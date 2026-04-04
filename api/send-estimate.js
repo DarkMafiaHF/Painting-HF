@@ -1,10 +1,3 @@
-const { Resend } = require('resend');
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-const TO_EMAIL   = 'HANIYA_FAHIM@HOTMAIL.COM';
-const FROM_EMAIL = 'Advance Pristine Painting <onboarding@resend.dev>';
-
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -90,17 +83,26 @@ module.exports = async function handler(req, res) {
   `;
 
   try {
-    const { error } = await resend.emails.send({
-      from:    FROM_EMAIL,
-      to:      TO_EMAIL,
-      subject: `🎨 New Estimate Request – ${name} (${service})`,
-      html,
-      ...(email !== 'Not provided' && { replyTo: email }),
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from:     'Advance Pristine Painting <onboarding@resend.dev>',
+        to:       ['HANIYA_FAHIM@HOTMAIL.COM'],
+        subject:  `🎨 New Estimate Request – ${name} (${service})`,
+        html,
+        ...(email !== 'Not provided' && { reply_to: email }),
+      }),
     });
 
-    if (error) {
-      console.error('Resend error:', error);
-      return res.status(500).json({ error: 'Failed to send email', detail: error });
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error('Resend API error:', data);
+      return res.status(500).json({ error: 'Failed to send email', detail: data });
     }
 
     return res.status(200).json({ success: true });
