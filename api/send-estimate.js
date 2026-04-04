@@ -91,7 +91,7 @@ module.exports = async function handler(req, res) {
       },
       body: JSON.stringify({
         from:     'Advance Pristine Painting <onboarding@resend.dev>',
-        to:       ['HANIYA_FAHIM@HOTMAIL.COM'],
+        to: ['haniya_fahim@hotmail.com'],
         subject:  `🎨 New Estimate Request – ${name} (${service})`,
         html,
         ...(email !== 'Not provided' && { reply_to: email }),
