@@ -1,9 +1,5 @@
 {
   "name": "advance-pristine-painting",
   "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "resend": "^3.2.0"
-  }
+  "private": true
 }
