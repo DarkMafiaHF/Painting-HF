@@ -47,6 +47,8 @@
   .hero {
     background: var(--navy); color: #fff;
     padding: 3.5rem 1.5rem 8rem;
+        z-index:-1;
+
     text-align: center; position: relative; overflow: hidden;
   }
   .hero::before {
@@ -95,12 +97,14 @@
   .hero-phone svg { width: 16px; height: 16px; fill: #fff; }
 
   /* FORM CARD */
-  .main-wrap { max-width: 600px; margin: -4rem auto 3rem; padding: 0 1rem; }
+  .main-wrap { max-width: 600px; margin: -2.5rem auto 3rem; padding: 0 1rem; z-index:9999;
+}
   .card {
     background: var(--white); border-radius: 20px;
     padding: 2.5rem 2.2rem;
     box-shadow: 0 14px 50px rgba(30,45,74,0.12);
     border: 1px solid var(--border);
+    z-index:9999;
   }
   .card-header { margin-bottom: 2rem; }
   .card-header h2 { font-family: 'Playfair Display', serif; font-size: 1.55rem; color: var(--navy); margin-bottom: 0.3rem; }
