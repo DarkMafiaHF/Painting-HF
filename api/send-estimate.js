@@ -1,22 +1,26 @@
 module.exports = async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  if (req.method === 'OPTIONS') return res.status(200).end();
-  if (req.method !== 'POST')   return res.status(405).json({ error: 'Method not allowed' });
+  if (req.method === "OPTIONS") return res.status(200).end();
+  if (req.method !== "POST")
+    return res.status(405).json({ error: "Method not allowed" });
 
   const {
-    name, phone,
-    email       = 'Not provided',
-    address, service, message,
-    contactTime = 'Not specified',
-    timeline    = 'Not specified',
-    sentAt      = 'Just now',
+    name,
+    phone,
+    email = "Not provided",
+    address,
+    service,
+    message,
+    contactTime = "Not specified",
+    timeline = "Not specified",
+    sentAt = "Just now",
   } = req.body || {};
 
   if (!name || !phone || !address || !service || !message) {
-    return res.status(400).json({ error: 'Missing required fields' });
+    return res.status(400).json({ error: "Missing required fields" });
   }
 
   const html = `
@@ -43,9 +47,11 @@ module.exports = async function handler(req, res) {
           <tr>
             <td style="padding:8px 0;color:#666;font-size:13px;">Email</td>
             <td style="padding:8px 0;font-weight:600;">
-              ${email !== 'Not provided'
-                ? `<a href="mailto:${email}" style="color:#d94f1e;text-decoration:none;">${email}</a>`
-                : '<span style="color:#999;">Not provided</span>'}
+              ${
+                email !== "Not provided"
+                  ? `<a href="mailto:${email}" style="color:#d94f1e;text-decoration:none;">${email}</a>`
+                  : '<span style="color:#999;">Not provided</span>'
+              }
             </td>
           </tr>
         </table>
@@ -62,7 +68,7 @@ module.exports = async function handler(req, res) {
         </table>
         <h2 style="font-size:13px;text-transform:uppercase;letter-spacing:0.1em;color:#d94f1e;margin:0 0 10px;">Notes</h2>
         <p style="background:#f8f6f2;border-left:3px solid #d94f1e;padding:14px 16px;border-radius:4px;margin:0 0 24px;font-size:14px;line-height:1.7;">
-          ${message.replace(/\n/g, '<br>')}
+          ${message.replace(/\n/g, "<br>")}
         </p>
         <h2 style="font-size:13px;text-transform:uppercase;letter-spacing:0.1em;color:#d94f1e;margin:0 0 14px;">Preferences</h2>
         <table style="width:100%;border-collapse:collapse;">
@@ -83,32 +89,35 @@ module.exports = async function handler(req, res) {
   `;
 
   try {
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
       headers: {
-        'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from:     'Advance Pristine Painting <onboarding@resend.dev>',
-        to: ['haniya_fahim@hotmail.com'],
-        subject:  `🎨 New Estimate Request – ${name} (${service})`,
+        from: "Advance Pristine Painting <onboarding@resend.dev>",
+        to: ["pristinepaintingokc@gmail.com"],
+        subject: `🎨 New Estimate Request – ${name} (${service})`,
         html,
-        ...(email !== 'Not provided' && { reply_to: email }),
+        ...(email !== "Not provided" && { reply_to: email }),
       }),
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-      console.error('Resend API error:', data);
-      return res.status(500).json({ error: 'Failed to send email', detail: data });
+      console.error("Resend API error:", data);
+      return res
+        .status(500)
+        .json({ error: "Failed to send email", detail: data });
     }
 
     return res.status(200).json({ success: true });
-
   } catch (err) {
-    console.error('Handler error:', err);
-    return res.status(500).json({ error: 'Internal server error', detail: err.message });
+    console.error("Handler error:", err);
+    return res
+      .status(500)
+      .json({ error: "Internal server error", detail: err.message });
   }
 };
