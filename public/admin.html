@@ -224,7 +224,7 @@
   window.doLogin = async function() {
     const pwd = document.getElementById('admin-pwd').value;
 
-    const res = await fetch('/api/admin-login', {
+    const res = await fetch('https://painting-hf.vercel.app/api/admin-login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ password: pwd })
