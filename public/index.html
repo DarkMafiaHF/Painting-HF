@@ -654,6 +654,21 @@
     }
   }
 
+  // ── Build quick-reply suggestions (Firestore Q&A + built-in fallbacks) ───
+  function getQuickReplies(exclude) {
+    const builtIn = [
+      'How much does painting cost?',
+      'What services do you offer?',
+      'How long does it take?',
+      'Get a free estimate',
+    ];
+    // Use display questions from Firestore Q&A if available
+    const fromFirestore = qaList.map(item => item.display || item.question);
+    const pool = fromFirestore.length ? fromFirestore : builtIn;
+    // Filter out the one just asked, pick up to 4
+    return pool.filter(q => q.toLowerCase() !== (exclude || '').toLowerCase()).slice(0, 4);
+  }
+
   // ── Find best matching answer ─────────────────────────────────────────────
   function findAnswer(text) {
     const input = text.toLowerCase();
@@ -726,14 +741,9 @@
     if (step === 'ask_name') {
       visitorName = text.trim();
       step = 'chatting';
-      // Show quick reply buttons with common questions
+      // Show quick reply buttons — pulled from Firestore Q&A if available
       setTimeout(() => {
-        addMsg(`Nice to meet you, ${visitorName}! 😊 How can I help you today? Here are some common questions, or just type your own!`, 'bot', [
-          'How much does painting cost?',
-          'What services do you offer?',
-          'How long does it take?',
-          'Get a free estimate',
-        ]);
+        addMsg(`Nice to meet you, ${visitorName}! 😊 How can I help you today? Here are some common questions, or just type your own!`, 'bot', getQuickReplies());
       }, 400);
       return;
     }
@@ -742,13 +752,14 @@
     const answer = findAnswer(text) || builtInAnswer(text);
     if (answer) {
       setTimeout(() => {
-        addMsg(answer, 'bot');
+        // Show quick replies after every answer (excluding the one just asked)
+        addMsg(answer, 'bot', getQuickReplies(text));
         // After 2nd question offer contact form
         if (!contactSaved) setTimeout(showContactForm, 600);
       }, 400);
     } else {
       setTimeout(() => {
-        addMsg(`Great question, ${visitorName}! That's something our team can answer directly. Give us a call at 405-900-1000 or fill out the estimate form on this page and we'll be in touch within 24 hours! 🎨`, 'bot');
+        addMsg(`Great question, ${visitorName}! That's something our team can answer directly. Give us a call at 405-900-1000 or fill out the estimate form on this page and we'll be in touch within 24 hours! 🎨`, 'bot', getQuickReplies(text));
         if (!contactSaved) setTimeout(showContactForm, 600);
       }, 400);
     }
