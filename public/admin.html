@@ -192,111 +192,206 @@
 </div>
 
 <!-- Firebase -->
-<!-- ONLY showing changed parts to keep this readable -->
-
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-  import { getFirestore, collection, getDocs, deleteDoc, doc, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+  import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, updateDoc, query, orderBy, setDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+
 
   const firebaseConfig = {
-    apiKey: "YOUR_KEY",
-    authDomain: "YOUR_DOMAIN",
-    projectId: "YOUR_PROJECT",
+    apiKey: "AIzaSyDdYF9OR0mQ0sy4FJchwJsytbfhVddsr2E",
+    authDomain: "advance-pristine-painting.firebaseapp.com",
+    projectId: "advance-pristine-painting",
+    storageBucket: "advance-pristine-painting.firebasestorage.app",
+    messagingSenderId: "673855479671",
+    appId: "1:673855479671:web:a71356d15078c0caaccb72"
   };
 
   const app = initializeApp(firebaseConfig);
   const db  = getFirestore(app);
 
-  let qaItems = [];
+  let qaItems  = [];
   let qaDocIds = [];
 
-  // ✅ AUTO LOGIN IF TOKEN EXISTS
-  window.onload = function () {
-    const token = localStorage.getItem('admin_token');
-    if (token) {
-      document.getElementById('login-screen').style.display = 'none';
-      document.getElementById('admin-screen').style.display = 'block';
-      loadLeads();
-    }
-  };
-
-  // 🔐 LOGIN
+  // ── AUTH ──────────────────────────────────────────────────────────────────
   window.doLogin = async function() {
     const pwd = document.getElementById('admin-pwd').value;
-
-    const res = await fetch('https://painting-hf.vercel.app/api/admin-login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password: pwd })
-    });
-
-    const data = await res.json();
-
-    if (data.success) {
-      localStorage.setItem('admin_token', data.token);
-
-      document.getElementById('login-screen').style.display = 'none';
-      document.getElementById('admin-screen').style.display = 'block';
-
-      loadLeads();
-    } else {
+    try {
+      const res = await fetch('/api/check-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pwd })
+      });
+      if (res.ok) {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('admin-screen').style.display = 'block';
+        loadLeads();
+      } else {
+        document.getElementById('login-error').style.display = 'block';
+      }
+    } catch {
       document.getElementById('login-error').style.display = 'block';
     }
   };
 
-  // 🚪 LOGOUT
   window.doLogout = function() {
-    localStorage.removeItem('admin_token');
-
     document.getElementById('admin-screen').style.display = 'none';
     document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('admin-pwd').value = '';
   };
 
-  // 📊 LOAD LEADS
+  // ── TABS ──────────────────────────────────────────────────────────────────
+  window.switchTab = function(name, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+    if (name === 'qa') loadQa();
+  };
+
+  // ── LEADS ─────────────────────────────────────────────────────────────────
   window.loadLeads = async function() {
-    document.getElementById('leads-list').innerHTML = 'Loading...';
-
-    const snap = await getDocs(query(collection(db, 'leads'), orderBy('createdAt', 'desc')));
-    const leads = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-
-    renderLeads(leads);
+    document.getElementById('leads-list').innerHTML = '<div class="loading">Loading...</div>';
+    try {
+      const snap = await getDocs(query(collection(db, 'leads'), orderBy('createdAt', 'desc')));
+      const leads = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      renderLeads(leads);
+    } catch(e) {
+      document.getElementById('leads-list').innerHTML = '<div class="loading">Could not load leads: ' + e.message + '</div>';
+    }
   };
 
-  // ✅ FIXED markReplied (NO DUPLICATE)
+  function renderLeads(leads) {
+    const newCount  = leads.filter(l => l.status === 'new').length;
+    const weekAgo   = new Date(Date.now() - 7*24*60*60*1000).toISOString();
+    const weekCount = leads.filter(l => l.createdAt > weekAgo).length;
+    document.getElementById('stat-total').textContent = leads.length;
+    document.getElementById('stat-new').textContent   = newCount;
+    document.getElementById('stat-week').textContent  = weekCount;
+
+    if (!leads.length) {
+      document.getElementById('leads-list').innerHTML = `<div class="empty-state"><div class="icon">💬</div>No chat leads yet — they'll show up here once visitors start chatting!</div>`;
+      return;
+    }
+
+    document.getElementById('leads-list').innerHTML = leads.map(lead => {
+      const time = lead.createdAt ? new Date(lead.createdAt).toLocaleString('en-US', { dateStyle:'medium', timeStyle:'short' }) : '';
+      return `<div class="lead-card ${lead.status === 'new' ? 'new' : ''}">
+        <div class="lead-top">
+          <div>
+            <div class="lead-name">${esc(lead.name || 'Unknown')}</div>
+            <div class="lead-email">${esc(lead.email || '')}</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="lead-time">${esc(time)}</div>
+            <span class="badge ${lead.status === 'new' ? 'new' : 'replied'}" id="badge-${lead.id}">${lead.status === 'new' ? 'New lead' : 'Followed up'}</span>
+          </div>
+        </div>
+        <div class="lead-actions">
+          <a href="mailto:${esc(lead.email)}?subject=Re: Your painting inquiry&body=Hi ${esc(lead.name)}," class="primary">Reply by email</a>
+          ${lead.status === 'new' ? `<button onclick="markReplied('${lead.id}')">Mark as followed up</button>` : ''}
+        </div>
+      </div>`;
+    }).join('');
+  }
+
   window.markReplied = async function(id) {
-    await fetch('/api/update-lead', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('admin_token')
-      },
-      body: JSON.stringify({ id })
-    });
-
+    await updateDoc(doc(db, 'leads', id), { status: 'replied' });
+    document.getElementById('badge-' + id).className = 'badge replied';
     document.getElementById('badge-' + id).textContent = 'Followed up';
+    const btn = document.querySelector(`button[onclick="markReplied('${id}')"]`);
+    if (btn) btn.remove();
   };
 
-  // 💾 SAVE QA
+  // ── Q&A ───────────────────────────────────────────────────────────────────
+  window.loadQa = async function() {
+    document.getElementById('qa-list').innerHTML = '<div class="loading">Loading Q&A...</div>';
+    try {
+      const snap = await getDocs(collection(db, 'qa'));
+      qaItems  = snap.docs.map(d => ({ question: d.data().question, answer: d.data().answer }));
+      qaDocIds = snap.docs.map(d => d.id);
+      renderQa();
+    } catch(e) {
+      document.getElementById('qa-list').innerHTML = '<div class="loading">Could not load Q&A: ' + e.message + '</div>';
+    }
+  };
+
+  function renderQa() {
+    if (!qaItems.length) {
+      document.getElementById('qa-list').innerHTML = `<div class="empty-state"><div class="icon">✏️</div>No Q&A yet. Hit "Add question" to get started!</div>`;
+      return;
+    }
+    document.getElementById('qa-list').innerHTML = qaItems.map((item, i) => `
+      <div class="qa-item">
+        <div class="qa-item-header">
+          <div class="qa-num">${i+1}</div>
+          <div class="qa-item-label">Q&amp;A pair</div>
+          <button class="qa-delete" onclick="deleteQaItem(${i})" title="Delete">×</button>
+        </div>
+        <div class="qa-field">
+          <label>Question</label>
+          <input type="text" value="${esc(item.question)}" placeholder="e.g. Do you offer discounts for large jobs?" oninput="qaItems[${i}].question=this.value"/>
+        </div>
+        <div class="qa-field">
+          <label>Answer</label>
+          <textarea placeholder="e.g. Yes! We offer 10% off for whole-home projects." oninput="qaItems[${i}].answer=this.value">${esc(item.answer)}</textarea>
+        </div>
+      </div>`).join('');
+  }
+
+  window.addQaItem = function() {
+    qaItems.push({ question: '', answer: '' });
+    qaDocIds.push(null);
+    renderQa();
+    const inputs = document.querySelectorAll('.qa-item input');
+    if (inputs.length) { inputs[inputs.length-1].scrollIntoView({ behavior:'smooth', block:'center' }); inputs[inputs.length-1].focus(); }
+  };
+
+  window.deleteQaItem = async function(i) {
+    if (!confirm('Delete this Q&A pair?')) return;
+    if (qaDocIds[i]) {
+      await deleteDoc(doc(db, 'qa', qaDocIds[i]));
+    }
+    qaItems.splice(i, 1);
+    qaDocIds.splice(i, 1);
+    renderQa();
+  };
+
   window.saveQa = async function() {
+    const btn    = document.getElementById('save-qa-btn');
+    const status = document.getElementById('save-status');
+
+    // Collect current DOM values
     const questions = document.querySelectorAll('.qa-item input');
     const answers   = document.querySelectorAll('.qa-item textarea');
+    const current   = Array.from(questions).map((q,i) => ({ question: q.value.trim(), answer: answers[i]?.value.trim()||'' })).filter(x => x.question && x.answer);
 
-    const items = Array.from(questions).map((q,i) => ({
-      question: q.value.trim(),
-      answer: answers[i].value.trim()
-    })).filter(x => x.question && x.answer);
+    btn.disabled = true; btn.textContent = 'Saving...';
 
-    await fetch('/api/save-qa', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('admin_token')
-      },
-      body: JSON.stringify({ items })
-    });
+    try {
+      // Delete all existing docs and rewrite (simplest approach)
+      for (const id of qaDocIds.filter(Boolean)) {
+        await deleteDoc(doc(db, 'qa', id));
+      }
+      qaDocIds = [];
+      for (const item of current) {
+        const ref = await addDoc(collection(db, 'qa'), item);
+        qaDocIds.push(ref.id);
+      }
+      qaItems = current;
+      status.classList.add('show');
+      setTimeout(() => status.classList.remove('show'), 3000);
+      renderQa();
+    } catch(e) {
+      alert('Could not save: ' + e.message);
+    }
 
-    alert('Saved!');
+    btn.disabled = false; btn.textContent = 'Save changes';
   };
+
+  function esc(s) {
+    return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
 </script>
 </body>
 </html>
