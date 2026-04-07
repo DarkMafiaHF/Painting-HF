@@ -1,5 +1,5 @@
 export default function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://advance-pristine-painting.web.app');
+  res.setHeader('Access-Control-Allow-Origin', 'https://adv-pristine-estimatescheduler.web.app');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
