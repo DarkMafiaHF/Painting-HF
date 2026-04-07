@@ -87,11 +87,13 @@ async function buildSystemPrompt() {
 
 // ── Main handler ──────────────────────────────────────────────────────────
 module.exports = async function handler(req, res) {
+  // CORS headers set FIRST before anything can crash
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, X-Admin-Key");
   if (req.method === "OPTIONS") return res.status(200).end();
 
+  try {
   const action = req.query.action;
   const isAdmin = req.headers["x-admin-key"] === process.env.ADMIN_KEY;
 
@@ -247,4 +249,9 @@ module.exports = async function handler(req, res) {
   }
 
   return res.status(400).json({ error: "Unknown action" });
+
+  } catch (err) {
+    console.error("Handler crash:", err);
+    return res.status(500).json({ error: "Server error", detail: err.message });
+  }
 };
