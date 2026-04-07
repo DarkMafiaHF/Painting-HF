@@ -486,11 +486,11 @@
   })();
 </script>
 
+
 <!-- ============================================================
-  CHAT WIDGET
+  CHAT WIDGET — Firebase Firestore (no backend needed)
   ============================================================ -->
 <style>
-  /* Bubble */
   #chat-bubble {
     position: fixed; bottom: 24px; right: 24px; z-index: 9999;
     width: 56px; height: 56px; border-radius: 50%;
@@ -501,7 +501,7 @@
     transition: transform 0.2s, box-shadow 0.2s;
   }
   #chat-bubble:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(217,79,30,0.55); }
-  #chat-bubble svg { width: 24px; height: 24px; fill: #fff; transition: opacity 0.2s; }
+  #chat-bubble svg { width: 24px; height: 24px; fill: #fff; }
   #chat-unread {
     position: absolute; top: -4px; right: -4px;
     width: 18px; height: 18px; border-radius: 50%;
@@ -510,11 +510,9 @@
     display: none; align-items: center; justify-content: center;
     border: 2px solid #fff;
   }
-
-  /* Window */
   #chat-window {
     position: fixed; bottom: 92px; right: 24px; z-index: 9998;
-    width: 340px; max-height: 520px;
+    width: 340px; max-height: 540px;
     background: var(--white); border-radius: 18px;
     box-shadow: 0 16px 56px rgba(30,45,74,0.18);
     border: 1px solid var(--border);
@@ -524,15 +522,8 @@
     transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), opacity 0.18s ease;
     overflow: hidden;
   }
-  #chat-window.open {
-    transform: scale(1) translateY(0);
-    opacity: 1; pointer-events: all;
-  }
-  @media (max-width: 420px) {
-    #chat-window { width: calc(100vw - 24px); right: 12px; bottom: 84px; }
-  }
-
-  /* Header */
+  #chat-window.open { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
+  @media (max-width: 420px) { #chat-window { width: calc(100vw - 24px); right: 12px; bottom: 84px; } }
   .cw-header {
     background: var(--navy); padding: 14px 16px;
     display: flex; align-items: center; gap: 10px; flex-shrink: 0;
@@ -545,279 +536,278 @@
   }
   .cw-header-text .cw-name { font-size: 13px; font-weight: 600; color: #fff; }
   .cw-header-text .cw-status { font-size: 11px; color: rgba(255,255,255,0.55); }
-  .cw-close {
-    margin-left: auto; background: none; border: none;
-    color: rgba(255,255,255,0.6); cursor: pointer; font-size: 20px;
-    line-height: 1; padding: 0 2px;
-  }
+  .cw-close { margin-left: auto; background: none; border: none; color: rgba(255,255,255,0.6); cursor: pointer; font-size: 20px; line-height: 1; padding: 0 2px; }
   .cw-close:hover { color: #fff; }
-
-  /* Messages */
-  .cw-messages {
-    flex: 1; overflow-y: auto; padding: 14px 14px 6px;
-    display: flex; flex-direction: column; gap: 10px;
-    scroll-behavior: smooth;
-  }
+  .cw-messages { flex: 1; overflow-y: auto; padding: 14px 14px 6px; display: flex; flex-direction: column; gap: 10px; scroll-behavior: smooth; }
   .cw-messages::-webkit-scrollbar { width: 4px; }
   .cw-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
   .cw-msg { display: flex; flex-direction: column; max-width: 85%; }
   .cw-msg.bot { align-self: flex-start; }
   .cw-msg.user { align-self: flex-end; }
-  .cw-bubble {
-    padding: 9px 13px; border-radius: 14px;
-    font-size: 13px; line-height: 1.55;
-  }
-  .cw-msg.bot .cw-bubble {
-    background: #f0f2f5; color: var(--text);
-    border-bottom-left-radius: 4px;
-  }
-  .cw-msg.user .cw-bubble {
-    background: var(--orange); color: #fff;
-    border-bottom-right-radius: 4px;
-  }
+  .cw-bubble { padding: 9px 13px; border-radius: 14px; font-size: 13px; line-height: 1.55; }
+  .cw-msg.bot .cw-bubble { background: #f0f2f5; color: var(--text); border-bottom-left-radius: 4px; }
+  .cw-msg.user .cw-bubble { background: var(--orange); color: #fff; border-bottom-right-radius: 4px; }
   .cw-quick { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
   .cw-quick-btn {
     font-size: 11.5px; padding: 5px 11px; border-radius: 20px;
     border: 1.5px solid var(--orange); color: var(--orange);
-    background: transparent; cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
+    background: transparent; cursor: pointer; font-family: 'DM Sans', sans-serif;
     transition: background 0.15s, color 0.15s;
   }
   .cw-quick-btn:hover { background: var(--orange); color: #fff; }
-
-  /* Typing indicator */
-  .cw-typing { display: flex; gap: 4px; align-items: center; padding: 9px 13px; }
-  .cw-typing span {
-    width: 7px; height: 7px; border-radius: 50%; background: #bbb;
-    animation: cw-bounce 1.2s infinite;
-  }
-  .cw-typing span:nth-child(2) { animation-delay: 0.2s; }
-  .cw-typing span:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes cw-bounce {
-    0%, 60%, 100% { transform: translateY(0); }
-    30% { transform: translateY(-5px); }
-  }
-
-  /* Contact capture */
-  .cw-contact-form {
-    background: #f8f6f2; border-radius: 10px;
-    padding: 12px 14px; margin-top: 6px;
-    border: 1px solid var(--border);
-  }
+  .cw-contact-form { background: #f8f6f2; border-radius: 10px; padding: 12px 14px; margin-top: 6px; border: 1px solid var(--border); }
   .cw-contact-form p { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
   .cw-contact-form input {
     width: 100%; padding: 7px 10px; font-size: 12px;
-    border: 1.5px solid var(--border); border-radius: 8px;
-    margin-bottom: 6px; font-family: 'DM Sans', sans-serif;
-    background: #fff; color: var(--text); outline: none;
+    border: 1.5px solid var(--border); border-radius: 8px; margin-bottom: 6px;
+    font-family: 'DM Sans', sans-serif; background: #fff; color: var(--text); outline: none;
   }
   .cw-contact-form input:focus { border-color: var(--navy-mid); }
   .cw-contact-form button {
     width: 100%; padding: 8px; font-size: 12px; font-weight: 600;
     background: var(--navy); color: #fff; border: none; border-radius: 8px;
-    cursor: pointer; font-family: 'DM Sans', sans-serif;
-    transition: background 0.15s;
+    cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.15s;
   }
   .cw-contact-form button:hover { background: var(--navy-mid); }
-
-  /* Footer / input */
   .cw-footer { padding: 10px 12px; border-top: 1px solid var(--border); flex-shrink: 0; }
   .cw-input-row { display: flex; gap: 8px; }
   .cw-input {
     flex: 1; padding: 9px 13px; border-radius: 20px;
     border: 1.5px solid var(--border); font-size: 13px;
-    font-family: 'DM Sans', sans-serif; background: #faf9f7;
-    color: var(--text); outline: none;
+    font-family: 'DM Sans', sans-serif; background: #faf9f7; color: var(--text); outline: none;
     transition: border-color 0.15s;
   }
   .cw-input:focus { border-color: var(--navy-mid); background: #fff; }
   .cw-send {
     width: 36px; height: 36px; border-radius: 50%;
     background: var(--orange); border: none; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; transition: background 0.15s;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    transition: background 0.15s;
   }
   .cw-send:hover { background: #bf4118; }
   .cw-send svg { width: 16px; height: 16px; fill: #fff; }
   .cw-powered { text-align: center; font-size: 10px; color: #ccc; margin-top: 6px; }
 </style>
 
-<!-- Bubble -->
 <button id="chat-bubble" onclick="toggleChat()" aria-label="Open chat">
   <svg id="chat-icon-open" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 10H6V10h12v2zm0-3H6V7h12v2z"/></svg>
   <svg id="chat-icon-close" viewBox="0 0 24 24" style="display:none;"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
   <div id="chat-unread">1</div>
 </button>
 
-<!-- Chat window -->
 <div id="chat-window">
   <div class="cw-header">
     <div class="cw-avatar">🖌️</div>
     <div class="cw-header-text">
       <div class="cw-name">Advance Pristine Painting</div>
-      <div class="cw-status">Ask us anything — we reply fast!</div>
+      <div class="cw-status">Ask us anything!</div>
     </div>
     <button class="cw-close" onclick="toggleChat()">×</button>
   </div>
   <div class="cw-messages" id="cw-messages"></div>
   <div class="cw-footer">
     <div class="cw-input-row">
-      <input class="cw-input" id="cw-input" placeholder="Type your question..." onkeydown="if(event.key==='Enter')sendMessage()" />
+      <input class="cw-input" id="cw-input" placeholder="Type your message..." onkeydown="if(event.key==='Enter')sendMessage()" />
       <button class="cw-send" onclick="sendMessage()">
         <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
       </button>
     </div>
-    <div class="cw-powered">Powered by AI · Advance Pristine Painting</div>
+    <div class="cw-powered">Advance Pristine Painting · 405-900-1000</div>
   </div>
 </div>
 
-<script>
-(function() {
-  const CHAT_API = 'https://painting-hf.vercel.app/api/chat';
-  let isOpen = false;
-  let messages = [];
-  let contactCaptured = false;
-  let msgCount = 0;
-  let typingEl = null;
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getFirestore, collection, addDoc, getDocs, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDdYF9OR0mQ0sy4FJchwJsytbfhVddsr2E",
+    authDomain: "advance-pristine-painting.firebaseapp.com",
+    projectId: "advance-pristine-painting",
+    storageBucket: "advance-pristine-painting.firebasestorage.app",
+    messagingSenderId: "673855479671",
+    appId: "1:673855479671:web:a71356d15078c0caaccb72"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  // ── State ────────────────────────────────────────────────────────────────
+  let isOpen        = false;
+  let visitorName   = '';
+  let contactSaved  = false;
+  let qaList        = [];
+  let step          = 'ask_name'; // ask_name → chatting
 
   const messagesEl = document.getElementById('cw-messages');
   const inputEl    = document.getElementById('cw-input');
   const unreadEl   = document.getElementById('chat-unread');
 
-  // Show greeting on load after 3s
-  setTimeout(() => {
-    if (!isOpen) {
-      unreadEl.style.display = 'flex';
+  // ── Load Q&A from Firestore ───────────────────────────────────────────────
+  async function loadQA() {
+    try {
+      const snap = await getDocs(collection(db, 'qa'));
+      qaList = snap.docs.map(d => ({ question: d.data().question.toLowerCase(), answer: d.data().answer, display: d.data().question }));
+    } catch(e) {
+      qaList = [];
     }
-    addBotMessage(
-      "Hey there! 👋 I'm the virtual assistant for Advance Pristine Painting. How can I help you today?",
-      [
-        "How much does painting cost?",
-        "Get a free estimate",
-        "What services do you offer?",
-        "How long does it take?"
-      ]
-    );
-  }, 1200);
+  }
 
+  // ── Find best matching answer ─────────────────────────────────────────────
+  function findAnswer(text) {
+    const input = text.toLowerCase();
+    // Exact or partial match
+    for (const item of qaList) {
+      if (input.includes(item.question) || item.question.includes(input)) return item.answer;
+    }
+    // Keyword match — split question into words and check overlap
+    for (const item of qaList) {
+      const words = item.question.split(' ').filter(w => w.length > 3);
+      const matches = words.filter(w => input.includes(w));
+      if (matches.length >= 2) return item.answer;
+    }
+    return null;
+  }
+
+  // ── Built-in fallback answers ─────────────────────────────────────────────
+  function builtInAnswer(text) {
+    const t = text.toLowerCase();
+    if (t.match(/price|cost|how much|charge|rate/))
+      return "Pricing depends on the size and type of job. We offer FREE on-site estimates — just fill out the form on this page or call us at 405-900-1000!";
+    if (t.match(/time|long|how many days|duration/))
+      return "A single room usually takes 1 day. A full interior typically takes 3–5 days. We'll give you a precise timeline during your free estimate!";
+    if (t.match(/area|locat|cover|serve|where/))
+      return "We serve Oklahoma City and the surrounding areas. Not sure if we cover you? Call us at 405-900-1000!";
+    if (t.match(/insur|licen|certif/))
+      return "Yes, we are fully licensed and insured for your peace of mind! 👍";
+    if (t.match(/paint|brand|sherwin|material/))
+      return "We use premium-grade paints including Sherwin-Williams. We can discuss specific products during your estimate!";
+    if (t.match(/book|schedul|appoint|estimate|quote/))
+      return "Easy! Fill out the estimate form right on this page, or call us at 405-900-1000. We follow up within 24 hours!";
+    if (t.match(/furniture|move|prep/))
+      return "We ask you to move small valuables. Our team handles larger furniture and always protects your floors with drop cloths!";
+    if (t.match(/service|offer|do you/))
+      return "We offer Interior Painting, Exterior Painting, Commercial Painting, Cabinet Refinishing, and Deck/Fence Staining. Want a free estimate for any of these?";
+    return null;
+  }
+
+  // ── Messaging ─────────────────────────────────────────────────────────────
+  function addMsg(text, role, quickReplies) {
+    const el = document.createElement('div');
+    el.className = `cw-msg ${role}`;
+    let html = `<div class="cw-bubble">${esc(text)}</div>`;
+    if (quickReplies && quickReplies.length) {
+      const btns = quickReplies.map(q =>
+        `<button class="cw-quick-btn" data-msg="${esc(q)}" onclick="window.cwSend(this.dataset.msg)">${esc(q)}</button>`
+      ).join('');
+      html += `<div class="cw-quick">${btns}</div>`;
+    }
+    el.innerHTML = html;
+    messagesEl.appendChild(el);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function showContactForm() {
+    if (contactSaved) return;
+    const el = document.createElement('div');
+    el.className = 'cw-msg bot';
+    el.innerHTML = `<div class="cw-contact-form" id="cw-cf">
+      <p>Want us to follow up with you directly?</p>
+      <input type="email" id="cw-cf-email" placeholder="Your email address" />
+      <button onclick="window.cwSubmitContact()">Send →</button>
+    </div>`;
+    messagesEl.appendChild(el);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  // ── Handle incoming message ───────────────────────────────────────────────
+  function handleMessage(text) {
+    if (step === 'ask_name') {
+      visitorName = text.trim();
+      step = 'chatting';
+      // Show quick reply buttons with common questions
+      setTimeout(() => {
+        addMsg(`Nice to meet you, ${visitorName}! 😊 How can I help you today? Here are some common questions, or just type your own!`, 'bot', [
+          'How much does painting cost?',
+          'What services do you offer?',
+          'How long does it take?',
+          'Get a free estimate',
+        ]);
+      }, 400);
+      return;
+    }
+
+    // Look for answer
+    const answer = findAnswer(text) || builtInAnswer(text);
+    if (answer) {
+      setTimeout(() => {
+        addMsg(answer, 'bot');
+        // After 2nd question offer contact form
+        if (!contactSaved) setTimeout(showContactForm, 600);
+      }, 400);
+    } else {
+      setTimeout(() => {
+        addMsg(`Great question, ${visitorName}! That's something our team can answer directly. Give us a call at 405-900-1000 or fill out the estimate form on this page and we'll be in touch within 24 hours! 🎨`, 'bot');
+        if (!contactSaved) setTimeout(showContactForm, 600);
+      }, 400);
+    }
+  }
+
+  // ── Send message ──────────────────────────────────────────────────────────
+  window.cwSend = function(text) {
+    const content = (text || inputEl.value).trim();
+    if (!content) return;
+    inputEl.value = '';
+    addMsg(content, 'user');
+    handleMessage(content);
+  };
+
+  window.sendMessage = function() { window.cwSend(); };
+
+  // ── Submit contact ────────────────────────────────────────────────────────
+  window.cwSubmitContact = async function() {
+    const email = document.getElementById('cw-cf-email').value.trim();
+    if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
+    contactSaved = true;
+    document.getElementById('cw-cf').remove();
+    try {
+      await addDoc(collection(db, 'leads'), {
+        name: visitorName || 'Unknown',
+        email,
+        createdAt: new Date().toISOString(),
+        status: 'new',
+        page: 'chat widget'
+      });
+    } catch(e) { console.error('Lead save error:', e); }
+    addMsg(`Got it! We'll reach out to you at ${email} soon. In the meantime, feel free to call us at 405-900-1000! 🎨`, 'bot');
+  };
+
+  // ── Toggle chat ───────────────────────────────────────────────────────────
   window.toggleChat = function() {
     isOpen = !isOpen;
     document.getElementById('chat-window').classList.toggle('open', isOpen);
-    document.getElementById('chat-icon-open').style.display  = isOpen ? 'none' : 'block';
+    document.getElementById('chat-icon-open').style.display  = isOpen ? 'none'  : 'block';
     document.getElementById('chat-icon-close').style.display = isOpen ? 'block' : 'none';
     unreadEl.style.display = 'none';
     if (isOpen) setTimeout(() => inputEl.focus(), 250);
   };
 
-  window.sendMessage = function(text) {
-    const content = (text || inputEl.value).trim();
-    if (!content) return;
-    inputEl.value = '';
-    addUserMessage(content);
-    getBotReply(content);
-  };
-
-  function addUserMessage(text) {
-    messages.push({ role: 'user', content: text });
-    msgCount++;
-    const el = document.createElement('div');
-    el.className = 'cw-msg user';
-    el.innerHTML = `<div class="cw-bubble">${escHtml(text)}</div>`;
-    messagesEl.appendChild(el);
-    scrollBottom();
+  // ── Init ──────────────────────────────────────────────────────────────────
+  async function init() {
+    await loadQA();
+    // Show greeting after 1.5s
+    setTimeout(() => {
+      unreadEl.style.display = 'flex';
+      addMsg("Hey there! 👋 Welcome to Advance Pristine Painting! Before we get started, what's your name?", 'bot');
+    }, 1500);
   }
 
-  function addBotMessage(text, quickReplies, showContactForm) {
-    messages.push({ role: 'assistant', content: text });
-    const el = document.createElement('div');
-    el.className = 'cw-msg bot';
-    let html = `<div class="cw-bubble">${escHtml(text)}</div>`;
-
-    if (quickReplies && quickReplies.length) {
-      const btns = quickReplies.map(q =>
-        `<button class="cw-quick-btn" data-msg="${escHtml(q)}" onclick="sendMessage(this.dataset.msg)">${escHtml(q)}</button>`
-      ).join('');
-      html += `<div class="cw-quick">${btns}</div>`;
-    }
-
-    if (showContactForm && !contactCaptured) {
-      html += `
-        <div class="cw-contact-form" id="cw-contact-form">
-          <p>Leave your details and we'll follow up!</p>
-          <input type="text"  id="cw-cf-name"  placeholder="Your name" />
-          <input type="email" id="cw-cf-email" placeholder="Email address" />
-          <button onclick="submitContact()">Send →</button>
-        </div>`;
-    }
-
-    el.innerHTML = html;
-    messagesEl.appendChild(el);
-    scrollBottom();
+  function esc(s) {
+    return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  function showTyping() {
-    typingEl = document.createElement('div');
-    typingEl.className = 'cw-msg bot';
-    typingEl.innerHTML = '<div class="cw-bubble cw-typing"><span></span><span></span><span></span></div>';
-    messagesEl.appendChild(typingEl);
-    scrollBottom();
-  }
-
-  function removeTyping() {
-    if (typingEl) { typingEl.remove(); typingEl = null; }
-  }
-
-  async function getBotReply(userText) {
-    showTyping();
-    const shouldAskContact = msgCount >= 2 && !contactCaptured;
-
-    try {
-      const res = await fetch(`${CHAT_API}?action=message`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: messages.slice(-10) })
-      });
-      const data = await res.json();
-      removeTyping();
-      addBotMessage(data.reply || "Sorry about that! Please call us at 405-900-1000.", null, shouldAskContact);
-    } catch(e) {
-      removeTyping();
-      addBotMessage("Hmm, having a little trouble right now. You can always reach us at 405-900-1000!", null, false);
-    }
-  }
-
-  window.submitContact = async function() {
-    const name  = document.getElementById('cw-cf-name').value.trim();
-    const email = document.getElementById('cw-cf-email').value.trim();
-    if (!name || !email) {
-      alert('Please enter both your name and email.');
-      return;
-    }
-    contactCaptured = true;
-    document.getElementById('cw-contact-form').remove();
-
-    const summary = messages.filter(m => m.role === 'user').map(m => m.content).join('; ');
-
-    try {
-      await fetch(`${CHAT_API}?action=save-lead`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, summary, messages })
-      });
-    } catch(e) { /* silent */ }
-
-    addBotMessage(`Got it, ${name}! 🎉 We'll be in touch at ${email} soon. In the meantime, feel free to call us at 405-900-1000 if you need anything right away!`);
-  };
-
-  function scrollBottom() {
-    messagesEl.scrollTop = messagesEl.scrollHeight;
-  }
-
-  function escHtml(s) {
-    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-})();
+  init();
 </script>
 </body>
 </html>
