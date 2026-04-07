@@ -35,19 +35,36 @@ Guidelines:
 - Never make up specific prices. Always recommend a free estimate for accurate pricing.`;
 
 // ── Upstash Redis helpers ─────────────────────────────────────────────────
+// Tries multiple env var names since Upstash adds different ones depending on setup
+function getRedisUrl() {
+  return process.env.REDIS_URL || process.env.KV_REST_API_URL;
+}
+function getRedisToken() {
+  return process.env.KV_REST_API_TOKEN || process.env.KV_REST_API_READ_ONLY_TOKEN;
+}
+
 async function kvGet(key) {
-  const res = await fetch(`${process.env.REDIS_URL}/get/${key}`, {
-    headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` },
+  const url = getRedisUrl();
+  const token = getRedisToken();
+  if (!url || !token) {
+    console.error("Upstash env vars missing! REDIS_URL:", !!url, "TOKEN:", !!token);
+    return null;
+  }
+  const res = await fetch(`${url}/get/${key}`, {
+    headers: { Authorization: `Bearer ${token}` },
   });
   const data = await res.json();
   return data.result ? JSON.parse(data.result) : null;
 }
 
 async function kvSet(key, value) {
-  await fetch(`${process.env.REDIS_URL}/set/${key}`, {
+  const url = getRedisUrl();
+  const token = getRedisToken();
+  if (!url || !token) return;
+  await fetch(`${url}/set/${key}`, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ value: JSON.stringify(value) }),
