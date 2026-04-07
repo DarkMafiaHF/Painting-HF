@@ -1,3 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin — Advance Pristine Painting</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #1e2d4a; --navy-deep: #141e33; --navy-mid: #2b3f63;
+    --orange: #d94f1e; --cream: #f8f6f2; --white: #ffffff;
+    --text: #1a1a1a; --muted: #666; --border: #ddd8ce;
+    --green: #2d7a4a; --green-bg: #eaf4ef;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; }
+
+  /* LOGIN */
+  .login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+  .login-card {
+    background: var(--white); border-radius: 20px; padding: 2.5rem 2.2rem;
+    box-shadow: 0 14px 50px rgba(30,45,74,0.12); border: 1px solid var(--border);
+    width: 100%; max-width: 380px; text-align: center;
+  }
+  .login-card h1 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--navy); margin-bottom: 0.3rem; }
+  .login-card p { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.6rem; }
+  .login-card input {
+    width: 100%; padding: 11px 14px; font-size: 0.95rem; font-family: 'DM Sans', sans-serif;
+    border: 1.5px solid var(--border); border-radius: 10px; background: #faf9f7;
+    color: var(--text); outline: none; margin-bottom: 12px; transition: border-color 0.15s;
+  }
+  .login-card input:focus { border-color: var(--navy-mid); background: #fff; }
+  .login-card button {
+    width: 100%; padding: 13px; background: var(--navy); color: #fff;
+    border: none; border-radius: 10px; font-size: 0.95rem; font-weight: 600;
+    font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.2s;
+  }
+  .login-card button:hover { background: var(--navy-mid); }
+  .login-error { font-size: 0.82rem; color: var(--orange); margin-top: 10px; display: none; }
+
+  /* SHELL */
+  .admin-wrap { display: none; min-height: 100vh; }
+  .admin-topbar {
+    background: var(--navy-deep); color: #fff; padding: 0 1.5rem; height: 56px;
+    display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 100;
+  }
+  .admin-topbar img { height: 30px; }
+  .admin-topbar .title { font-family: 'Playfair Display', serif; font-size: 1.1rem; }
+  .admin-topbar .spacer { flex: 1; }
+  .admin-topbar .logout-btn { font-size: 0.8rem; color: rgba(255,255,255,0.5); background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .admin-topbar .logout-btn:hover { color: #fff; }
+
+  /* TABS */
+  .tab-bar { background: var(--white); border-bottom: 1px solid var(--border); display: flex; padding: 0 1.5rem; }
+  .tab-btn {
+    padding: 14px 20px; font-size: 0.88rem; font-weight: 500; border: none; background: none;
+    cursor: pointer; color: var(--muted); font-family: 'DM Sans', sans-serif;
+    border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.15s;
+  }
+  .tab-btn.active { color: var(--navy); border-bottom-color: var(--orange); }
+  .tab-btn:hover:not(.active) { color: var(--text); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+  .admin-body { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+
+  /* STATS */
+  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 2rem; }
+  @media (max-width: 480px) { .stats-row { grid-template-columns: 1fr 1fr; } }
+  .stat-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem 1.2rem; }
+  .stat-card .label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.35rem; }
+  .stat-card .value { font-size: 1.8rem; font-weight: 600; color: var(--navy); line-height: 1; }
+
+  /* SECTION */
+  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--navy); }
+  .ghost-btn { font-size: 0.8rem; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.15s; }
+  .ghost-btn:hover { background: var(--border); }
+
+  /* LEADS */
+  .leads-list { display: flex; flex-direction: column; gap: 12px; }
+  .lead-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 16px 18px; transition: box-shadow 0.15s; }
+  .lead-card:hover { box-shadow: 0 4px 20px rgba(30,45,74,0.08); }
+  .lead-card.new { border-left: 3px solid var(--orange); }
+  .lead-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+  .lead-name { font-weight: 600; font-size: 0.95rem; color: var(--navy); }
+  .lead-email { font-size: 0.8rem; color: var(--orange); margin-top: 2px; }
+  .lead-time { font-size: 0.75rem; color: var(--muted); }
+  .badge { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 3px 9px; border-radius: 20px; margin-top: 4px; }
+  .badge.new { background: #fdf0eb; color: #a33010; }
+  .badge.replied { background: var(--green-bg); color: var(--green); }
+  .lead-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .lead-actions a, .lead-actions button {
+    font-size: 0.8rem; padding: 6px 14px; border-radius: 8px; border: 1px solid var(--border);
+    background: transparent; color: var(--muted); cursor: pointer; font-family: 'DM Sans', sans-serif; text-decoration: none; transition: background 0.15s;
+  }
+  .lead-actions a:hover, .lead-actions button:hover { background: var(--cream); }
+  .lead-actions a.primary { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .lead-actions a.primary:hover { background: var(--navy-mid); }
+
+  /* Q&A */
+  .qa-intro { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem 1.3rem; margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+  .qa-intro strong { color: var(--navy); }
+  .qa-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.5rem; }
+  .qa-item { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; }
+  .qa-item-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .qa-num { width: 24px; height: 24px; border-radius: 50%; background: var(--cream); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 600; color: var(--muted); flex-shrink: 0; }
+  .qa-item-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); flex: 1; }
+  .qa-delete { background: none; border: none; cursor: pointer; color: #ccc; font-size: 18px; line-height: 1; padding: 0 2px; transition: color 0.15s; }
+  .qa-delete:hover { color: var(--orange); }
+  .qa-field { margin-bottom: 8px; }
+  .qa-field label { display: block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #888; margin-bottom: 5px; }
+  .qa-field input, .qa-field textarea {
+    width: 100%; padding: 9px 12px; font-size: 0.88rem; font-family: 'DM Sans', sans-serif;
+    border: 1.5px solid var(--border); border-radius: 9px; background: #faf9f7; color: var(--text); outline: none; transition: border-color 0.15s;
+  }
+  .qa-field input:focus, .qa-field textarea:focus { border-color: var(--navy-mid); background: #fff; }
+  .qa-field textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+  .qa-actions { display: flex; gap: 10px; align-items: center; }
+  .btn-primary { padding: 10px 22px; background: var(--navy); color: #fff; border: none; border-radius: 10px; font-size: 0.88rem; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.2s; }
+  .btn-primary:hover { background: var(--navy-mid); }
+  .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+  .btn-add { padding: 10px 18px; background: transparent; color: var(--navy); border: 1.5px dashed var(--border); border-radius: 10px; font-size: 0.88rem; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+  .btn-add:hover { border-color: var(--navy); background: var(--white); }
+  .save-status { font-size: 0.8rem; color: var(--green); display: none; }
+  .save-status.show { display: inline; }
+
+  .empty-state { text-align: center; padding: 3rem 1rem; color: var(--muted); font-size: 0.9rem; }
+  .empty-state .icon { font-size: 2rem; margin-bottom: 0.75rem; }
+  .loading { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="login-screen">
+  <div class="login-card">
+    <div style="font-size:2rem;margin-bottom:0.8rem;">🎨</div>
+    <h1>Admin Login</h1>
+    <p>Advance Pristine Painting</p>
+    <input type="password" id="admin-pwd" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <button onclick="doLogin()">Sign In →</button>
+    <div class="login-error" id="login-error">Incorrect password. Try again.</div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin-wrap" id="admin-screen">
+  <div class="admin-topbar">
+    <img src="logo.png" alt="Logo"/>
+    <span class="title">Pristine Painting</span>
+    <div class="spacer"></div>
+    <button class="logout-btn" onclick="doLogout()">Sign out</button>
+  </div>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('leads',this)">💬 Chat Leads</button>
+    <button class="tab-btn" onclick="switchTab('qa',this)">✏️ Q&amp;A Editor</button>
+  </div>
+
+  <!-- LEADS TAB -->
+  <div class="tab-panel active" id="tab-leads">
+    <div class="admin-body">
+      <div class="stats-row">
+        <div class="stat-card"><div class="label">Total leads</div><div class="value" id="stat-total">—</div></div>
+        <div class="stat-card"><div class="label">New</div><div class="value" id="stat-new" style="color:var(--orange);">—</div></div>
+        <div class="stat-card"><div class="label">This week</div><div class="value" id="stat-week">—</div></div>
+      </div>
+      <div class="section-header">
+        <h2>Chat Leads</h2>
+        <button class="ghost-btn" onclick="loadLeads()">↻ Refresh</button>
+      </div>
+      <div class="leads-list" id="leads-list"><div class="loading">Loading leads...</div></div>
+    </div>
+  </div>
+
+  <!-- Q&A TAB -->
+  <div class="tab-panel" id="tab-qa">
+    <div class="admin-body">
+      <div class="qa-intro">
+        <strong>Chatbot Q&amp;A Editor</strong><br>
+        Add questions and answers here. The chatbot matches visitor questions to your answers automatically. The more you add, the smarter it gets!
+      </div>
+      <div class="section-header"><h2>Questions &amp; Answers</h2></div>
+      <div class="qa-list" id="qa-list"><div class="loading">Loading Q&amp;A...</div></div>
+      <div class="qa-actions">
+        <button class="btn-add" onclick="addQaItem()">+ Add question</button>
+        <button class="btn-primary" id="save-qa-btn" onclick="saveQa()">Save changes</button>
+        <span class="save-status" id="save-status">✓ Saved!</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase -->
 <!-- ONLY showing changed parts to keep this readable -->
 
 <script type="module">
@@ -104,3 +298,5 @@
     alert('Saved!');
   };
 </script>
+</body>
+</html>
