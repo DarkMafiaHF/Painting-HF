@@ -736,7 +736,7 @@
 
     if (quickReplies && quickReplies.length) {
       const btns = quickReplies.map(q =>
-        `<button class="cw-quick-btn" onclick="sendMessage(${JSON.stringify(q)})">${escHtml(q)}</button>`
+        `<button class="cw-quick-btn" data-msg="${escHtml(q)}" onclick="sendMessage(this.dataset.msg)">${escHtml(q)}</button>`
       ).join('');
       html += `<div class="cw-quick">${btns}</div>`;
     }
