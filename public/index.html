@@ -595,7 +595,15 @@
   <div id="chat-unread">1</div>
 </button>
 
-<div id="chat-window">
+<div id="chat-window" style="position:relative;">
+  <!-- Name popup overlay -->
+  <div id="cw-name-overlay">
+    <div class="cw-name-box">
+      <p>👋 Welcome! Before we start,<br><strong>what's your name?</strong></p>
+      <input type="text" id="cw-name-input" placeholder="Your first name" maxlength="40" />
+      <button onclick="window.cwSubmitName()">Let's Chat →</button>
+    </div>
+  </div>
   <div class="cw-header">
     <div class="cw-avatar">🖌️</div>
     <div class="cw-header-text">
@@ -617,45 +625,98 @@
 </div>
 
 <!-- Firebase SDK -->
+<style>
+  /* Name popup overlay */
+  #cw-name-overlay {
+    position: absolute; inset: 0; z-index: 10;
+    background: rgba(20,30,51,0.55);
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 18px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  #cw-name-overlay.visible { opacity: 1; pointer-events: all; }
+  .cw-name-box {
+    background: #fff; border-radius: 14px;
+    padding: 20px 20px 16px; width: 260px;
+    box-shadow: 0 8px 32px rgba(30,45,74,0.18);
+    text-align: center;
+  }
+  .cw-name-box p { font-size: 13px; color: var(--text); margin-bottom: 10px; line-height: 1.5; }
+  .cw-name-box input {
+    width: 100%; padding: 8px 11px; font-size: 13px;
+    border: 1.5px solid var(--border); border-radius: 8px; margin-bottom: 10px;
+    font-family: 'DM Sans', sans-serif; color: var(--text); outline: none;
+    transition: border-color 0.15s;
+  }
+  .cw-name-box input:focus { border-color: var(--navy-mid); }
+  .cw-name-box input.shake {
+    animation: nameShake 0.35s ease;
+    border-color: var(--orange);
+  }
+  @keyframes nameShake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+  .cw-name-box button {
+    width: 100%; padding: 9px; font-size: 13px; font-weight: 600;
+    background: var(--navy); color: #fff; border: none; border-radius: 8px;
+    cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.15s;
+  }
+  .cw-name-box button:hover { background: var(--navy-mid); }
+
+  /* Inline email error (replaces alert) */
+  .cw-cf-error {
+    font-size: 11px; color: var(--orange);
+    margin: -4px 0 6px; display: none;
+    text-align: left;
+  }
+  .cw-cf-error.show { display: block; }
+</style>
+
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-  import { getFirestore, collection, addDoc, getDocs, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+  import { getFirestore, collection, addDoc, getDocs } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
- const firebaseConfig = {
-  apiKey: "AIzaSyDA81P6VazjmdZ5hBujy10QC7F-zn1Wg5o",
-  authDomain: "adv-pristine-estimatescheduler.firebaseapp.com",
-  projectId: "adv-pristine-estimatescheduler",
-  storageBucket: "adv-pristine-estimatescheduler.firebasestorage.app",
-  messagingSenderId: "190271287269",
-  appId: "1:190271287269:web:d9970cffee760e1a58890c",
-  measurementId: "G-NK9W0CNBH4"
-};
+  const firebaseConfig = {
+    apiKey: "AIzaSyDA81P6VazjmdZ5hBujy10QC7F-zn1Wg5o",
+    authDomain: "adv-pristine-estimatescheduler.firebaseapp.com",
+    projectId: "adv-pristine-estimatescheduler",
+    storageBucket: "adv-pristine-estimatescheduler.firebasestorage.app",
+    messagingSenderId: "190271287269",
+    appId: "1:190271287269:web:d9970cffee760e1a58890c",
+    measurementId: "G-NK9W0CNBH4"
+  };
 
   const app = initializeApp(firebaseConfig);
   const db  = getFirestore(app);
 
   // ── State ────────────────────────────────────────────────────────────────
-  let isOpen        = false;
-  let visitorName   = '';
-  let contactSaved  = false;
-  let qaList        = [];
-  let step          = 'ask_name'; // ask_name → chatting
+  let isOpen       = false;
+  let visitorName  = '';
+  let contactSaved = false;
+  let qaList       = [];
 
-  const messagesEl = document.getElementById('cw-messages');
-  const inputEl    = document.getElementById('cw-input');
-  const unreadEl   = document.getElementById('chat-unread');
+  const messagesEl  = document.getElementById('cw-messages');
+  const inputEl     = document.getElementById('cw-input');
+  const unreadEl    = document.getElementById('chat-unread');
+  const nameOverlay = document.getElementById('cw-name-overlay');
+  const nameInput   = document.getElementById('cw-name-input');
 
-  // ── Load Q&A from Firestore ───────────────────────────────────────────────
+  // ── Load Q&A from Firestore ──────────────────────────────────────────────
   async function loadQA() {
     try {
       const snap = await getDocs(collection(db, 'qa'));
-      qaList = snap.docs.map(d => ({ question: d.data().question.toLowerCase(), answer: d.data().answer, display: d.data().question }));
-    } catch(e) {
-      qaList = [];
-    }
+      qaList = snap.docs.map(d => ({
+        question: d.data().question.toLowerCase(),
+        answer:   d.data().answer,
+        display:  d.data().question
+      }));
+    } catch(e) { qaList = []; }
   }
 
-  // ── Build quick-reply suggestions (Firestore Q&A + built-in fallbacks) ───
+  // ── Quick replies ────────────────────────────────────────────────────────
   function getQuickReplies(exclude) {
     const builtIn = [
       'How much does painting cost?',
@@ -663,30 +724,24 @@
       'How long does it take?',
       'Get a free estimate',
     ];
-    // Use display questions from Firestore Q&A if available
     const fromFirestore = qaList.map(item => item.display || item.question);
     const pool = fromFirestore.length ? fromFirestore : builtIn;
-    // Filter out the one just asked, pick up to 4
     return pool.filter(q => q.toLowerCase() !== (exclude || '').toLowerCase()).slice(0, 4);
   }
 
-  // ── Find best matching answer ─────────────────────────────────────────────
+  // ── Find answer ──────────────────────────────────────────────────────────
   function findAnswer(text) {
     const input = text.toLowerCase();
-    // Exact or partial match
     for (const item of qaList) {
       if (input.includes(item.question) || item.question.includes(input)) return item.answer;
     }
-    // Keyword match — split question into words and check overlap
     for (const item of qaList) {
       const words = item.question.split(' ').filter(w => w.length > 3);
-      const matches = words.filter(w => input.includes(w));
-      if (matches.length >= 2) return item.answer;
+      if (words.filter(w => input.includes(w)).length >= 2) return item.answer;
     }
     return null;
   }
 
-  // ── Built-in fallback answers ─────────────────────────────────────────────
   function builtInAnswer(text) {
     const t = text.toLowerCase();
     if (t.match(/price|cost|how much|charge|rate/))
@@ -708,7 +763,7 @@
     return null;
   }
 
-  // ── Messaging ─────────────────────────────────────────────────────────────
+  // ── Messaging ────────────────────────────────────────────────────────────
   function addMsg(text, role, quickReplies) {
     const el = document.createElement('div');
     el.className = `cw-msg ${role}`;
@@ -724,41 +779,37 @@
     messagesEl.scrollTop = messagesEl.scrollHeight;
   }
 
+  // ── Email contact form — only shown on fallback (bot can't answer) ────────
   function showContactForm() {
     if (contactSaved) return;
+    // Remove any existing unanswered form first to avoid duplicates
+    const existing = document.getElementById('cw-cf');
+    if (existing) existing.closest('.cw-msg').remove();
+
     const el = document.createElement('div');
     el.className = 'cw-msg bot';
-    el.innerHTML = `<div class="cw-contact-form" id="cw-cf">
-      <p>Want us to follow up with you directly?</p>
-      <input type="email" id="cw-cf-email" placeholder="Your email address" />
-      <button onclick="window.cwSubmitContact()">Send →</button>
-    </div>`;
+    el.innerHTML = `
+      <div class="cw-contact-form" id="cw-cf">
+        <p>Want us to follow up with you directly?</p>
+        <input type="email" id="cw-cf-email" placeholder="Your email address"
+               oninput="document.getElementById('cw-cf-err').classList.remove('show');this.style.borderColor=''"/>
+        <div class="cw-cf-error" id="cw-cf-err">Please enter a valid email address.</div>
+        <button onclick="window.cwSubmitContact()">Send →</button>
+      </div>`;
     messagesEl.appendChild(el);
     messagesEl.scrollTop = messagesEl.scrollHeight;
   }
 
-  // ── Handle incoming message ───────────────────────────────────────────────
+  // ── Handle incoming message ──────────────────────────────────────────────
   function handleMessage(text) {
-    if (step === 'ask_name') {
-      visitorName = text.trim();
-      step = 'chatting';
-      // Show quick reply buttons — pulled from Firestore Q&A if available
-      setTimeout(() => {
-        addMsg(`Nice to meet you, ${visitorName}! 😊 How can I help you today? Here are some common questions, or just type your own!`, 'bot', getQuickReplies());
-      }, 400);
-      return;
-    }
-
-    // Look for answer
     const answer = findAnswer(text) || builtInAnswer(text);
     if (answer) {
       setTimeout(() => {
-        // Show quick replies after every answer (excluding the one just asked)
         addMsg(answer, 'bot', getQuickReplies(text));
-        // After 2nd question offer contact form
-        if (!contactSaved) setTimeout(showContactForm, 600);
+        // Bot answered — no email prompt needed
       }, 400);
     } else {
+      // Bot can't answer — show fallback + ask for email
       setTimeout(() => {
         addMsg(`Great question, ${visitorName}! That's something our team can answer directly. Give us a call at 405-900-1000 or fill out the estimate form on this page and we'll be in touch within 24 hours! 🎨`, 'bot', getQuickReplies(text));
         if (!contactSaved) setTimeout(showContactForm, 600);
@@ -766,10 +817,30 @@
     }
   }
 
-  // ── Send message ──────────────────────────────────────────────────────────
+  // ── Name popup logic ─────────────────────────────────────────────────────
+  window.cwSubmitName = function() {
+    const name = nameInput.value.trim();
+    if (!name || name.length < 2) {
+      nameInput.classList.add('shake');
+      nameInput.addEventListener('animationend', () => nameInput.classList.remove('shake'), { once: true });
+      nameInput.focus();
+      return;
+    }
+    visitorName = name;
+    nameOverlay.classList.remove('visible');
+    inputEl.disabled = false;
+    setTimeout(() => {
+      addMsg(`Nice to meet you, ${visitorName}! 😊 How can I help you today? Here are some common questions, or just type your own!`, 'bot', getQuickReplies());
+      inputEl.focus();
+    }, 300);
+  };
+
+  nameInput.addEventListener('keydown', e => { if (e.key === 'Enter') window.cwSubmitName(); });
+
+  // ── Send message ─────────────────────────────────────────────────────────
   window.cwSend = function(text) {
     const content = (text || inputEl.value).trim();
-    if (!content) return;
+    if (!content || !visitorName) return;
     inputEl.value = '';
     addMsg(content, 'user');
     handleMessage(content);
@@ -777,12 +848,21 @@
 
   window.sendMessage = function() { window.cwSend(); };
 
-  // ── Submit contact ────────────────────────────────────────────────────────
+  // ── Submit contact email ─────────────────────────────────────────────────
   window.cwSubmitContact = async function() {
-    const email = document.getElementById('cw-cf-email').value.trim();
-    if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
+    const emailEl = document.getElementById('cw-cf-email');
+    const errEl   = document.getElementById('cw-cf-err');
+    if (!emailEl) return;
+    const email = emailEl.value.trim();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!valid) {
+      errEl.classList.add('show');
+      emailEl.style.borderColor = 'var(--orange)';
+      emailEl.focus();
+      return;
+    }
     contactSaved = true;
-    document.getElementById('cw-cf').remove();
+    document.getElementById('cw-cf').closest('.cw-msg').remove();
     try {
       await addDoc(collection(db, 'leads'), {
         name: visitorName || 'Unknown',
@@ -795,23 +875,29 @@
     addMsg(`Got it! We'll reach out to you at ${email} soon. In the meantime, feel free to call us at 405-900-1000! 🎨`, 'bot');
   };
 
-  // ── Toggle chat ───────────────────────────────────────────────────────────
+  // ── Toggle chat ──────────────────────────────────────────────────────────
   window.toggleChat = function() {
     isOpen = !isOpen;
     document.getElementById('chat-window').classList.toggle('open', isOpen);
     document.getElementById('chat-icon-open').style.display  = isOpen ? 'none'  : 'block';
     document.getElementById('chat-icon-close').style.display = isOpen ? 'block' : 'none';
     unreadEl.style.display = 'none';
-    if (isOpen) setTimeout(() => inputEl.focus(), 250);
+    if (isOpen) {
+      setTimeout(() => {
+        if (!visitorName) nameInput.focus();
+        else inputEl.focus();
+      }, 250);
+    }
   };
 
-  // ── Init ──────────────────────────────────────────────────────────────────
+  // ── Init ─────────────────────────────────────────────────────────────────
   async function init() {
     await loadQA();
-    // Show greeting after 1.5s
+    inputEl.disabled = true; // disabled until name is entered
     setTimeout(() => {
       unreadEl.style.display = 'flex';
-      addMsg("Hey there! 👋 Welcome to Advance Pristine Painting! Before we get started, what's your name?", 'bot');
+      addMsg("Hey there! 👋 Welcome to Advance Pristine Painting!", 'bot');
+      setTimeout(() => nameOverlay.classList.add('visible'), 500);
     }, 1500);
   }
 
