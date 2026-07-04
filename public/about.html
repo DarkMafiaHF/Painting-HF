@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Steve Higgs – Advance Pristine Painting | Oklahoma City</title>
+  <meta name="description" content="Meet Steve Higgs, owner of Advance Pristine Painting in Oklahoma City. Learn about his passion for quality painting, his team, and why OKC homeowners trust him." />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="canonical" href="https://advpristinepainting.com/about.html" />
+  <meta property="og:title" content="About Steve Higgs – Advance Pristine Painting" />
+  <meta property="og:description" content="Meet Steve Higgs, owner of Advance Pristine Painting in Oklahoma City, and the values behind every paint job." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://advpristinepainting.com/about.html" />
+  <meta property="og:image" content="https://advpristinepainting.com/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="About Steve Higgs – Advance Pristine Painting" />
+  <meta name="twitter:description" content="Meet Steve Higgs, owner of Advance Pristine Painting in Oklahoma City." />
+  <meta name="twitter:image" content="https://advpristinepainting.com/logo.png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Advance Pristine Painting",
+    "url": "https://advpristinepainting.com",
+    "telephone": "+14059001000",
+    "founder": {
+      "@type": "Person",
+      "name": "Steve Higgs",
+      "jobTitle": "Owner & Master Painter"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Oklahoma City",
+      "addressRegion": "OK",
+      "addressCountry": "US"
+    }
+  }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --navy: #1e2d4a; --navy-deep: #141e33; --navy-mid: #2b3f63; --orange: #d94f1e; --cream: #f8f6f2; --white: #fff; --text: #1a1a1a; --muted: #666; --border: #ddd8ce; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "DM Sans", sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+
+    /* PAGE LOADER */
+    #page-loader { position: fixed; inset: 0; z-index: 99999; background: var(--navy-deep); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; transition: opacity 0.6s ease, visibility 0.6s ease; }
+    #page-loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-logo { font-family: "Playfair Display", serif; font-size: 1.8rem; color: #fff; }
+    .loader-logo span { color: var(--orange); font-style: italic; }
+    .loader-brush { width: 120px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+    .loader-brush-fill { height: 100%; width: 0; background: var(--orange); border-radius: 2px; animation: brushLoad 1.4s cubic-bezier(0.4,0,0.2,1) forwards; }
+    @keyframes brushLoad { to { width: 100%; } }
+    .loader-tagline { font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+
+    /* NAV */
+    .topbar { background: var(--orange); color: #fff; text-align: center; padding: 9px 1rem; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.05em; }
+    .topbar a { color: #fff; text-decoration: none; }
+    nav { background: var(--navy-deep); position: sticky; top: 0; z-index: 500; box-shadow: 0 2px 16px rgba(0,0,0,0.25); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 60px; }
+    .nav-logo-text { font-family: "Playfair Display", serif; font-size: 1.1rem; color: #fff; line-height: 1.2; }
+    .nav-logo-text small { display: block; font-family: "DM Sans", sans-serif; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); font-weight: 400; }
+    .nav-links { display: flex; align-items: center; gap: 0.2rem; }
+    .nav-links a { color: rgba(255,255,255,0.72); text-decoration: none; font-size: 0.88rem; font-weight: 500; padding: 8px 14px; border-radius: 8px; transition: color 0.18s, background 0.18s; }
+    .nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255,255,255,0.09); }
+    .nav-links a.active { color: var(--orange); }
+    .nav-cta { background: var(--orange) !important; color: #fff !important; font-weight: 600 !important; padding: 9px 18px !important; border-radius: 30px !important; margin-left: 0.5rem; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; }
+    @media (max-width: 680px) { .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--navy-deep); padding: 1rem 1.5rem 1.5rem; gap: 0.5rem; border-top: 1px solid rgba(255,255,255,0.1); } .nav-links.open { display: flex; } .nav-links a { width: 100%; } .nav-hamburger { display: flex; } }
+
+    /* HERO */
+    .page-hero { background: var(--navy); color: #fff; padding: 5rem 1.5rem 6rem; text-align: center; position: relative; overflow: hidden; }
+    .page-hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 40% 60%, rgba(217,79,30,0.12) 0%, transparent 60%); }
+    .page-hero::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 70px; background: var(--cream); clip-path: ellipse(55% 100% at 50% 100%); }
+    .hero-inner { max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
+    .page-eyebrow { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 1rem; font-weight: 600; }
+    .page-hero h1 { font-family: "Playfair Display", serif; font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.12; margin-bottom: 1rem; }
+    .page-hero h1 em { font-style: italic; color: var(--orange); }
+    .page-hero p { color: rgba(255,255,255,0.72); font-size: 1.05rem; line-height: 1.7; }
+
+    /* SHARED */
+    section { padding: 5rem 1.5rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--orange); font-weight: 700; margin-bottom: 0.6rem; }
+    .section-title { font-family: "Playfair Display", serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--navy); line-height: 1.2; margin-bottom: 1rem; }
+    .section-title em { font-style: italic; color: var(--orange); }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--orange); color: #fff; padding: 13px 26px; border-radius: 40px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+    .btn-primary:hover { background: #bf4118; transform: translateY(-1px); }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ABOUT SECTION */
+    .about-section { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: center; }
+    @media (max-width: 750px) { .about-grid { grid-template-columns: 1fr; gap: 3rem; } }
+    .steve-card {
+      background: var(--cream); border: 1.5px solid var(--border); border-radius: 24px;
+      padding: 2.5rem; text-align: center; position: relative; overflow: hidden;
+    }
+    .steve-card::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--orange), var(--navy));
+    }
+    .steve-avatar {
+      width: 110px; height: 110px; border-radius: 50%; background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-family: "Playfair Display", serif; font-size: 3rem; color: #fff; font-weight: 800;
+      margin: 0 auto 1.2rem; border: 4px solid var(--white); box-shadow: 0 8px 24px rgba(30,45,74,0.2);
+      transition: transform 0.3s ease;
+    }
+    .steve-card:hover .steve-avatar { transform: scale(1.05) rotate(-3deg); }
+    .steve-card h3 { font-family: "Playfair Display", serif; font-size: 1.5rem; color: var(--navy); margin-bottom: 0.3rem; }
+    .steve-title { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); font-weight: 700; margin-bottom: 1.2rem; }
+    .steve-facts { display: flex; flex-direction: column; gap: 0.6rem; text-align: left; }
+    .steve-fact { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: var(--text); }
+    .steve-fact-icon { font-size: 1rem; flex-shrink: 0; }
+    .steve-contact { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+    .steve-contact a { display: block; color: var(--orange); text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.4rem; transition: gap 0.2s; }
+    .steve-contact a:hover { text-decoration: underline; }
+
+    .about-content .lead { font-family: "Playfair Display", serif; font-size: 1.2rem; color: var(--navy); line-height: 1.65; margin-bottom: 1.5rem; font-style: italic; }
+    .about-content p { color: var(--muted); font-size: 0.97rem; line-height: 1.8; margin-bottom: 1.2rem; }
+    .about-content p strong { color: var(--text); font-weight: 600; }
+
+    /* VALUES */
+    .values-section { background: var(--cream); }
+    .values-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .value-card {
+      background: var(--white); border: 1.5px solid var(--border); border-radius: 20px;
+      padding: 2rem; position: relative; overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s;
+    }
+    .value-card::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+    .value-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(30,45,74,0.1); border-color: transparent; }
+    .value-card:hover::after { transform: scaleX(1); }
+    .value-icon { font-size: 2rem; margin-bottom: 1rem; display: block; transition: transform 0.3s ease; }
+    .value-card:hover .value-icon { transform: scale(1.15) rotate(-5deg); }
+    .value-card h3 { font-family: "Playfair Display", serif; font-size: 1.1rem; color: var(--navy); margin-bottom: 0.5rem; }
+    .value-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+
+    /* CREDENTIALS */
+    .creds-section { background: var(--navy); color: #fff; padding: 5rem 1.5rem; }
+    .creds-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .cred-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 2rem; text-align: center; transition: background 0.25s, transform 0.25s; }
+    .cred-card:hover { background: rgba(255,255,255,0.09); transform: translateY(-4px); }
+    .cred-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .cred-card h4 { font-family: "Playfair Display", serif; font-size: 1.05rem; color: #fff; margin-bottom: 0.5rem; }
+    .cred-card p { font-size: 0.84rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+    /* PROMISE */
+    .promise-section { background: var(--white); }
+    .promise-wrap { background: var(--cream); border: 1.5px solid var(--border); border-radius: 28px; padding: 3.5rem; max-width: 720px; margin: 3rem auto 0; text-align: center; position: relative; overflow: hidden; }
+    .promise-wrap::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--orange), var(--navy-mid)); }
+    .promise-wrap .quote-mark { font-family: "Playfair Display", serif; font-size: 6rem; line-height: 0.5; color: var(--orange); opacity: 0.2; margin-bottom: 1rem; display: block; }
+    .promise-wrap blockquote { font-family: "Playfair Display", serif; font-size: clamp(1.15rem, 2.5vw, 1.5rem); line-height: 1.6; color: var(--navy); font-style: italic; margin-bottom: 1.5rem; }
+    .promise-wrap cite { font-size: 0.85rem; color: var(--muted); font-style: normal; }
+    .promise-wrap cite strong { color: var(--navy); }
+
+    /* CTA */
+    .cta-band { background: linear-gradient(135deg, var(--navy-deep), var(--navy-mid)); color: #fff; text-align: center; padding: 5rem 1.5rem; }
+    .cta-band h2 { font-family: "Playfair Display", serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin-bottom: 0.8rem; }
+    .cta-band p { color: rgba(255,255,255,0.7); margin-bottom: 2.2rem; font-size: 1.05rem; }
+    .cta-group { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-cta-orange { background: var(--orange); color: #fff; padding: 15px 32px; border-radius: 40px; font-weight: 700; font-size: 1.05rem; text-decoration: none; transition: background 0.2s; }
+    .btn-cta-orange:hover { background: #bf4118; }
+    .btn-cta-ghost { border: 2px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.85); padding: 13px 28px; border-radius: 40px; font-weight: 600; font-size: 1.05rem; text-decoration: none; transition: all 0.2s; }
+    .btn-cta-ghost:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
+
+    /* FOOTER */
+    footer { background: var(--navy-deep); color: rgba(255,255,255,0.55); padding: 3rem 1.5rem 2rem; font-size: 0.82rem; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2.5rem; }
+    @media (max-width: 650px) { .footer-inner { grid-template-columns: 1fr; } }
+    .footer-brand img { height: 90px; margin-bottom: 0.6rem; }
+    .footer-brand p { line-height: 1.7; }
+    .footer-brand a { color: var(--orange); text-decoration: none; }
+    .footer-col h4 { color: #fff; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1rem; font-weight: 700; }
+    .footer-col a { display: block; color: rgba(255,255,255,0.55); text-decoration: none; margin-bottom: 0.5rem; font-size: 0.85rem; transition: color 0.15s; }
+    .footer-col a:hover { color: var(--orange); }
+    .footer-bottom { max-width: 1100px; margin: 2rem auto 0; padding-top: 1.2rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.75rem; color: rgba(255,255,255,0.35); }
+
+    /* CHAT */
+    #chat-bubble { position: fixed; bottom: 24px; right: 24px; z-index: 9999; width: 56px; height: 56px; border-radius: 50%; background: var(--orange); color: #fff; border: none; cursor: pointer; box-shadow: 0 4px 20px rgba(217,79,30,0.45); display: flex; align-items: center; justify-content: center; transition: transform 0.2s, box-shadow 0.2s; }
+    #chat-bubble:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(217,79,30,0.55); }
+    #chat-bubble svg { width: 24px; height: 24px; fill: #fff; }
+    #chat-unread { position: absolute; top: -4px; right: -4px; width: 18px; height: 18px; border-radius: 50%; background: var(--navy); color: #fff; font-size: 10px; font-weight: 700; display: none; align-items: center; justify-content: center; border: 2px solid #fff; }
+    #chat-window { position: fixed; bottom: 92px; right: 24px; z-index: 9998; width: 340px; max-height: 620px; height: 320px; background: var(--white); border-radius: 18px; box-shadow: 0 16px 56px rgba(30,45,74,0.18); border: 1px solid var(--border); display: flex; flex-direction: column; transform: scale(0.92) translateY(16px); opacity: 0; pointer-events: none; transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), opacity 0.18s ease; overflow: hidden; }
+    #chat-window.open { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
+    @media (max-width:420px) { #chat-window { width: calc(100vw - 24px); right: 12px; bottom: 84px; } }
+    .cw-header { background: var(--navy); padding: 14px 16px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .cw-avatar { width: 36px; height: 36px; border-radius: 50%; background: rgba(217,79,30,0.25); display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+    .cw-header-text .cw-name { font-size: 13px; font-weight: 600; color: #fff; }
+    .cw-header-text .cw-status { font-size: 11px; color: rgba(255,255,255,0.55); }
+    .cw-header-actions { margin-left: auto; display: flex; align-items: center; gap: 4px; }
+    .cw-close, .cw-fullscreen { background: none; border: none; color: rgba(255,255,255,0.6); cursor: pointer; line-height: 1; padding: 4px 5px; border-radius: 6px; transition: color 0.15s, background 0.15s; display: flex; align-items: center; justify-content: center; }
+    .cw-close { font-size: 20px; }
+    .cw-fullscreen svg { width: 14px; height: 14px; fill: currentColor; }
+    .cw-close:hover, .cw-fullscreen:hover { color: #fff; background: rgba(255,255,255,0.1); }
+    #chat-backdrop { display: none; position: fixed; inset: 0; z-index: 99998; background: rgba(14,22,40,0.55); backdrop-filter: blur(6px); animation: backdropIn 0.25s ease; }
+    #chat-backdrop.visible { display: block; }
+    @keyframes backdropIn { from{opacity:0} to{opacity:1} }
+    #chat-window.fullscreen { top:40px!important; bottom:40px!important; left:50%!important; right:auto!important; transform:translateX(-50%)!important; width:min(640px,calc(100vw - 48px))!important; height:auto!important; max-height:none!important; border-radius:20px!important; z-index:99999; box-shadow:0 32px 80px rgba(14,22,40,0.45)!important; }
+    .cw-messages { flex:1; overflow-y:auto; padding:14px 14px 6px; display:flex; flex-direction:column; gap:10px; scroll-behavior:smooth; }
+    .cw-messages::-webkit-scrollbar { width:4px; }
+    .cw-messages::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+    .cw-msg { display:flex; flex-direction:column; max-width:85%; }
+    .cw-msg.bot { align-self:flex-start; }
+    .cw-msg.user { align-self:flex-end; }
+    .cw-bubble { padding:9px 13px; border-radius:14px; font-size:13px; line-height:1.55; }
+    .cw-msg.bot .cw-bubble { background:#f0f2f5; color:var(--text); border-bottom-left-radius:4px; }
+    .cw-msg.user .cw-bubble { background:var(--orange); color:#fff; border-bottom-right-radius:4px; }
+    .cw-footer { padding:10px 12px; border-top:1px solid var(--border); flex-shrink:0; }
+    .cw-input-row { display:flex; gap:8px; }
+    .cw-input { flex:1; padding:9px 13px; border-radius:20px; border:1.5px solid var(--border); font-size:13px; font-family:"DM Sans",sans-serif; background:#faf9f7; color:var(--text); outline:none; transition:border-color 0.15s; }
+    .cw-input:focus { border-color:var(--navy-mid); background:#fff; }
+    .cw-send { width:36px; height:36px; border-radius:50%; background:var(--orange); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background 0.15s; }
+    .cw-send:hover { background:#bf4118; }
+    .cw-send svg { width:16px; height:16px; fill:#fff; }
+    .cw-powered { text-align:center; font-size:10px; color:#ccc; margin-top:6px; }
+    #cw-name-overlay { position:absolute; inset:0; z-index:20; background:rgba(20,30,51,0.6); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.2s ease; }
+    #cw-name-overlay.visible { opacity:1; pointer-events:all; }
+    .cw-name-box { background:#fff; border-radius:14px; padding:18px 18px 16px; width:100%; max-width:290px; box-shadow:0 8px 32px rgba(30,45,74,0.18); text-align:center; }
+    .cw-name-box p { font-size:13px; color:var(--text); margin-bottom:12px; line-height:1.5; }
+    .cw-name-box input { width:100%; padding:10px 12px; font-size:13px; border:1.5px solid var(--border); border-radius:8px; margin-bottom:10px; font-family:"DM Sans",sans-serif; color:var(--text); outline:none; transition:border-color 0.15s; display:block; }
+    .cw-name-box input:focus { border-color:var(--navy-mid); }
+    .cw-name-box input.shake { animation:nameShake 0.35s ease; border-color:var(--orange); }
+    @keyframes nameShake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
+    .cw-name-err { font-size:11px; color:var(--orange); display:none; margin-top:-6px; margin-bottom:8px; }
+    .cw-name-err.show { display:block; }
+    .cw-name-btn { width:100%; padding:11px; background:var(--navy); color:#fff; border:none; border-radius:8px; font-size:13px; font-weight:600; cursor:pointer; font-family:"DM Sans",sans-serif; transition:background 0.15s; }
+    .cw-name-btn:hover { background:var(--navy-mid); }
+    @keyframes cwDot { 0%,80%,100%{opacity:0.25;transform:scale(0.85)} 40%{opacity:1;transform:scale(1)} }
+  
+      /* ── GLOBAL HOVER EFFECTS ── */
+      a { transition: opacity 0.18s ease; }
+      .btn-primary, .btn-ghost, .btn-cta-orange, .btn-cta-ghost, .nav-cta {
+        transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
+      }
+      .btn-primary:hover, .btn-cta-orange:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(217,79,30,0.35); }
+      .footer-col a { position: relative; }
+      .footer-col a::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 0; height: 1px; background: var(--orange); transition: width 0.25s ease; }
+      .footer-col a:hover::after { width: 100%; }
+      .topbar a:hover { opacity: 0.8; }
+      .nav-hamburger span { transition: transform 0.25s ease, opacity 0.25s ease; }
+      .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+      .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+      </style>
+</head>
+<body>
+
+<div id="page-loader">
+  <div class="loader-logo">Advance <span>Pristine</span> Painting</div>
+  <div class="loader-brush"><div class="loader-brush-fill"></div></div>
+  <div class="loader-tagline">Pristine Painting With Pristine Results</div>
+</div>
+
+<div class="topbar">📞 <a href="tel:4059001000">405-900-1000</a> · Oklahoma City &amp; Surrounding Areas</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="Advance Pristine Painting" />
+      <div class="nav-logo-text">Advance Pristine Painting<small>Oklahoma City, OK</small></div>
+    </a>
+        <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="testimonials.html">Reviews</a>
+      <a href="about.html" class="active">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="estimate.html" class="nav-cta">Free Estimate</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="hero-inner">
+    <div class="page-eyebrow">The Person Behind the Brush</div>
+    <h1>Meet <em>Steve Higgs</em></h1>
+    <p>Owner, painter, and proud Oklahoma City local. Here's the story behind Advance Pristine Painting — and why quality is never negotiable.</p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="steve-card reveal">
+        <div class="steve-avatar">S</div>
+        <h3>Steve Higgs</h3>
+        <div class="steve-title">Owner &amp; Master Painter</div>
+        <div class="steve-facts">
+          <div class="steve-fact"><span class="steve-fact-icon">📍</span> Oklahoma City, OK</div>
+          <div class="steve-fact"><span class="steve-fact-icon">🎨</span> 10+ years of painting experience</div>
+          <div class="steve-fact"><span class="steve-fact-icon">🛡️</span> Fully licensed &amp; insured</div>
+          <div class="steve-fact"><span class="steve-fact-icon">🏆</span> Sherwin-Williams certified</div>
+          <div class="steve-fact"><span class="steve-fact-icon">⭐</span> 5-star rated by <span data-count="47" data-suffix="+">0+</span> customers</div>
+          <div class="steve-fact"><span class="steve-fact-icon">🏠</span> <span data-count="500" data-suffix="+">0+</span> homes painted in OKC</div>
+        </div>
+        <div class="steve-contact">
+          <a href="tel:4059001000">📞 405-900-1000</a>
+          <a href="mailto:Pristinepaintingokc@gmail.com">✉️ Pristinepaintingokc@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="about-content reveal">
+        <p class="lead">"I started this business because I believed Oklahoma City homeowners deserved a painter who actually cares about the craft — not just getting the job done fast and moving on."</p>
+        <p>Steve Higgs founded Advance Pristine Painting with a simple but powerful idea: <strong>do the job the right way, every single time.</strong> After years working in the painting trade, Steve saw too many homeowners left with rushed work, hidden costs, and painters who didn't show up when they said they would.</p>
+        <p>He decided to do things differently. Advance Pristine Painting was built around <strong>transparency, craftsmanship, and genuine respect for the customer's home.</strong> No surprises on the bill. No cutting corners on prep. No leaving until the customer is truly happy.</p>
+        <p>Today, Steve leads a small, tight-knit team that serves Oklahoma City and surrounding areas including Edmond, Yukon, Midwest City, Norman, and Moore. Every job — from a single accent wall to a full commercial repaint — gets the same level of care and attention to detail.</p>
+        <p>When he's not painting, you'll find Steve right here in Oklahoma City, living in the same community he serves every day.</p>
+        <div style="margin-top: 2rem; display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="estimate.html" class="btn-primary">Get a Free Estimate →</a>
+          <a href="testimonials.html" class="btn-primary" style="background: var(--navy);">Read Reviews →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">How We Work</div>
+      <h2 class="section-title">The Values Behind <em>Every Job</em></h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <span class="value-icon">🎯</span>
+        <h3>Precision Over Speed</h3>
+        <p>We take the time to prep properly, tape every edge, and apply paint the right way. Rushing a paint job costs the customer twice — once now, once when it peels.</p>
+      </div>
+      <div class="value-card reveal">
+        <span class="value-icon">💬</span>
+        <h3>Honest Communication</h3>
+        <p>No surprise costs. No vague timelines. Steve personally walks through every estimate and stays in contact throughout the project so you're never left guessing.</p>
+      </div>
+      <div class="value-card reveal">
+        <span class="value-icon">🧹</span>
+        <h3>Leave It Cleaner</h3>
+        <p>We protect your furniture and floors, tape every edge, and clean up completely before we leave. The only thing left behind is a beautifully painted room.</p>
+      </div>
+      <div class="value-card reveal">
+        <span class="value-icon">🛡️</span>
+        <h3>Stand Behind the Work</h3>
+        <p>If you're not happy with something, we fix it — on the spot, before we pack up. Steve believes a job isn't done until the customer is truly satisfied.</p>
+      </div>
+      <div class="value-card reveal">
+        <span class="value-icon">🎨</span>
+        <h3>Only the Best Materials</h3>
+        <p>We use Sherwin-Williams Emerald, Duration, and SuperPaint exclusively. Because using premium materials is the only way to guarantee results that last.</p>
+      </div>
+      <div class="value-card reveal">
+        <span class="value-icon">🤝</span>
+        <h3>Community First</h3>
+        <p>Steve lives and works right here in Oklahoma City. When you hire Advance Pristine Painting, you're keeping money in the local community — and getting a neighbor who cares.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="creds-section">
+  <div class="section-inner">
+    <div class="section-label" style="color:rgba(217,79,30,0.8);">Credentials &amp; Trust</div>
+    <h2 class="section-title" style="color:#fff;">Why You Can <em style="color:#f0a07a;">Trust Us</em></h2>
+    <div class="creds-grid">
+      <div class="cred-card reveal">
+        <div class="cred-icon">📋</div>
+        <h4>Fully Licensed</h4>
+        <p>Advance Pristine Painting is fully licensed to operate as a painting contractor in Oklahoma, meeting all state requirements.</p>
+      </div>
+      <div class="cred-card reveal">
+        <div class="cred-icon">🛡️</div>
+        <h4>Fully Insured</h4>
+        <p>We carry comprehensive liability insurance on every job. Your home and property are protected from day one.</p>
+      </div>
+      <div class="cred-card reveal">
+        <div class="cred-icon">🎨</div>
+        <h4>Sherwin-Williams Certified</h4>
+        <p>Our team is trained and certified in Sherwin-Williams premium product application — ensuring correct techniques for lasting results.</p>
+      </div>
+      <div class="cred-card reveal">
+        <div class="cred-icon">⭐</div>
+        <h4>5-Star Rated</h4>
+        <p><span data-count="47" data-suffix="+">0+</span> verified customer reviews with a 5.0 average rating across Google and Facebook. Oklahoma City homeowners trust us.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEVE'S PROMISE -->
+<section class="promise-section">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;">
+      <div class="section-label" style="text-align:center;">Steve's Promise</div>
+      <h2 class="section-title" style="text-align:center;">A <em>Personal Guarantee</em></h2>
+    </div>
+    <div class="promise-wrap reveal">
+      <span class="quote-mark">"</span>
+      <blockquote>
+        When you hire Advance Pristine Painting, you're not hiring a faceless company — you're hiring me, Steve. I put my name on every single job, and I don't consider a project finished until you're completely happy with the results. That's not a slogan. That's a promise I make personally to every customer.
+      </blockquote>
+      <cite><strong>Steve Higgs</strong> · Owner, Advance Pristine Painting</cite>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <h2>Ready to Work with Steve's Team?</h2>
+  <p>Get your free, no-obligation estimate within 24 hours. Real craftsmanship, honest pricing.</p>
+  <div class="cta-group">
+    <a href="estimate.html" class="btn-cta-orange">Get My Free Estimate</a>
+    <a href="tel:4059001000" class="btn-cta-ghost">📞 Call Steve Directly</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="logo.png" alt="Advance Pristine Painting" />
+      <p><strong style="color:#fff;">Advance Pristine Painting LLC</strong><br />Owner: Steve Higgs · Oklahoma City, OK<br /><a href="tel:4059001000">405-900-1000</a> · <a href="mailto:Pristinepaintingokc@gmail.com">Pristinepaintingokc@gmail.com</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="testimonials.html">Reviews</a>
+      <a href="about.html">About Steve</a>
+      <a href="faq.html">FAQ</a>
+      
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="estimate.html">Free Estimate</a>
+      <a href="tel:4059001000">Call Us</a>
+      <a href="mailto:Pristinepaintingokc@gmail.com">Email Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Advance Pristine Painting LLC</span>
+    <span style="font-style:italic;">Pristine Painting With Pristine Results!</span>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('load', () => { setTimeout(() => document.getElementById('page-loader').classList.add('hidden'), 1500); });
+  document.getElementById('hamburger').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+<script>
+  // ── NUMBER COUNTER ANIMATION ──────────────────────────────────────────
+  function animateCounter(el) {
+    const target    = parseFloat(el.dataset.count);
+    const suffix    = el.dataset.suffix || '';
+    const prefix    = el.dataset.prefix || '';
+    const decimals  = (target % 1 !== 0) ? 1 : 0;
+    const duration  = 1800;
+    const start     = performance.now();
+
+    function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; } // ease-in-out
+
+    function step(now) {
+      const elapsed  = Math.min(now - start, duration);
+      const progress = ease(elapsed / duration);
+      const current  = target * progress;
+      el.textContent = prefix + (decimals ? current.toFixed(1) : Math.floor(current)) + suffix;
+      if (elapsed < duration) requestAnimationFrame(step);
+      else el.textContent = prefix + (decimals ? target.toFixed(1) : target) + suffix;
+    }
+    requestAnimationFrame(step);
+  }
+
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !e.target.dataset.counted) {
+        e.target.dataset.counted = 'true';
+        animateCounter(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('[data-count]').forEach(el => counterObs.observe(el));
+</script>
+
+
+    <!-- CHAT BACKDROP -->
+    <div id="chat-backdrop" onclick="toggleFullscreen()"></div>
+
+    <!-- CHAT BUBBLE -->
+    <button id="chat-bubble" onclick="toggleChat()" aria-label="Open chat">
+      <div id="chat-unread">1</div>
+      <svg id="chat-icon-open" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+      <svg id="chat-icon-close" viewBox="0 0 24 24" style="display:none;"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+    </button>
+
+    <!-- CHAT WINDOW -->
+    <div id="chat-window">
+      <div class="cw-header">
+        <div class="cw-avatar">🎨</div>
+        <div class="cw-header-text">
+          <div class="cw-name">Advance Pristine Painting</div>
+          <div class="cw-status">Typically replies in a few minutes</div>
+        </div>
+        <div class="cw-header-actions">
+          <button class="cw-fullscreen" onclick="toggleFullscreen()" title="Expand">
+            <svg id="fs-expand-icon" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+            <svg id="fs-shrink-icon" viewBox="0 0 24 24" style="display:none;"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>
+          </button>
+          <button class="cw-close" onclick="toggleChat()">×</button>
+        </div>
+      </div>
+      <div class="cw-messages" id="cw-messages"></div>
+      <div class="cw-footer">
+        <div class="cw-input-row">
+          <input class="cw-input" id="cw-input" placeholder="Type a message…" onkeydown="if(event.key==='Enter')cwSend()" disabled />
+          <button class="cw-send" onclick="cwSend()">
+            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          </button>
+        </div>
+        <div class="cw-powered">Powered by AI · Advance Pristine Painting</div>
+      </div>
+      <div id="cw-name-overlay">
+        <div class="cw-name-box">
+          <p>👋 Hi! Before we chat, what's your name and email?</p>
+          <input type="text" id="cw-name-input" placeholder="Your name" />
+          <span class="cw-name-err" id="cw-err-name">Please enter your name.</span>
+          <input type="email" id="cw-email-input" placeholder="Your email" />
+          <span class="cw-name-err" id="cw-err-email">Please enter a valid email.</span>
+          <button class="cw-name-btn" onclick="cwSubmitName()">Start Chatting →</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // CHAT WIDGET
+      let isOpen = false, visitorName = '', visitorEmail = '', chatHistory = [], leadDocId = null;
+      const messagesEl = document.getElementById('cw-messages');
+      const inputEl = document.getElementById('cw-input');
+      const nameOverlay = document.getElementById('cw-name-overlay');
+      const nameInput = document.getElementById('cw-name-input');
+      const emailInput = document.getElementById('cw-email-input');
+      const unreadEl = document.getElementById('chat-unread');
+
+   function buildSystemPrompt() {
+        return `You are a friendly, knowledgeable estimator assistant for Advance Pristine Painting LLC, based in Oklahoma City, OK. Your job is to chat with website visitors, ask smart questions about their painting project, and give them a ballpark price estimate.
+
+IMPORTANT RULES:
+- Be warm, conversational and concise — like a real person texting, not a robot. Use the visitor's name (${visitorName}) naturally.
+- Ask ONE question at a time. Never dump multiple questions at once.
+- Branch your questions intelligently based on what the customer tells you.
+- After collecting enough info, give a clear ballpark price range and offer to book a call or fill out the estimate form.
+- Always be honest that the final price is confirmed on-site. This is just a ballpark.
+- Never make up prices wildly — use the pricing logic below.
+- If someone asks something unrelated to painting/your services, politely redirect.
+- Keep responses SHORT. 1-3 sentences max unless giving the final estimate.
+- Use light emojis where natural 🎨
+
+SERVICE CATEGORIES YOU HANDLE:
+1. Exterior Painting
+2. Interior Painting
+3. Cabinet Refinishing
+4. Deck / Fence Staining
+5. Commercial Painting
+
+━━━━━━━━━━━━━━━━━━━━━━
+EXTERIOR PAINTING — QUESTION FLOW:
+━━━━━━━━━━━━━━━━━━━━━━
+Ask in this order:
+1. Substrate type: Wood (Cedar, Pine, Unknown) / Brick / Vinyl / Metal / Stucco
+   - If Wood: ask "Would you say the surface is porous or in rough shape?" (helps gauge prep work)
+2. How many colors? (1 / 2 / 3 / 4+)
+3. Which areas need painting? Ask about each one:
+   - Body (main walls) — yes/no
+   - Trim — yes/no
+   - Fascia boards — yes/no
+   - Soffit — yes/no
+   - Gutters — yes/no
+   - Doors (front/back/side) — yes/no → if yes, how many?
+   - Garage doors — yes/no → if yes, how many?
+4. Condition: Good (minor peeling) / Fair (moderate peeling/chips) / Poor (heavy peeling, bare wood)
+5. Approximate square footage of the home (or just "small/medium/large" if they don't know)
+
+EXTERIOR PRICING LOGIC (ballpark):
+- Base labor + materials for a medium home (1,500–2,000 sqft): $3,500–$5,500
+- Large home (2,500–3,500 sqft) with full scope: $5,500–$9,000+
+- Add ~$300–600 per garage door
+- Add ~$150–300 per exterior door
+- Poor condition (heavy prep/scraping): add 20–30% to total
+- Cedar/wood substrate: add pressure washing + 48hr dry time (mention this)
+- Each additional color beyond 1: add ~$200–400
+- Reference job: Full cedar exterior (body, trim, fascia, soffit, gutters, 2 doors, 2 garage doors, fences), poor condition, 2 colors = $4,322.81 for ~1,800 sqft. Use as anchor.
+- Work is performed in 3 phases: Pressure Washing → Scrape/Prep/Mask → Paint Application
+- All areas receive 2 coats of premium Sherwin-Williams paint
+- Timeline: typically 4–7 days depending on scope
+
+━━━━━━━━━━━━━━━━━━━━━━
+INTERIOR PAINTING — QUESTION FLOW:
+━━━━━━━━━━━━━━━━━━━━━━
+1. How many rooms? (which ones — bedroom, living room, kitchen, hallways, etc.)
+2. Ceiling height — standard (8ft) or taller?
+3. How many colors?
+4. Any trim, doors or accent walls included?
+5. Condition of walls (good / some holes/damage / significant repairs needed)
+
+INTERIOR PRICING (ballpark):
+- Per room (standard, 1 color, good condition): $250–$450
+- Living/great room or open plan: $400–$700
+- Full interior (3bed/2bath home): $2,500–$4,500
+- Add $100–200 per room for trim/doors
+- Repairs/patching: add $150–400 depending on severity
+- Timeline: 1 day per room roughly, full interior 3–5 days
+
+━━━━━━━━━━━━━━━━━━━━━━
+CABINET REFINISHING — QUESTION FLOW:
+━━━━━━━━━━━━━━━━━━━━━━
+1. Full cabinet paint (inside of boxes too) OR just doors, drawers & front frames (back masked)?
+2. How many doors?
+3. How many drawers?
+4. Current finish: painted, stained, or raw wood?
+5. Color change (light to light / dark to light / light to dark)?
+
+CABINET PRICING (ballpark):
+- Doors + drawers + frames only: $75–$120 per door, $40–$70 per drawer
+- Full cabinet (boxes included): add 40–60% to above
+- Dark to light color change: add $200–400 for extra primer coats
+- Average kitchen (30 doors, 10 drawers): $2,800–$4,500
+
+━━━━━━━━━━━━━━━━━━━━━━
+DECK / FENCE STAINING:
+━━━━━━━━━━━━━━━━━━━━━━
+1. Deck or fence or both?
+2. Approximate linear feet or sqft
+3. Condition (new/weathered/heavily weathered)
+4. Solid stain or semi-transparent?
+
+DECK/FENCE PRICING:
+- Fence: $2–4 per linear foot (both sides)
+- Deck: $1.50–$3 per sqft
+- Heavy prep/cleaning: add $100–300
+
+━━━━━━━━━━━━━━━━━━━━━━
+ENDING THE CONVERSATION:
+━━━━━━━━━━━━━━━━━━━━━━
+Once you have enough info, give a friendly ballpark range, explain briefly what's included, then say:
+"To lock in your exact price, we can schedule a FREE on-site estimate! You can fill out the form on this page or call us directly at 405-900-1000. What works best for you?"
+
+BUSINESS INFO:
+- Company: Advance Pristine Painting LLC
+- Owner: Steve Higgs
+- Phone: 405-900-1000
+- Location: Oklahoma City, OK and surrounding areas
+- Fully licensed and insured
+- Uses premium Sherwin-Williams products (Emerald, Duration, SuperPaint lines)
+- 50% deposit required upfront, 50% on completion${qaKnowledge}`;
+      }
+      function showTyping() {
+        const el = document.createElement('div');
+        el.className = 'cw-msg bot'; el.id = 'cw-typing';
+        el.innerHTML = `<div class="cw-bubble" style="padding:10px 14px;"><span style="display:inline-flex;gap:4px;align-items:center;"><span style="width:6px;height:6px;border-radius:50%;background:var(--muted);animation:cwDot 1.2s infinite 0s"></span><span style="width:6px;height:6px;border-radius:50%;background:var(--muted);animation:cwDot 1.2s infinite 0.2s"></span><span style="width:6px;height:6px;border-radius:50%;background:var(--muted);animation:cwDot 1.2s infinite 0.4s"></span></span></div>`;
+        messagesEl.appendChild(el);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+      function hideTyping() { const el = document.getElementById('cw-typing'); if(el) el.remove(); }
+
+      function addMsg(text, role) {
+        const el = document.createElement('div');
+        el.className = `cw-msg ${role}`;
+        const formatted = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+        el.innerHTML = `<div class="cw-bubble">${formatted}</div>`;
+        messagesEl.appendChild(el);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      async function askClaude(userMessage) {
+        chatHistory.push({ role: 'user', content: userMessage });
+        inputEl.disabled = true;
+        showTyping();
+        try {
+          const response = await fetch(CHAT_API, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ messages: chatHistory, systemPrompt: buildSystemPrompt() })
+          });
+          const data = await response.json();
+          hideTyping();
+          const reply = data.content && data.content[0] && data.content[0].text
+            ? data.content[0].text
+            : "Sorry, I had a hiccup! Feel free to call us at 405-900-1000 😊";
+          chatHistory.push({ role: 'assistant', content: reply });
+          addMsg(reply, 'bot');
+        } catch(err) {
+          hideTyping();
+          addMsg("Oops, something went wrong! Call us at 405-900-1000 and we'll be happy to help. 🎨", 'bot');
+        }
+        inputEl.disabled = false;
+        inputEl.focus();
+      }
+
+      window.cwSubmitName = async function() {
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        let hasError = false;
+        if (!name || name.length < 2) { nameInput.classList.add('shake'); document.getElementById('cw-err-name').classList.add('show'); hasError = true; }
+        else { document.getElementById('cw-err-name').classList.remove('show'); }
+        if (!emailValid) { emailInput.classList.add('shake'); document.getElementById('cw-err-email').classList.add('show'); hasError = true; }
+        else { document.getElementById('cw-err-email').classList.remove('show'); }
+        if (hasError) return;
+        visitorName = name; visitorEmail = email;
+        nameOverlay.classList.remove('visible');
+        inputEl.disabled = false;
+        setTimeout(async () => { await askClaude(`Hi! My name is ${visitorName}.`); inputEl.focus(); }, 300);
+      };
+
+      window.cwSend = function() {
+        const content = inputEl.value.trim();
+        if (!content || !visitorName || inputEl.disabled) return;
+        inputEl.value = '';
+        addMsg(content, 'user');
+        askClaude(content);
+      };
+
+      window.toggleChat = function() {
+        isOpen = !isOpen;
+        document.getElementById('chat-window').classList.toggle('open', isOpen);
+        document.getElementById('chat-icon-open').style.display = isOpen ? 'none' : 'block';
+        document.getElementById('chat-icon-close').style.display = isOpen ? 'block' : 'none';
+        unreadEl.style.display = 'none';
+        if (isOpen) {
+          if (!visitorName) nameOverlay.classList.add('visible');
+          setTimeout(() => { if (!visitorName) nameInput.focus(); else inputEl.focus(); }, 250);
+        } else {
+          nameOverlay.classList.remove('visible');
+          const win = document.getElementById('chat-window');
+          if (win.classList.contains('fullscreen')) {
+            win.classList.remove('fullscreen');
+            document.getElementById('chat-backdrop').classList.remove('visible');
+            document.getElementById('fs-expand-icon').style.display = 'block';
+            document.getElementById('fs-shrink-icon').style.display = 'none';
+          }
+        }
+      };
+
+      window.toggleFullscreen = function() {
+        const win = document.getElementById('chat-window');
+        const backdrop = document.getElementById('chat-backdrop');
+        const isFs = win.classList.toggle('fullscreen');
+        backdrop.classList.toggle('visible', isFs);
+        document.getElementById('fs-expand-icon').style.display = isFs ? 'none' : 'block';
+        document.getElementById('fs-shrink-icon').style.display = isFs ? 'block' : 'none';
+        setTimeout(() => { messagesEl.scrollTop = messagesEl.scrollHeight; }, 50);
+      };
+
+      nameInput.addEventListener('keydown', e => { if (e.key === 'Enter') emailInput.focus(); });
+      emailInput.addEventListener('keydown', e => { if (e.key === 'Enter') cwSubmitName(); });
+
+      // Auto-open after delay
+      setTimeout(() => {
+        const win = document.getElementById('chat-window');
+        win.style.display = 'flex';
+        requestAnimationFrame(() => requestAnimationFrame(() => toggleChat()));
+      }, 2000);
+    </script>
+  <script>
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.getElementById("page-loader").classList.add("hidden");
+      // Trigger hero animations after loader fades
+      setTimeout(() => {
+        document.querySelector(".hero").classList.add("animated");
+        document.querySelector(".hero-canvas").classList.add("animated");
+        // Fire hero counters now — they can't use IntersectionObserver
+        // because they start invisible and are already in the viewport
+        setTimeout(() => {
+          document.querySelectorAll('.hero [data-count]').forEach(el => {
+            if (!el.dataset.counted) {
+              el.dataset.counted = 'true';
+              animateCounter(el);
+            }
+          });
+  
+ }); // wait for badge pop-in animation to start
+      }); // small extra delay so fade-out is visible first
+    });
+  });
+      </script>
+</body>
+</html>
