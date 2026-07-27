@@ -1,1299 +1,576 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Painting Services – Advance Pristine Painting | Oklahoma City</title>
-    <meta
-      name="description"
-      content="Interior, exterior & commercial painting plus cabinet refinishing and deck staining in Oklahoma City, OK. Licensed & insured. Free estimates."
-    />
-    <link rel="icon" type="image/png" href="logo.png" />
-    <link
-      rel="canonical"
-      href="https://advpristinepainting.com/services.html"
-    />
-    <meta
-      property="og:title"
-      content="Painting Services – Advance Pristine Painting"
-    />
-    <meta
-      property="og:description"
-      content="Full-service painting in OKC: interior, exterior, commercial, cabinet refinishing, deck staining. Free estimates, licensed & insured."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://advpristinepainting.com/services.html" />
-    <meta property="og:image" content="https://advpristinepainting.com/logo.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Painting Services – Advance Pristine Painting" />
-    <meta name="twitter:description" content="Full-service painting in OKC: interior, exterior, commercial, cabinet refinishing, deck staining." />
-    <meta name="twitter:image" content="https://advpristinepainting.com/logo.png" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Work – Advance Pristine Painting | Oklahoma City</title>
+  <meta name="description" content="See before and after photos from Advance Pristine Painting projects across Oklahoma City. Interior, exterior, cabinet refinishing and more." />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="canonical" href="https://advpristinepainting.com/gallery.html" />
+  <meta property="og:title" content="Our Work – Advance Pristine Painting" />
+  <meta property="og:description" content="Real before & after painting projects from Oklahoma City homes. Interior, exterior, and cabinet refinishing." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://advpristinepainting.com/gallery.html" />
+  <meta property="og:image" content="https://advpristinepainting.com/exter1.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Our Work – Advance Pristine Painting" />
+  <meta name="twitter:description" content="Real before & after painting projects from Oklahoma City homes." />
+  <meta name="twitter:image" content="https://advpristinepainting.com/exter1.jpg" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Advance Pristine Painting",
+    "url": "https://advpristinepainting.com",
+    "telephone": "+14059001000",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Oklahoma City",
+      "addressRegion": "OK",
+      "addressCountry": "US"
+    }
+  }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #1e2d4a; --navy-deep: #141e33; --navy-mid: #2b3f63;
+      --orange: #d94f1e; --cream: #f8f6f2; --white: #fff;
+      --text: #1a1a1a; --muted: #666; --border: #ddd8ce;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: "DM Sans", sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
 
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "Advance Pristine Painting",
-        "telephone": "+14059001000",
-        "url": "https://advpristinepainting.com",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Oklahoma City",
-          "addressRegion": "OK",
-          "addressCountry": "US"
-        },
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Painting Services",
-          "itemListElement": [
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Interior Painting",
-                "description": "Complete interior painting services including walls, ceilings, trim, and doors."
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Exterior Painting",
-                "description": "Weather-resistant exterior painting for homes and businesses in Oklahoma City."
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Commercial Painting",
-                "description": "Professional commercial painting with minimal disruption to your business."
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Cabinet Refinishing",
-                "description": "Professional cabinet painting and refinishing for kitchens and bathrooms."
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Deck and Fence Staining",
-                "description": "Premium deck and fence staining and sealing services."
-              }
-            }
-          ]
-        }
-      }
-    </script>
+    /* PAGE LOADER */
+    #page-loader { position:fixed;inset:0;z-index:99999;background:var(--navy-deep);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;transition:opacity 0.6s ease,visibility 0.6s ease; }
+    #page-loader.hidden { opacity:0;visibility:hidden; }
+    .loader-logo { font-family:"Playfair Display",serif;font-size:1.8rem;color:#fff; }
+    .loader-logo span { color:var(--orange);font-style:italic; }
+    .loader-brush { width:120px;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden; }
+    .loader-brush-fill { height:100%;width:0;background:var(--orange);border-radius:2px;animation:brushLoad 1.4s cubic-bezier(0.4,0,0.2,1) forwards; }
+    @keyframes brushLoad { to { width:100%; } }
+    .loader-tagline { font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35); }
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      :root {
-        --navy: #1e2d4a;
-        --navy-deep: #141e33;
-        --navy-mid: #2b3f63;
-        --orange: #d94f1e;
-        --gold: #b07d2a;
-        --cream: #f8f6f2;
-        --white: #ffffff;
-        --text: #1a1a1a;
-        --muted: #666;
-        --border: #ddd8ce;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        font-family: "DM Sans", sans-serif;
-        background: var(--cream);
-        color: var(--text);
-        overflow-x: hidden;
-      }
+    /* NAV */
+    .topbar { background:var(--orange);color:#fff;text-align:center;padding:9px 1rem;font-size:0.82rem;font-weight:600;letter-spacing:0.05em; }
+    .topbar a { color:#fff;text-decoration:none; }
+    nav { background:var(--navy-deep);position:sticky;top:0;z-index:500;box-shadow:0 2px 16px rgba(0,0,0,0.25); }
+    .nav-inner { max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:64px; }
+    .nav-logo { display:flex;align-items:center;gap:10px;text-decoration:none; }
+    .nav-logo img { height:40px; }
+    .nav-logo-text { font-family:"Playfair Display",serif;font-size:1.1rem;color:#fff;line-height:1.2; }
+    .nav-logo-text small { display:block;font-family:"DM Sans",sans-serif;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);font-weight:400; }
+    .nav-links { display:flex;align-items:center;gap:0.2rem; }
+    .nav-links a { color:rgba(255,255,255,0.72);text-decoration:none;font-size:0.88rem;font-weight:500;padding:8px 14px;border-radius:8px;transition:color 0.18s,background 0.18s; }
+    .nav-links a:hover, .nav-links a.active { color:#fff;background:rgba(255,255,255,0.09); }
+    .nav-links a.active { color:var(--orange); }
+    .nav-cta { background:var(--orange)!important;color:#fff!important;font-weight:600!important;padding:9px 18px!important;border-radius:30px!important;margin-left:0.5rem; }
+    .nav-cta:hover { background:#bf4118!important; }
+    .nav-hamburger { display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px; }
+    .nav-hamburger span { display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:transform 0.25s ease,opacity 0.25s ease; }
+    .nav-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity:0; }
+    .nav-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    @media (max-width:680px) {
+      .nav-links { display:none;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:var(--navy-deep);padding:1rem 1.5rem 1.5rem;gap:0.5rem;border-top:1px solid rgba(255,255,255,0.1); }
+      .nav-links.open { display:flex; }
+      .nav-links a { width:100%; }
+      .nav-hamburger { display:flex; }
+    }
 
-      /* NAV */
-      .topbar {
-        background: var(--orange);
-        color: #fff;
-        text-align: center;
-        padding: 9px 1rem;
-        font-size: 0.82rem;
-        font-weight: 600;
-        letter-spacing: 0.05em;
-      }
-      .topbar a {
-        color: #fff;
-        text-decoration: none;
-      }
-      nav {
-        background: var(--navy-deep);
-        position: sticky;
-        top: 0;
-        z-index: 500;
-        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
-      }
-      .nav-inner {
-        max-width: 1100px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 1.5rem;
-        height: 64px;
-      }
-      .nav-logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        text-decoration: none;
-      }
-      .nav-logo img {
-        height: 60px;
-      }
-      .nav-logo-text {
-        font-family: "Playfair Display", serif;
-        font-size: 1.1rem;
-        color: #fff;
-        line-height: 1.2;
-      }
-      .nav-logo-text small {
-        display: block;
-        font-family: "DM Sans", sans-serif;
-        font-size: 0.65rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.5);
-        font-weight: 400;
-      }
-      .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 0.2rem;
-      }
-      .nav-links a {
-        color: rgba(255, 255, 255, 0.72);
-        text-decoration: none;
-        font-size: 0.88rem;
-        font-weight: 500;
-        padding: 8px 14px;
-        border-radius: 8px;
-        transition:
-          color 0.18s,
-          background 0.18s;
-      }
-      .nav-links a:hover,
-      .nav-links a.active {
-        color: #fff;
-        background: rgba(255, 255, 255, 0.09);
-      }
-      .nav-links a.active {
-        color: var(--orange);
-      }
-      .nav-cta {
-        background: var(--orange) !important;
-        color: #fff !important;
-        font-weight: 600 !important;
-        padding: 9px 18px !important;
-        border-radius: 30px !important;
-        margin-left: 0.5rem;
-      }
-      .nav-cta:hover {
-        background: #bf4118 !important;
-      }
-      .nav-hamburger {
-        display: none;
-        flex-direction: column;
-        gap: 5px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 6px;
-      }
-      .nav-hamburger span {
-        display: block;
-        width: 22px;
-        height: 2px;
-        background: #fff;
-        border-radius: 2px;
-      }
-      @media (max-width: 680px) {
-        .nav-links {
-          display: none;
-          flex-direction: column;
-          position: absolute;
-          top: 64px;
-          left: 0;
-          right: 0;
-          background: var(--navy-deep);
-          padding: 1rem 1.5rem 1.5rem;
-          gap: 0.5rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .nav-links.open {
-          display: flex;
-        }
-        .nav-links a {
-          width: 100%;
-        }
-        .nav-hamburger {
-          display: flex;
-        }
-      }
+    /* PAGE HERO */
+    .page-hero { background:var(--navy);color:#fff;padding:5rem 1.5rem 6rem;text-align:center;position:relative;overflow:hidden; }
+    .page-hero::before { content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(217,79,30,0.13) 0%,transparent 65%); }
+    .page-hero::after { content:"";position:absolute;bottom:0;left:0;right:0;height:70px;background:var(--cream);clip-path:ellipse(55% 100% at 50% 100%); }
+    .hero-inner { max-width:680px;margin:0 auto;position:relative;z-index:1; }
+    .page-eyebrow { font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:1rem;font-weight:600; }
+    .page-hero h1 { font-family:"Playfair Display",serif;font-size:clamp(2.2rem,5vw,3.4rem);line-height:1.12;margin-bottom:1rem; }
+    .page-hero h1 em { font-style:italic;color:var(--orange); }
+    .page-hero p { color:rgba(255,255,255,0.72);font-size:1.05rem;line-height:1.7; }
 
-      /* PAGE HERO */
-      .page-hero {
-        background: var(--navy);
-        color: #fff;
-        padding: 5rem 1.5rem 6rem;
-        position: relative;
-        overflow: hidden;
-        text-align: center;
-      }
-      .page-hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(
-          ellipse at 30% 50%,
-          rgba(217, 79, 30, 0.12) 0%,
-          transparent 60%
-        );
-        pointer-events: none;
-      }
-      .page-hero::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 70px;
-        background: var(--cream);
-        clip-path: ellipse(55% 100% at 50% 100%);
-      }
-      .page-hero-inner {
-        max-width: 680px;
-        margin: 0 auto;
-        position: relative;
-        z-index: 1;
-      }
-      .page-eyebrow {
-        font-size: 0.72rem;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.5);
-        margin-bottom: 1rem;
-        font-weight: 600;
-      }
-      .page-hero h1 {
-        font-family: "Playfair Display", serif;
-        font-size: clamp(2.2rem, 5vw, 3.4rem);
-        line-height: 1.12;
-        margin-bottom: 1rem;
-      }
-      .page-hero h1 em {
-        font-style: italic;
-        color: var(--orange);
-      }
-      .page-hero p {
-        color: rgba(255, 255, 255, 0.72);
-        font-size: 1.05rem;
-        line-height: 1.7;
-      }
+    /* SHARED */
+    .section-inner { max-width:1100px;margin:0 auto; }
+    .section-label { font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:0.6rem; }
+    .section-title { font-family:"Playfair Display",serif;font-size:clamp(1.8rem,3.5vw,2.6rem);color:var(--navy);line-height:1.2;margin-bottom:1rem; }
+    .section-title em { font-style:italic;color:var(--orange); }
+    .reveal { opacity:0;transform:translateY(28px);transition:opacity 0.6s ease,transform 0.6s ease; }
+    .reveal.visible { opacity:1;transform:translateY(0); }
+    .btn-primary { display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;padding:13px 26px;border-radius:40px;font-weight:700;font-size:0.95rem;text-decoration:none;transition:background 0.2s,transform 0.15s; }
+    .btn-primary:hover { background:#bf4118;transform:translateY(-2px); }
 
-      /* SHARED */
-      section {
-        padding: 5rem 1.5rem;
-      }
-      .section-inner {
-        max-width: 1100px;
-        margin: 0 auto;
-      }
-      .section-label {
-        font-size: 0.72rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--orange);
-        font-weight: 700;
-        margin-bottom: 0.6rem;
-      }
-      .section-title {
-        font-family: "Playfair Display", serif;
-        font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-        color: var(--navy);
-        line-height: 1.2;
-        margin-bottom: 1rem;
-      }
-      .section-title em {
-        font-style: italic;
-        color: var(--orange);
-      }
-      .section-sub {
-        color: var(--muted);
-        font-size: 1.02rem;
-        line-height: 1.7;
-        max-width: 560px;
-      }
-      .btn-primary {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: var(--orange);
-        color: #fff;
-        padding: 13px 26px;
-        border-radius: 40px;
-        font-weight: 700;
-        font-size: 0.95rem;
-        text-decoration: none;
-        transition:
-          background 0.2s,
-          transform 0.15s;
-      }
-      .btn-primary:hover {
-        background: #bf4118;
-        transform: translateY(-1px);
-      }
-      .reveal {
-        opacity: 0;
-        transform: translateY(28px);
-        transition:
-          opacity 0.6s ease,
-          transform 0.6s ease;
-      }
-      .reveal.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    /* FILTER TABS */
+    .filter-section { padding:3rem 1.5rem 1rem;background:var(--white); }
+    .filter-tabs { display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:0; }
+    .filter-btn {
+      padding:9px 20px;border-radius:30px;border:1.5px solid var(--border);
+      background:var(--cream);color:var(--text);font-size:0.85rem;font-weight:600;
+      cursor:pointer;font-family:"DM Sans",sans-serif;transition:all 0.2s;
+    }
+    .filter-btn:hover { border-color:var(--orange);color:var(--orange); }
+    .filter-btn.active { background:var(--navy);color:#fff;border-color:var(--navy); }
 
-      /* SERVICE DETAIL CARDS */
-      .services-detail {
-        background: var(--white);
-      }
-      .svc-detail-item {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4rem;
-        align-items: center;
-        padding: 4rem 0;
-        border-bottom: 1.5px solid var(--border);
-      }
-      .svc-detail-item:last-child {
-        border-bottom: none;
-      }
-      .svc-detail-item.reverse {
-        direction: rtl;
-      }
-      .svc-detail-item.reverse > * {
-        direction: ltr;
-      }
-      @media (max-width: 750px) {
-        .svc-detail-item,
-        .svc-detail-item.reverse {
-          grid-template-columns: 1fr;
-          gap: 2rem;
-          direction: ltr;
-        }
-      }
-      .svc-visual {
-        background: var(--cream);
-        border-radius: 24px;
-        padding: 3rem 2rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 280px;
-        border: 1.5px solid var(--border);
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-      .svc-visual::before {
-        content: "";
-        position: absolute;
-        top: -30px;
-        right: -30px;
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        background: rgba(217, 79, 30, 0.07);
-      }
-      .svc-big-icon {
-        font-size: 4rem;
-        margin-bottom: 1rem;
-        display: block;
-      }
-      .svc-visual h4 {
-        font-family: "Playfair Display", serif;
-        font-size: 1.3rem;
-        color: var(--navy);
-        margin-bottom: 0.5rem;
-      }
-      .svc-visual p {
-        font-size: 0.85rem;
-        color: var(--muted);
-        line-height: 1.6;
-      }
-      .svc-tag {
-        display: inline-block;
-        background: rgba(217, 79, 30, 0.1);
-        color: var(--orange);
-        font-size: 0.72rem;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        padding: 4px 12px;
-        border-radius: 20px;
-        margin-bottom: 1rem;
-      }
-      .svc-info h2 {
-        font-family: "Playfair Display", serif;
-        font-size: clamp(1.6rem, 3vw, 2.1rem);
-        color: var(--navy);
-        margin-bottom: 0.8rem;
-        line-height: 1.2;
-      }
-      .svc-info h2 em {
-        font-style: italic;
-        color: var(--orange);
-      }
-      .svc-info p {
-        color: var(--muted);
-        font-size: 0.95rem;
-        line-height: 1.75;
-        margin-bottom: 1.2rem;
-      }
-      .svc-includes {
-        margin: 1.4rem 0;
-      }
-      .svc-includes h5 {
-        font-size: 0.75rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--navy);
-        font-weight: 700;
-        margin-bottom: 0.8rem;
-      }
-      .svc-checklist {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      .svc-checklist li {
-        display: flex;
-        align-items: flex-start;
-        gap: 8px;
-        font-size: 0.9rem;
-        color: var(--text);
-      }
-      .svc-checklist li::before {
-        content: "✓";
-        color: var(--orange);
-        font-weight: 700;
-        flex-shrink: 0;
-        margin-top: 1px;
-      }
+    /* ── BEFORE / AFTER SLIDERS ── */
+    .sliders-section { padding:3rem 1.5rem 5rem;background:var(--white); }
+    .sliders-header { text-align:center;margin-bottom:3rem; }
+    .sliders-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:2rem; }
+    @media (max-width:500px) { .sliders-grid { grid-template-columns:1fr; } }
 
-      /* PROCESS STRIP */
-      .process-strip {
-        background: var(--navy);
-        color: #fff;
-        padding: 5rem 1.5rem;
-      }
-      .process-strip .section-label {
-        color: rgba(217, 79, 30, 0.8);
-      }
-      .process-strip .section-title {
-        color: #fff;
-      }
-      .process-strip .section-title em {
-        color: #f0a07a;
-      }
-      .steps-row {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 1.5rem;
-        margin-top: 3rem;
-      }
-      .step-item {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 18px;
-        padding: 1.8rem 1.4rem;
-        position: relative;
-      }
-      .step-num {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: var(--orange);
-        color: #fff;
-        font-family: "Playfair Display", serif;
-        font-size: 1.1rem;
-        font-weight: 800;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 1rem;
-      }
-      .step-item h4 {
-        font-size: 0.95rem;
-        color: #fff;
-        margin-bottom: 0.4rem;
-        font-weight: 600;
-      }
-      .step-item p {
-        font-size: 0.83rem;
-        color: rgba(255, 255, 255, 0.6);
-        line-height: 1.6;
-      }
+    .ba-card {
+      border-radius:22px;overflow:hidden;border:1.5px solid var(--border);
+      background:var(--navy-deep);
+      transition:transform 0.25s ease,box-shadow 0.25s ease;
+    }
+    .ba-card:hover { transform:translateY(-5px);box-shadow:0 20px 56px rgba(30,45,74,0.18); }
 
-      /* PAINT PRODUCTS */
-      .products-section {
-        background: var(--cream);
-      }
-      .products-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-        gap: 1.5rem;
-        margin-top: 3rem;
-      }
-      .product-card {
-        background: var(--white);
-        border: 1.5px solid var(--border);
-        border-radius: 18px;
-        padding: 2rem;
-      }
-      .product-icon {
-        font-size: 2.2rem;
-        margin-bottom: 1rem;
-      }
-      .product-card h3 {
-        font-family: "Playfair Display", serif;
-        font-size: 1.15rem;
-        color: var(--navy);
-        margin-bottom: 0.4rem;
-      }
-      .product-card .badge {
-        display: inline-block;
-        background: rgba(30, 45, 74, 0.07);
-        color: var(--navy-mid);
-        font-size: 0.7rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        padding: 3px 10px;
-        border-radius: 20px;
-        margin-bottom: 0.8rem;
-      }
-      .product-card p {
-        font-size: 0.88rem;
-        color: var(--muted);
-        line-height: 1.65;
-      }
+    /* The slider itself */
+    .ba-slider {
+      position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;cursor:ew-resize;
+      user-select:none;-webkit-user-select:none;
+    }
+    .ba-after, .ba-before {
+      position:absolute;inset:0;width:100%;height:100%;
+      display:flex;align-items:center;justify-content:center;
+      font-size:0.75rem;
+    }
+    /* Placeholder styling — Steve swaps these for real <img> tags */
+    .ba-before {
+      background:linear-gradient(135deg,#c8c0b4 0%,#b0a898 100%);
+      flex-direction:column;gap:0.5rem;color:rgba(0,0,0,0.4);
+    }
+    .ba-after {
+      background:linear-gradient(135deg,#d94f1e22 0%,#1e2d4a22 100%);
+      flex-direction:column;gap:0.5rem;color:rgba(0,0,0,0.4);
+    }
+    /* When real images are used */
+    .ba-before img, .ba-after img {
+      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    }
+    .placeholder-icon { font-size:2.5rem;opacity:0.4; }
+    .placeholder-text { font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;opacity:0.5; }
 
-      /* CTA BAND */
-      .cta-band {
-        background: linear-gradient(
-          135deg,
-          var(--navy-deep) 0%,
-          var(--navy-mid) 100%
-        );
-        color: #fff;
-        text-align: center;
-        padding: 5rem 1.5rem;
-        position: relative;
-        overflow: hidden;
-      }
-      .cta-band::before {
-        content: "";
-        position: absolute;
-        top: -80px;
-        right: -80px;
-        width: 320px;
-        height: 320px;
-        border-radius: 50%;
-        background: rgba(217, 79, 30, 0.1);
-      }
-      .cta-band h2 {
-        font-family: "Playfair Display", serif;
-        font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-        margin-bottom: 0.8rem;
-        position: relative;
-      }
-      .cta-band p {
-        color: rgba(255, 255, 255, 0.7);
-        margin-bottom: 2.2rem;
-        font-size: 1.05rem;
-        position: relative;
-      }
-      .cta-group {
-        display: flex;
-        gap: 14px;
-        justify-content: center;
-        flex-wrap: wrap;
-        position: relative;
-      }
-      .btn-cta-orange {
-        background: var(--orange);
-        color: #fff;
-        padding: 15px 32px;
-        border-radius: 40px;
-        font-weight: 700;
-        font-size: 1.05rem;
-        text-decoration: none;
-        transition: background 0.2s;
-      }
-      .btn-cta-orange:hover {
-        background: #bf4118;
-      }
-      .btn-cta-ghost {
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        color: rgba(255, 255, 255, 0.85);
-        padding: 13px 28px;
-        border-radius: 40px;
-        font-weight: 600;
-        font-size: 1.05rem;
-        text-decoration: none;
-        transition: all 0.2s;
-      }
-      .btn-cta-ghost:hover {
-        border-color: rgba(255, 255, 255, 0.7);
-        color: #fff;
-      }
+    /* Clip the "after" to reveal on drag */
+    .ba-after { clip-path:inset(0 50% 0 0);transition:none; }
 
-      /* FOOTER */
-      footer {
-        background: var(--navy-deep);
-        color: rgba(255, 255, 255, 0.55);
-        padding: 3rem 1.5rem 2rem;
-        font-size: 0.82rem;
-      }
-      .footer-inner {
-        max-width: 1100px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr;
-        gap: 2.5rem;
-      }
-      @media (max-width: 650px) {
-        .footer-inner {
-          grid-template-columns: 1fr;
-        }
-      }
-      .footer-brand img {
-        height: 90px;
-        margin-bottom: 0.6rem;
-      }
-      .footer-brand p {
-        line-height: 1.7;
-      }
-      .footer-brand a {
-        color: var(--orange);
-        text-decoration: none;
-      }
-      .footer-col h4 {
-        color: #fff;
-        font-size: 0.78rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        margin-bottom: 1rem;
-        font-weight: 700;
-      }
-      .footer-col a {
-        display: block;
-        color: rgba(255, 255, 255, 0.55);
-        text-decoration: none;
-        margin-bottom: 0.5rem;
-        transition: color 0.15s;
-        font-size: 0.85rem;
-      }
-      .footer-col a:hover {
-        color: var(--orange);
-      }
-      .footer-bottom {
-        max-width: 1100px;
-        margin: 2rem auto 0;
-        padding-top: 1.2rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        font-size: 0.75rem;
-        color: rgba(255, 255, 255, 0.35);
-      }
+    /* Drag handle */
+    .ba-handle {
+      position:absolute;top:0;bottom:0;left:50%;
+      width:3px;background:#fff;transform:translateX(-50%);
+      display:flex;align-items:center;justify-content:center;
+      cursor:ew-resize;z-index:10;
+    }
+    .ba-knob {
+      width:44px;height:44px;border-radius:50%;background:#fff;
+      box-shadow:0 4px 16px rgba(0,0,0,0.25);
+      display:flex;align-items:center;justify-content:center;
+      flex-shrink:0;pointer-events:none;
+    }
+    .ba-knob svg { width:20px;height:20px;fill:var(--navy); }
 
-      }
+    /* Before / After labels */
+    .ba-label-before, .ba-label-after {
+      position:absolute;bottom:14px;z-index:5;
+      background:rgba(20,30,51,0.75);backdrop-filter:blur(6px);
+      color:#fff;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;
+      text-transform:uppercase;padding:5px 12px;border-radius:20px;
+    }
+    .ba-label-before { left:14px; }
+    .ba-label-after  { right:14px; }
 
-      /* ── GLOBAL HOVER EFFECTS ── */
-      a {
-        transition: opacity 0.18s ease;
-      }
-      .btn-primary,
-      .btn-ghost,
-      .btn-cta-orange,
-      .btn-cta-ghost,
-      .nav-cta {
-        transition:
-          background 0.2s ease,
-          transform 0.15s ease,
-          box-shadow 0.2s ease,
-          border-color 0.2s ease !important;
-      }
-      .btn-primary:hover,
-      .btn-cta-orange:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(217, 79, 30, 0.35);
-      }
-      .footer-col a {
-        position: relative;
-      }
-      .footer-col a::after {
-        content: "";
-        position: absolute;
-        bottom: -1px;
-        left: 0;
-        width: 0;
-        height: 1px;
-        background: var(--orange);
-        transition: width 0.25s ease;
-      }
-      .footer-col a:hover::after {
-        width: 100%;
-      }
-      .topbar a:hover {
-        opacity: 0.8;
-      }
-      .nav-hamburger span {
-        transition:
-          transform 0.25s ease,
-          opacity 0.25s ease;
-      }
-      .nav-hamburger.open span:nth-child(1) {
-        transform: translateY(7px) rotate(45deg);
-      }
-      .nav-hamburger.open span:nth-child(2) {
-        opacity: 0;
-      }
-      .nav-hamburger.open span:nth-child(3) {
-        transform: translateY(-7px) rotate(-45deg);
-      }
-    </style>
-  </head>
-  <body>
-    <div
-      id="page-loader"
-      style="
-        position: fixed;
-        inset: 0;
-        z-index: 99999;
-        background: #141e33;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1.5rem;
-        transition:
-          opacity 0.6s ease,
-          visibility 0.6s ease;
-      "
-    >
-      <div
-        style="
-          font-family:
-            Playfair Display,
-            serif;
-          font-size: 1.8rem;
-          color: #fff;
-        "
-      >
-        Advance
-        <span style="color: #d94f1e; font-style: italic">Pristine</span>
-        Painting
-      </div>
-      <div
-        style="
-          width: 120px;
-          height: 4px;
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 2px;
-          overflow: hidden;
-        "
-      >
-        <div
-          style="
-            height: 100%;
-            width: 0;
-            background: #d94f1e;
-            border-radius: 2px;
-            animation: brushLoad 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-          "
-        ></div>
-      </div>
-      <div
-        style="
-          font-size: 0.78rem;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          color: rgba(255, 255, 255, 0.35);
-        "
-      >
-        Pristine Painting With Pristine Results
-      </div>
+    /* Card footer */
+    .ba-footer {
+      padding:1.2rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    }
+    .ba-title { font-family:"Playfair Display",serif;font-size:1rem;color:#fff;line-height:1.3; }
+    .ba-tag {
+      background:rgba(217,79,30,0.2);color:#f0a07a;
+      font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+      padding:4px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;
+    }
+
+    /* ── PHOTO GRID ── */
+    .grid-section { padding:5rem 1.5rem;background:var(--cream); }
+    .photo-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+      gap:1.2rem;
+      margin-top:2.5rem;
+    }
+    .photo-card {
+      border-radius:18px;overflow:hidden;position:relative;
+      aspect-ratio:4/3;background:var(--border);
+      cursor:pointer;
+      transition:transform 0.25s ease,box-shadow 0.25s ease;
+    }
+    .photo-card:hover { transform:translateY(-4px);box-shadow:0 16px 40px rgba(30,45,74,0.15); }
+    .photo-card img { width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s ease; }
+    .photo-card:hover img { transform:scale(1.05); }
+    /* Placeholder for photo grid */
+    .photo-placeholder {
+      width:100%;height:100%;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;gap:0.5rem;
+      background:linear-gradient(135deg,#e2ddd6,#ccc8bf);
+    }
+    .photo-placeholder .ph-icon { font-size:2.2rem;opacity:0.35; }
+    .photo-placeholder .ph-label { font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(0,0,0,0.35); }
+    /* Overlay on hover */
+    .photo-overlay {
+      position:absolute;inset:0;background:linear-gradient(to top,rgba(20,30,51,0.85) 0%,transparent 55%);
+      opacity:0;transition:opacity 0.3s ease;display:flex;align-items:flex-end;padding:1.2rem;
+    }
+    .photo-card:hover .photo-overlay { opacity:1; }
+    .photo-overlay-text { color:#fff; }
+    .photo-overlay-text h4 { font-family:"Playfair Display",serif;font-size:1rem;margin-bottom:2px; }
+    .photo-overlay-text span { font-size:0.75rem;color:rgba(255,255,255,0.7); }
+
+    /* ── HOW TO ADD PHOTOS ── */
+    .add-photos-section { padding:4rem 1.5rem;background:var(--white); }
+    .add-photos-card {
+      max-width:720px;margin:0 auto;background:var(--navy);border-radius:24px;
+      padding:3rem;color:#fff;display:grid;grid-template-columns:1fr auto;
+      gap:2rem;align-items:center;
+    }
+    @media (max-width:600px) { .add-photos-card { grid-template-columns:1fr; } }
+    .add-photos-card h3 { font-family:"Playfair Display",serif;font-size:1.5rem;margin-bottom:0.8rem; }
+    .add-photos-card p { color:rgba(255,255,255,0.65);font-size:0.9rem;line-height:1.7; }
+    .add-photos-card code {
+      display:inline-block;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
+      border-radius:6px;padding:2px 8px;font-family:monospace;font-size:0.82rem;color:#f0a07a;
+    }
+    .add-photos-cta { display:flex;flex-direction:column;gap:10px;align-items:center;flex-shrink:0; }
+    .add-photos-cta a { white-space:nowrap; }
+
+    /* ── CTA ── */
+    .cta-band { background:linear-gradient(135deg,var(--navy-deep),var(--navy-mid));color:#fff;text-align:center;padding:5rem 1.5rem; }
+    .cta-band h2 { font-family:"Playfair Display",serif;font-size:clamp(1.8rem,3.5vw,2.6rem);margin-bottom:0.8rem; }
+    .cta-band p { color:rgba(255,255,255,0.7);margin-bottom:2.2rem;font-size:1.05rem; }
+    .cta-group { display:flex;gap:14px;justify-content:center;flex-wrap:wrap; }
+    .btn-cta-orange { background:var(--orange);color:#fff;padding:15px 32px;border-radius:40px;font-weight:700;font-size:1.05rem;text-decoration:none;transition:background 0.2s,transform 0.15s; }
+    .btn-cta-orange:hover { background:#bf4118;transform:translateY(-2px); }
+    .btn-cta-ghost { border:2px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.85);padding:13px 28px;border-radius:40px;font-weight:600;font-size:1.05rem;text-decoration:none;transition:all 0.2s; }
+    .btn-cta-ghost:hover { border-color:rgba(255,255,255,0.7);color:#fff; }
+
+    /* FOOTER */
+    footer { background:var(--navy-deep);color:rgba(255,255,255,0.55);padding:3rem 1.5rem 2rem;font-size:0.82rem; }
+    .footer-inner { max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem; }
+    @media (max-width:650px) { .footer-inner { grid-template-columns:1fr; } }
+    .footer-brand img { height:44px;margin-bottom:0.8rem; }
+    .footer-brand p { line-height:1.7; }
+    .footer-brand a { color:var(--orange);text-decoration:none; }
+    .footer-col h4 { color:#fff;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1rem;font-weight:700; }
+    .footer-col a { display:block;color:rgba(255,255,255,0.55);text-decoration:none;margin-bottom:0.5rem;font-size:0.85rem;transition:color 0.15s;position:relative; }
+    .footer-col a::after { content:'';position:absolute;bottom:-1px;left:0;width:0;height:1px;background:var(--orange);transition:width 0.25s ease; }
+    .footer-col a:hover { color:var(--orange); }
+    .footer-col a:hover::after { width:100%; }
+    .footer-bottom { max-width:1100px;margin:2rem auto 0;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;font-size:0.75rem;color:rgba(255,255,255,0.35); }
+
+  </style>
+</head>
+<body>
+
+<div id="page-loader">
+  <div class="loader-logo">Advance <span>Pristine</span> Painting</div>
+  <div class="loader-brush"><div class="loader-brush-fill"></div></div>
+  <div class="loader-tagline">Pristine Painting With Pristine Results</div>
+</div>
+
+<div class="topbar">📞 <a href="tel:4059001000">405-900-1000</a> · Free Estimates · Oklahoma City &amp; Surrounding Areas</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="Advance Pristine Painting" />
+      <div class="nav-logo-text">Advance Pristine Painting<small>Oklahoma City, OK</small></div>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="testimonials.html">Reviews</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="gallery.html" class="active">Gallery</a>
+      <a href="estimate.html" class="nav-cta">Free Estimate</a>
     </div>
-    <style>
-      @keyframes brushLoad {
-        to {
-          width: 100%;
-        }
-      }
-      #page-loader.hidden {
-        opacity: 0;
-        visibility: hidden;
-      }
-    </style>
-    <div class="topbar">
-      📞 Call for a Free Quote! &nbsp;<a href="tel:4059001000">405-900-1000</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="hero-inner">
+    <div class="page-eyebrow">The Proof Is in the Paint</div>
+    <h1>Our Work,<br /><em>Up Close</em></h1>
+    <p>Real projects, real homes, real Oklahoma City families. Drag the sliders to see the transformation.</p>
+  </div>
+</section>
+
+<!-- FILTER TABS -->
+<div class="filter-section">
+  <div class="section-inner">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-filter="all">All Projects</button>
+      <button class="filter-btn" data-filter="interior">Interior</button>
+      <button class="filter-btn" data-filter="exterior">Exterior</button>
+      <button class="filter-btn" data-filter="cabinet">Cabinets</button>
+      <button class="filter-btn" data-filter="commercial">Commercial</button>
+      <button class="filter-btn" data-filter="deck">Deck &amp; Fence</button>
     </div>
+  </div>
+</div>
 
-    <nav>
-      <div class="nav-inner">
-        <a href="index.html" class="nav-logo">
-          <img src="logo.png" alt="Advance Pristine Painting" />
-          <div class="nav-logo-text">
-            Advance Pristine Painting<small>Oklahoma City, OK</small>
+<!-- BEFORE / AFTER SLIDERS -->
+<section class="sliders-section">
+  <div class="section-inner">
+    <div class="sliders-header reveal">
+      <div class="section-label">Before &amp; After</div>
+      <h2 class="section-title">Drag to <em>Reveal</em> the Difference</h2>
+    </div>
+    <div class="sliders-grid" id="slidersGrid">
+
+      <!-- ── SLOT 1 — Interior Living Room ── -->
+      <div class="ba-card reveal" data-category="interior">
+        <div class="ba-slider" data-slider>
+          <div class="ba-before">
+            <img src="./aft2.jpg" alt="Living room before painting">
           </div>
-        </a>
-        <div class="nav-links" id="navLinks">
-          <a href="index.html">Home</a>
-          <a href="services.html" class="active">Services</a>
-          <a href="testimonials.html">Reviews</a>
-          <a href="about.html">About</a>
-          <a href="faq.html">FAQ</a>
-          <a href="gallery.html">Gallery</a>
-          <a href="estimate.html" class="nav-cta">Free Estimate</a>
-        </div>
-        <button class="nav-hamburger" id="hamburger" aria-label="Menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </nav>
-
-    <section class="page-hero">
-      <div class="page-hero-inner">
-        <div class="page-eyebrow">What We Offer</div>
-        <h1>Every Painting Service<br />You Could <em>Ever Need</em></h1>
-        <p>
-          Interior, exterior, commercial, cabinets — we handle it all with the
-          same care, precision, and premium products. Serving Oklahoma City and
-          all surrounding areas.
-        </p>
-      </div>
-    </section>
-
-    <!-- SERVICE DETAILS -->
-    <section class="services-detail">
-      <div class="section-inner">
-        <div class="svc-detail-item reveal">
-          <div class="svc-visual">
-            <span class="svc-big-icon">🏠</span>
-            <h4>Interior Painting</h4>
-            <p>
-              Walls, ceilings, trim, doors — every surface covered with
-              precision
-            </p>
+          <div class="ba-after">
+            <img src="./bef2.jpg" alt="Living room after painting">
           </div>
-          <div class="svc-info">
-            <span class="svc-tag">Most Popular</span>
-            <h2>Interior <em>Painting</em></h2>
-            <p>
-              Your home's interior is where life happens — and it deserves to
-              look its best. We bring meticulous prep, expert application, and a
-              spotless cleanup to every interior job, big or small.
-            </p>
-            <p>
-              Whether you're freshening up a single room or repainting your
-              entire home, our team handles every detail so you don't have to
-              worry about a thing.
-            </p>
-            <div class="svc-includes">
-              <h5>What's Included</h5>
-              <ul class="svc-checklist">
-                <li>Full furniture and floor protection</li>
-                <li>Hole patching and drywall repair</li>
-                <li>Sanding and priming all surfaces</li>
-                <li>Premium Sherwin-Williams Emerald or Duration paint</li>
-                <li>Clean lines on trim, edges, and corners</li>
-                <li>Complete cleanup — we leave nothing behind</li>
-              </ul>
+          <div class="ba-label-before">Before</div>
+          <div class="ba-label-after">After</div>
+          <div class="ba-handle">
+            <div class="ba-knob">
+              <svg viewBox="0 0 24 24"><path d="M8 5l-7 7 7 7M16 5l7 7-7 7"/></svg>
             </div>
-            <a href="estimate.html" class="btn-primary"
-              >Get Interior Estimate →</a
-            >
           </div>
         </div>
+        <div class="ba-footer">
+          <div class="ba-title">Living Room<br /><small style="font-family:'DM Sans',sans-serif;font-size:0.78rem;color:rgba(255,255,255,0.5);font-weight:400;">Edmond, OK</small></div>
+          <div class="ba-tag">Interior</div>
+        </div>
+      </div>
 
-        <div class="svc-detail-item reverse reveal">
-          <div class="svc-visual">
-            <span class="svc-big-icon">🏡</span>
-            <h4>Exterior Painting</h4>
-            <p>
-              Curb appeal and weather protection, built to last through Oklahoma's climate
-            </p>
+      <!-- ── SLOT 2 — Exterior Full House ── -->
+      <div class="ba-card reveal" data-category="exterior">
+        <div class="ba-slider" data-slider>
+          <div class="ba-before">
+            <img src="./bef1.jpg" alt="Exterior of house before painting">
           </div>
-          <div class="svc-info">
-            <span class="svc-tag">Curb Appeal</span>
-            <h2>Exterior <em>Painting</em></h2>
-            <p>
-              Oklahoma's weather is no joke — intense heat, wind, and moisture
-              can take a toll on exterior paint. We use Sherwin-Williams
-              products specifically chosen to withstand the elements and
-              maintain their color for years.
-            </p>
-            <p>
-              Every exterior job includes thorough pressure washing, surface
-              prep, and caulking before a single drop of paint touches your
-              home.
-            </p>
-            <div class="svc-includes">
-              <h5>What's Included</h5>
-              <ul class="svc-checklist">
-                <li>Pressure washing and surface cleaning</li>
-                <li>Scraping and sanding of peeling areas</li>
-                <li>Caulking around windows, doors, and trim</li>
-                <li>Full priming before topcoat</li>
-                <li>Sherwin-Williams Duration or SuperPaint exterior</li>
-                <li>Protective drop cloths on landscaping</li>
-              </ul>
+          <div class="ba-after">
+            <img src="./aft1.jpg" alt="Exterior of house after painting">
+          </div>
+          <div class="ba-label-before">After</div>
+          <div class="ba-label-after">Before</div>
+          <div class="ba-handle">
+            <div class="ba-knob">
+              <svg viewBox="0 0 24 24"><path d="M8 5l-7 7 7 7M16 5l7 7-7 7"/></svg>
             </div>
-            <a href="estimate.html" class="btn-primary"
-              >Get Exterior Estimate →</a
-            >
           </div>
         </div>
+        <div class="ba-footer">
+          <div class="ba-title">Full Exterior<br /><small style="font-family:'DM Sans',sans-serif;font-size:0.78rem;color:rgba(255,255,255,0.5);font-weight:400;">Yukon, OK</small></div>
+          <div class="ba-tag">Exterior</div>
+        </div>
+      </div>
 
-        <div class="svc-detail-item reveal">
-          <div class="svc-visual">
-            <span class="svc-big-icon">🏢</span>
-            <h4>Commercial Painting</h4>
-            <p>Professional results with minimal disruption to your business</p>
+      <!-- ── SLOT 3 — Cabinet Refinishing ── -->
+      <div class="ba-card reveal" data-category="cabinet">
+        <div class="ba-slider" data-slider>
+          <div class="ba-before">
+            <img src="./bef4.png" alt="Kitchen cabinets before refinishing">
           </div>
-          <div class="svc-info">
-            <span class="svc-tag">Business Ready</span>
-            <h2>Commercial <em>Painting</em></h2>
-            <p>
-              From offices to retail stores to multi-family units, we work
-              around your schedule to deliver professional results without
-              interrupting your operations. We're available evenings and
-              weekends for occupied spaces.
-            </p>
-            <div class="svc-includes">
-              <h5>What's Included</h5>
-              <ul class="svc-checklist">
-                <li>Flexible scheduling (nights and weekends available)</li>
-                <li>High-traffic durable paint formulas</li>
-                <li>Multi-unit and large-scale project experience</li>
-                <li>Coordination with property managers</li>
-                <li>Full surface prep and priming</li>
-                <li>Insured work on every commercial job</li>
-              </ul>
+          <div class="ba-after">
+            <img src="./aft4.png" alt="Kitchen cabinets after refinishing">
+          </div>
+          <div class="ba-label-before">After</div>
+          <div class="ba-label-after">Before</div>
+          <div class="ba-handle">
+            <div class="ba-knob">
+              <svg viewBox="0 0 24 24"><path d="M8 5l-7 7 7 7M16 5l7 7-7 7"/></svg>
             </div>
-            <a href="estimate.html" class="btn-primary"
-              >Get Commercial Estimate →</a
-            >
           </div>
         </div>
+        <div class="ba-footer">
+          <div class="ba-title">Kitchen Cabinets<br /><small style="font-family:'DM Sans',sans-serif;font-size:0.78rem;color:rgba(255,255,255,0.5);font-weight:400;">Oklahoma City, OK</small></div>
+          <div class="ba-tag">Cabinets</div>
+        </div>
+      </div>
 
-        <div class="svc-detail-item reverse reveal">
-          <div class="svc-visual">
-            <span class="svc-big-icon">🚪</span>
-            <h4>Cabinet Refinishing</h4>
-            <p>
-              Factory-smooth finish — looks like brand new without the remodel
-              cost
-            </p>
+      <!-- ── SLOT 4 — Deck Staining ── -->
+      <div class="ba-card reveal" data-category="deck">
+        <div class="ba-slider" data-slider>
+          <div class="ba-before">
+            <img src="./aft3.jpg" alt="Deck before staining">
           </div>
-          <div class="svc-info">
-            <span class="svc-tag">Kitchen Transformation</span>
-            <h2>Cabinet <em>Refinishing</em></h2>
-            <p>
-              New cabinets can cost $10,000 or more. Cabinet refinishing
-              delivers the same visual impact at a fraction of the price. We
-              spray your cabinets to a factory-smooth finish that holds up to
-              daily kitchen use.
-            </p>
-            <p>
-              Guests will think you bought brand-new cabinets — we hear that all
-              the time.
-            </p>
-            <div class="svc-includes">
-              <h5>What's Included</h5>
-              <ul class="svc-checklist">
-                <li>Removal and labeling of all doors and hardware</li>
-                <li>Cleaning, degreasing, and sanding</li>
-                <li>Bonding primer application</li>
-                <li>Professional spray painting for smooth finish</li>
-                <li>Protective topcoat for durability</li>
-                <li>Reinstallation of all doors and hardware</li>
-              </ul>
+          <div class="ba-after">
+            <img src="./bef3.jpg" alt="Deck after staining">
+          </div>
+          <div class="ba-label-before">Before</div>
+          <div class="ba-label-after">After</div>
+          <div class="ba-handle">
+            <div class="ba-knob">
+              <svg viewBox="0 0 24 24"><path d="M8 5l-7 7 7 7M16 5l7 7-7 7"/></svg>
             </div>
-            <a href="estimate.html" class="btn-primary"
-              >Get Cabinet Estimate →</a
-            >
           </div>
         </div>
-
-        <div class="svc-detail-item reveal">
-          <div class="svc-visual">
-            <span class="svc-big-icon">🌿</span>
-            <h4>Deck &amp; Fence Staining</h4>
-            <p>Restore and protect your outdoor wood for lasting beauty</p>
-          </div>
-          <div class="svc-info">
-            <span class="svc-tag">Outdoor Spaces</span>
-            <h2>Deck &amp; Fence <em>Staining</em></h2>
-            <p>
-              Untreated or poorly maintained wood deteriorates fast under
-              Oklahoma's sun and rain. We strip, sand, and apply premium stains
-              and sealers that protect your investment and restore the natural
-              beauty of the wood.
-            </p>
-            <div class="svc-includes">
-              <h5>What's Included</h5>
-              <ul class="svc-checklist">
-                <li>Pressure washing and stripping old finish</li>
-                <li>Sanding and prepping wood surface</li>
-                <li>Premium semi-transparent or solid stain</li>
-                <li>Protective sealer for moisture resistance</li>
-                <li>Even coverage on all boards and rails</li>
-                <li>UV-resistant formula for Oklahoma's climate</li>
-              </ul>
-            </div>
-            <a href="estimate.html" class="btn-primary"
-              >Get Deck/Fence Estimate →</a
-            >
-          </div>
+        <div class="ba-footer">
+          <div class="ba-title">Deck Restoration<br /><small style="font-family:'DM Sans',sans-serif;font-size:0.78rem;color:rgba(255,255,255,0.5);font-weight:400;">Norman, OK</small></div>
+          <div class="ba-tag">Deck &amp; Fence</div>
         </div>
       </div>
-    </section>
 
-    <!-- PROCESS -->
-    <section class="process-strip">
-      <div class="section-inner">
-        <div class="section-label">Our Process</div>
-        <h2 class="section-title">How Every Job <em>Gets Done</em></h2>
-        <div class="steps-row">
-          <div class="step-item reveal">
-            <div class="step-num">1</div>
-            <h4>Free Estimate</h4>
-            <p>
-              We come to your property, assess the project, and give you a clear
-              quote within 24 hours. No pressure, ever.
-            </p>
-          </div>
-          <div class="step-item reveal">
-            <div class="step-num">2</div>
-            <h4>Color Consultation</h4>
-            <p>
-              Our team helps you choose the perfect colors and finishes for your
-              space, style, and budget.
-            </p>
-          </div>
-          <div class="step-item reveal">
-            <div class="step-num">3</div>
-            <h4>Prep &amp; Prime</h4>
-            <p>
-              We protect everything, patch imperfections, and prime all surfaces
-              before a single stroke of color goes on.
-            </p>
-          </div>
-          <div class="step-item reveal">
-            <div class="step-num">4</div>
-            <h4>Expert Painting</h4>
-            <p>
-              Our team executes with precision using premium Sherwin-Williams
-              paints and professional tools.
-            </p>
-          </div>
-          <div class="step-item reveal">
-            <div class="step-num">5</div>
-            <h4>Walkthrough &amp; Touch-Up</h4>
-            <p>
-              You inspect. We fix anything you're not 100% happy with — on the
-              spot, before we pack up.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <!-- PAINT PRODUCTS -->
-    <section class="products-section">
-      <div class="section-inner">
-        <div class="reveal">
-          <div class="section-label">Products We Use</div>
-          <h2 class="section-title">
-            Only the <em>Best</em> Sherwin-Williams Lines
-          </h2>
-          <p class="section-sub">
-            We don't cut corners on materials. Every job uses premium-grade
-            products chosen for performance and longevity in Oklahoma's climate.
-          </p>
-        </div>
-        <div class="products-grid">
-          <div class="product-card reveal">
-            <div class="product-icon">💎</div>
-            <div class="badge">Interior Premium</div>
-            <h3>Sherwin-Williams Emerald</h3>
-            <p>
-              The top of the Sherwin-Williams line. Exceptional hide,
-              scrubbability, and a beautiful finish. Our default for interior
-              premium projects.
-            </p>
-          </div>
-          <div class="product-card reveal">
-            <div class="product-icon">🏆</div>
-            <div class="badge">Interior &amp; Exterior</div>
-            <h3>Sherwin-Williams Duration</h3>
-            <p>
-              Built for durability. Excellent adhesion and weather resistance —
-              our go-to for exterior work and high-traffic interior spaces.
-            </p>
-          </div>
-          <div class="product-card reveal">
-            <div class="product-icon">⭐</div>
-            <div class="badge">Versatile</div>
-            <h3>Sherwin-Williams SuperPaint</h3>
-            <p>
-              A reliable workhorse with great coverage and washability. Perfect
-              for budget-conscious projects without sacrificing quality.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+<!-- PHOTO GRID -->
+<section class="grid-section">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Project Gallery</div>
+      <h2 class="section-title">More of Our <em>Work</em></h2>
+    </div>
+    <div class="photo-grid" id="photoGrid">
 
-    <!-- CTA -->
-    <section class="cta-band">
-      <h2>Ready to Get Started?</h2>
-      <p>
-        Request your free, no-obligation estimate and we'll respond within 24
-        hours.
-      </p>
-      <div class="cta-group">
-        <a href="estimate.html" class="btn-cta-orange">Get My Free Estimate</a>
-        <a href="tel:4059001000" class="btn-cta-ghost">📞 Call 405-900-1000</a>
+      <div class="photo-card reveal" data-category="interior">
+        <img src="./de.jpg" alt="Master bedroom interior painting">
+        <div class="photo-overlay"><div class="photo-overlay-text"><h4>Master Bedroom</h4><span>Oklahoma City, OK · Interior</span></div></div>
       </div>
-    </section>
+      <div class="photo-card reveal" data-category="exterior">
+        <img src="./exter1.jpg" alt="Home exterior front painting">
+        <div class="photo-overlay"><div class="photo-overlay-text"><h4>Home Exterior</h4><span>Edmond, OK · Exterior</span></div></div>
+      </div>
+      <div class="photo-card reveal" data-category="interior">
+        <img src="./ef2.jpg" alt="Kitchen walls interior painting">
+        <div class="photo-overlay"><div class="photo-overlay-text"><h4>Kitchen Walls</h4><span>Moore, OK · Interior</span></div></div>
+      </div>
+      <div class="photo-card reveal" data-category="commercial">
+        <img src="./hg.jpg" alt="Commercial office space painting">
+        <div class="photo-overlay"><div class="photo-overlay-text"><h4>Office Space</h4><span>Midwest City, OK · Commercial</span></div></div>
+      </div>
+      <div class="photo-card reveal" data-category="cabinet">
+        <img src="./sc.jpg" alt="Kitchen cabinet refinishing">
+        <div class="photo-overlay"><div class="photo-overlay-text"><h4>Cabinet Refinish</h4><span>Yukon, OK · Cabinets</span></div></div>
+      </div>
+      <div class="photo-card reveal" data-category="exterior">
+        <img src="./jj.jpg" alt="Exterior trim and fascia painting">
+        <div class="photo-overlay"><div class="photo-overlay-text"><h4>Trim &amp; Fascia</h4><span>Norman, OK · Exterior</span></div></div>
+      </div>
+      <div class="photo-card reveal" data-category="deck">
+        <img src="fv.jpg" alt="Deck staining project">
+        <div class="photo-overlay"><div class="photo-overlay-text"><h4>Deck Restoration</h4><span>Edmond, OK · Deck</span></div></div>
+      </div>
+      <div class="photo-card reveal" data-category="interior">
+        <img src="./y.jpg" alt="Hallway and staircase interior painting">
+        <div class="photo-overlay"><div class="photo-overlay-text"><h4>Hallway &amp; Staircase</h4><span>Oklahoma City, OK · Interior</span></div></div>
+      </div>
+      <div class="photo-card reveal" data-category="exterior">
+        <img src="./fff.jpg" alt="Full exterior repaint of house">
+        <div class="photo-overlay"><div class="photo-overlay-text"><h4>Full Exterior Repaint</h4><span>Yukon, OK · Exterior</span></div></div>
+      </div>
 
-    <footer>
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <img src="logo.png" alt="Advance Pristine Painting" />
-          <p>
-            <strong style="color: #fff">Advance Pristine Painting LLC</strong
-            ><br />Owner: Steve Higgs · Oklahoma City, OK<br /><a
-              href="tel:4059001000"
-              >405-900-1000</a
-            >
-            ·
-            <a href="mailto:Pristinepaintingokc@gmail.com"
-              >Pristinepaintingokc@gmail.com</a
-            >
-          </p>
-        </div>
-        <div class="footer-col">
-          <h4>Services</h4>
-          <a href="services.html">Interior Painting</a>
-          <a href="services.html">Exterior Painting</a>
-          <a href="services.html">Commercial Painting</a>
-          <a href="services.html">Cabinet Refinishing</a>
-          <a href="services.html">Deck &amp; Fence Staining</a>
-        </div>
-        <div class="footer-col">
-          <h4>Company</h4>
-          <a href="index.html">Home</a>
-          <a href="services.html">Services</a>
-          <a href="testimonials.html">Reviews</a>
-          <a href="about.html">About</a>
-          <a href="faq.html">FAQ</a>
-          <a href="estimate.html">Free Estimate</a>
-          <a href="tel:4059001000">Call Us</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 Advance Pristine Painting LLC</span>
-        <span style="font-style: italic"
-          >Pristine Painting With Pristine Results!</span
-        >
-      </div>
-    </footer>
+    </div>
+  </div>
+</section>
 
-    <script>
-      document.getElementById("hamburger").addEventListener("click", () => {
-        document.getElementById("navLinks").classList.toggle("open");
-        document.getElementById("hamburger").classList.toggle("open");
+<section class="cta-band">
+  <h2>Like What You See?</h2>
+  <p>Get a free estimate and let's create your before &amp; after story.</p>
+  <div class="cta-group">
+    <a href="estimate.html" class="btn-cta-orange">Get My Free Estimate</a>
+    <a href="tel:4059001000" class="btn-cta-ghost">📞 405-900-1000</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="logo.png" alt="Advance Pristine Painting" />
+      <p><strong style="color:#fff;">Advance Pristine Painting LLC</strong><br />Owner: Steve Higgs · Oklahoma City, OK<br /><a href="tel:4059001000">405-900-1000</a> · <a href="mailto:Pristinepaintingokc@gmail.com">Pristinepaintingokc@gmail.com</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="testimonials.html">Reviews</a>
+      <a href="about.html">About Steve</a>
+      <a href="faq.html">FAQ</a>
+      <a href="gallery.html">Gallery</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="estimate.html">Free Estimate</a>
+      <a href="tel:4059001000">Call Us</a>
+      <a href="mailto:Pristinepaintingokc@gmail.com">Email Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Advance Pristine Painting LLC</span>
+    <span style="font-style:italic;">Pristine Painting With Pristine Results!</span>
+  </div>
+</footer>
+
+
+<script>
+  // PAGE LOADER
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('page-loader').classList.add('hidden'), 1400);
+  });
+
+  // NAV
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+  });
+
+  // SCROLL REVEAL
+  const revObs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+  // ── BEFORE/AFTER SLIDERS ─────────────────────────────────────────────────
+  document.querySelectorAll('[data-slider]').forEach(slider => {
+    const after  = slider.querySelector('.ba-after');
+    const handle = slider.querySelector('.ba-handle');
+    let dragging = false;
+
+    function setPos(x) {
+      const rect = slider.getBoundingClientRect();
+      let pct = Math.max(0, Math.min(100, ((x - rect.left) / rect.width) * 100));
+      after.style.clipPath  = `inset(0 ${100 - pct}% 0 0)`;
+      handle.style.left     = pct + '%';
+    }
+
+    // Mouse
+    slider.addEventListener('mousedown', e => { dragging = true; setPos(e.clientX); });
+    window.addEventListener('mousemove', e => { if(dragging) setPos(e.clientX); });
+    window.addEventListener('mouseup',   () => { dragging = false; });
+
+    // Touch
+    slider.addEventListener('touchstart', e => { dragging = true; setPos(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('touchmove',  e => { if(dragging) setPos(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('touchend',   () => { dragging = false; });
+
+    // Start at 50%
+    after.style.clipPath = 'inset(0 50% 0 0)';
+  });
+
+  // ── FILTER TABS ──────────────────────────────────────────────────────────
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('[data-category]').forEach(card => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        card.style.opacity    = match ? '1' : '0.15';
+        card.style.transform  = match ? 'scale(1)' : 'scale(0.97)';
+        card.style.pointerEvents = match ? 'all' : 'none';
       });
-      const revealEls = document.querySelectorAll(".reveal");
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) e.target.classList.add("visible");
-          });
-        },
-        { threshold: 0.1 },
-      );
-      revealEls.forEach((el) => observer.observe(el));
-    </script>
-    <script>
-      window.addEventListener("load", () => {
-        setTimeout(
-          () => document.getElementById("page-loader").classList.add("hidden"),
-          1400,
-        );
-      });
-    </script>
+    });
+  });
 
-
-    <script>
-      window.addEventListener("load", () => {
-        setTimeout(() => {
-          document.getElementById("page-loader").classList.add("hidden");
-          // Trigger hero animations after loader fades
-          setTimeout(() => {
-            document.querySelector(".hero").classList.add("animated");
-            document.querySelector(".hero-canvas").classList.add("animated");
-            // Fire hero counters now — they can't use IntersectionObserver
-            // because they start invisible and are already in the viewport
-            setTimeout(() => {
-              document.querySelectorAll(".hero [data-count]").forEach((el) => {
-                if (!el.dataset.counted) {
-                  el.dataset.counted = "true";
-                  animateCounter(el);
-                }
-              });
-            }, 400); // wait for badge pop-in animation to start
-          }, 200); // small extra delay so fade-out is visible first
-        }, 1400);
-      });
-    </script>
-      <!-- CHAT WIDGET -->
+</script>
+    <!-- CHAT WIDGET -->
     <style>
       #chat-bubble {
         position: fixed;
@@ -2201,5 +1478,5 @@ BUSINESS INFO:
       init();
     </script>
 
-  </body>
+</body>
 </html>
