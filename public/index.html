@@ -2457,6 +2457,7 @@
       revealEls.forEach((el) => observer.observe(el));
 
       // CHAT WIDGET
+      let qaKnowledge = ""; // fixes "something went wrong" error - was undefined
       let isOpen = false,
         visitorName = "",
         visitorEmail = "",
