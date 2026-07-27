@@ -181,57 +181,6 @@
     .footer-col a:hover { color: var(--orange); }
     .footer-bottom { max-width: 1100px; margin: 2rem auto 0; padding-top: 1.2rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.75rem; color: rgba(255,255,255,0.35); }
 
-    /* CHAT */
-    #chat-bubble { position: fixed; bottom: 24px; right: 24px; z-index: 9999; width: 56px; height: 56px; border-radius: 50%; background: var(--orange); color: #fff; border: none; cursor: pointer; box-shadow: 0 4px 20px rgba(217,79,30,0.45); display: flex; align-items: center; justify-content: center; transition: transform 0.2s, box-shadow 0.2s; }
-    #chat-bubble:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(217,79,30,0.55); }
-    #chat-bubble svg { width: 24px; height: 24px; fill: #fff; }
-    #chat-unread { position: absolute; top: -4px; right: -4px; width: 18px; height: 18px; border-radius: 50%; background: var(--navy); color: #fff; font-size: 10px; font-weight: 700; display: none; align-items: center; justify-content: center; border: 2px solid #fff; }
-    #chat-window { position: fixed; bottom: 92px; right: 24px; z-index: 9998; width: 340px; max-height: 620px; height: 320px; background: var(--white); border-radius: 18px; box-shadow: 0 16px 56px rgba(30,45,74,0.18); border: 1px solid var(--border); display: flex; flex-direction: column; transform: scale(0.92) translateY(16px); opacity: 0; pointer-events: none; transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), opacity 0.18s ease; overflow: hidden; }
-    #chat-window.open { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
-    @media (max-width:420px) { #chat-window { width: calc(100vw - 24px); right: 12px; bottom: 84px; } }
-    .cw-header { background: var(--navy); padding: 14px 16px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-    .cw-avatar { width: 36px; height: 36px; border-radius: 50%; background: rgba(217,79,30,0.25); display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
-    .cw-header-text .cw-name { font-size: 13px; font-weight: 600; color: #fff; }
-    .cw-header-text .cw-status { font-size: 11px; color: rgba(255,255,255,0.55); }
-    .cw-header-actions { margin-left: auto; display: flex; align-items: center; gap: 4px; }
-    .cw-close, .cw-fullscreen { background: none; border: none; color: rgba(255,255,255,0.6); cursor: pointer; line-height: 1; padding: 4px 5px; border-radius: 6px; transition: color 0.15s, background 0.15s; display: flex; align-items: center; justify-content: center; }
-    .cw-close { font-size: 20px; }
-    .cw-fullscreen svg { width: 14px; height: 14px; fill: currentColor; }
-    .cw-close:hover, .cw-fullscreen:hover { color: #fff; background: rgba(255,255,255,0.1); }
-    #chat-backdrop { display: none; position: fixed; inset: 0; z-index: 99998; background: rgba(14,22,40,0.55); backdrop-filter: blur(6px); animation: backdropIn 0.25s ease; }
-    #chat-backdrop.visible { display: block; }
-    @keyframes backdropIn { from{opacity:0} to{opacity:1} }
-    #chat-window.fullscreen { top:40px!important; bottom:40px!important; left:50%!important; right:auto!important; transform:translateX(-50%)!important; width:min(640px,calc(100vw - 48px))!important; height:auto!important; max-height:none!important; border-radius:20px!important; z-index:99999; box-shadow:0 32px 80px rgba(14,22,40,0.45)!important; }
-    .cw-messages { flex:1; overflow-y:auto; padding:14px 14px 6px; display:flex; flex-direction:column; gap:10px; scroll-behavior:smooth; }
-    .cw-messages::-webkit-scrollbar { width:4px; }
-    .cw-messages::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
-    .cw-msg { display:flex; flex-direction:column; max-width:85%; }
-    .cw-msg.bot { align-self:flex-start; }
-    .cw-msg.user { align-self:flex-end; }
-    .cw-bubble { padding:9px 13px; border-radius:14px; font-size:13px; line-height:1.55; }
-    .cw-msg.bot .cw-bubble { background:#f0f2f5; color:var(--text); border-bottom-left-radius:4px; }
-    .cw-msg.user .cw-bubble { background:var(--orange); color:#fff; border-bottom-right-radius:4px; }
-    .cw-footer { padding:10px 12px; border-top:1px solid var(--border); flex-shrink:0; }
-    .cw-input-row { display:flex; gap:8px; }
-    .cw-input { flex:1; padding:9px 13px; border-radius:20px; border:1.5px solid var(--border); font-size:13px; font-family:"DM Sans",sans-serif; background:#faf9f7; color:var(--text); outline:none; transition:border-color 0.15s; }
-    .cw-input:focus { border-color:var(--navy-mid); background:#fff; }
-    .cw-send { width:36px; height:36px; border-radius:50%; background:var(--orange); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background 0.15s; }
-    .cw-send:hover { background:#bf4118; }
-    .cw-send svg { width:16px; height:16px; fill:#fff; }
-    .cw-powered { text-align:center; font-size:10px; color:#ccc; margin-top:6px; }
-    #cw-name-overlay { position:absolute; inset:0; z-index:20; background:rgba(20,30,51,0.6); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.2s ease; }
-    #cw-name-overlay.visible { opacity:1; pointer-events:all; }
-    .cw-name-box { background:#fff; border-radius:14px; padding:18px 18px 16px; width:100%; max-width:290px; box-shadow:0 8px 32px rgba(30,45,74,0.18); text-align:center; }
-    .cw-name-box p { font-size:13px; color:var(--text); margin-bottom:12px; line-height:1.5; }
-    .cw-name-box input { width:100%; padding:10px 12px; font-size:13px; border:1.5px solid var(--border); border-radius:8px; margin-bottom:10px; font-family:"DM Sans",sans-serif; color:var(--text); outline:none; transition:border-color 0.15s; display:block; }
-    .cw-name-box input:focus { border-color:var(--navy-mid); }
-    .cw-name-box input.shake { animation:nameShake 0.35s ease; border-color:var(--orange); }
-    @keyframes nameShake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
-    .cw-name-err { font-size:11px; color:var(--orange); display:none; margin-top:-6px; margin-bottom:8px; }
-    .cw-name-err.show { display:block; }
-    .cw-name-btn { width:100%; padding:11px; background:var(--navy); color:#fff; border:none; border-radius:8px; font-size:13px; font-weight:600; cursor:pointer; font-family:"DM Sans",sans-serif; transition:background 0.15s; }
-    .cw-name-btn:hover { background:var(--navy-mid); }
-    @keyframes cwDot { 0%,80%,100%{opacity:0.25;transform:scale(0.85)} 40%{opacity:1;transform:scale(1)} }
   
       /* ── GLOBAL HOVER EFFECTS ── */
       a { transition: opacity 0.18s ease; }
@@ -493,28 +442,482 @@
 </script>
 
 
-    <!-- CHAT BACKDROP -->
-    <div id="chat-backdrop" onclick="toggleFullscreen()"></div>
 
-    <!-- CHAT BUBBLE -->
+  <script>
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.getElementById("page-loader").classList.add("hidden");
+      // Trigger hero animations after loader fades
+      setTimeout(() => {
+        document.querySelector(".hero").classList.add("animated");
+        document.querySelector(".hero-canvas").classList.add("animated");
+        // Fire hero counters now — they can't use IntersectionObserver
+        // because they start invisible and are already in the viewport
+        setTimeout(() => {
+          document.querySelectorAll('.hero [data-count]').forEach(el => {
+            if (!el.dataset.counted) {
+              el.dataset.counted = 'true';
+              animateCounter(el);
+            }
+          });
+  
+ }); // wait for badge pop-in animation to start
+      }); // small extra delay so fade-out is visible first
+    });
+  });
+      </script>
+    <!-- CHAT WIDGET -->
+    <style>
+      #chat-bubble {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 9999;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--orange);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(217, 79, 30, 0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      #chat-bubble:hover {
+        transform: scale(1.08);
+        box-shadow: 0 6px 24px rgba(217, 79, 30, 0.55);
+      }
+      #chat-bubble svg {
+        width: 24px;
+        height: 24px;
+        fill: #fff;
+      }
+      #chat-unread {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--navy);
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #fff;
+      }
+      #chat-window {
+        position: fixed;
+        bottom: 92px;
+        right: 24px;
+        z-index: 9998;
+        width: 340px;
+        max-height: 620px;
+        height: 320px;
+        background: var(--white);
+        border-radius: 18px;
+        box-shadow: 0 16px 56px rgba(30, 45, 74, 0.18);
+        border: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        transform: scale(0.92) translateY(16px);
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+          opacity 0.18s ease;
+        overflow: hidden;
+      }
+      #chat-window.open {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+        pointer-events: all;
+      }
+      @media (max-width: 420px) {
+        #chat-window {
+          width: calc(100vw - 24px);
+          right: 12px;
+          bottom: 84px;
+        }
+      }
+      .cw-header {
+        background: var(--navy);
+        padding: 14px 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+      }
+      .cw-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(217, 79, 30, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 17px;
+        flex-shrink: 0;
+      }
+      .cw-header-text .cw-name {
+        font-size: 13px;
+        font-weight: 600;
+        color: #fff;
+      }
+      .cw-header-text .cw-status {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .cw-header-actions {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .cw-close,
+      .cw-fullscreen {
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        line-height: 1;
+        padding: 4px 5px;
+        border-radius: 6px;
+        transition:
+          color 0.15s,
+          background 0.15s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .cw-close {
+        font-size: 20px;
+      }
+      .cw-fullscreen svg {
+        width: 14px;
+        height: 14px;
+        fill: currentColor;
+      }
+      .cw-close:hover,
+      .cw-fullscreen:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.1);
+      }
+      /* Fullscreen mode */
+      #chat-backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 99998;
+        background: rgba(14, 22, 40, 0.55);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        animation: backdropIn 0.25s ease;
+      }
+      #chat-backdrop.visible {
+        display: block;
+      }
+      @keyframes backdropIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      #chat-window.fullscreen {
+        top: 40px !important;
+        bottom: 40px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        width: min(640px, calc(100vw - 48px)) !important;
+        height: auto !important;
+        max-height: none !important;
+        border-radius: 20px !important;
+        z-index: 99999;
+        box-shadow: 0 32px 80px rgba(14, 22, 40, 0.45) !important;
+      }
+      .cw-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 14px 14px 6px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        scroll-behavior: smooth;
+      }
+      .cw-messages::-webkit-scrollbar {
+        width: 4px;
+      }
+      .cw-messages::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 2px;
+      }
+      .cw-msg {
+        display: flex;
+        flex-direction: column;
+        max-width: 85%;
+      }
+      .cw-msg.bot {
+        align-self: flex-start;
+      }
+      .cw-msg.user {
+        align-self: flex-end;
+      }
+      .cw-bubble {
+        padding: 9px 13px;
+        border-radius: 14px;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+      .cw-msg.bot .cw-bubble {
+        background: #f0f2f5;
+        color: var(--text);
+        border-bottom-left-radius: 4px;
+      }
+      .cw-msg.user .cw-bubble {
+        background: var(--orange);
+        color: #fff;
+        border-bottom-right-radius: 4px;
+      }
+      .cw-footer {
+        padding: 10px 12px;
+        border-top: 1px solid var(--border);
+        flex-shrink: 0;
+      }
+      .cw-input-row {
+        display: flex;
+        gap: 8px;
+      }
+      .cw-input {
+        flex: 1;
+        padding: 9px 13px;
+        border-radius: 20px;
+        border: 1.5px solid var(--border);
+        font-size: 13px;
+        font-family: "DM Sans", sans-serif;
+        background: #faf9f7;
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.15s;
+      }
+      .cw-input:focus {
+        border-color: var(--navy-mid);
+        background: #fff;
+      }
+      .cw-send {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--orange);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: background 0.15s;
+      }
+      .cw-send:hover {
+        background: #bf4118;
+      }
+      .cw-send svg {
+        width: 16px;
+        height: 16px;
+        fill: #fff;
+      }
+      .cw-powered {
+        text-align: center;
+        font-size: 10px;
+        color: #ccc;
+        margin-top: 6px;
+      }
+
+      /* Onboarding overlay */
+      #cw-name-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 20;
+        background: rgba(20, 30, 51, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+      }
+      #cw-name-overlay.visible {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .cw-name-box {
+        background: #fff;
+        border-radius: 14px;
+        padding: 18px 18px 16px;
+        width: 100%;
+        max-width: 290px;
+        box-shadow: 0 8px 32px rgba(30, 45, 74, 0.18);
+        text-align: center;
+      }
+      .cw-name-box p {
+        font-size: 13px;
+        color: var(--text);
+        margin-bottom: 12px;
+        line-height: 1.5;
+      }
+      .cw-name-box input {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 13px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        margin-bottom: 10px;
+        font-family: "DM Sans", sans-serif;
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.15s;
+        display: block;
+      }
+      .cw-name-box input:focus {
+        border-color: var(--navy-mid);
+      }
+      .cw-name-box input.shake {
+        animation: nameShake 0.35s ease;
+        border-color: var(--orange);
+      }
+      @keyframes nameShake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-6px);
+        }
+        75% {
+          transform: translateX(6px);
+        }
+      }
+      .cw-name-box .cw-field-err {
+        font-size: 11px;
+        color: var(--orange);
+        margin: -4px 0 6px;
+        display: none;
+        text-align: left;
+      }
+      .cw-name-box .cw-field-err.show {
+        display: block;
+      }
+      .cw-name-box button {
+        width: 100%;
+        padding: 11px;
+        font-size: 13px;
+        font-weight: 600;
+        background: var(--navy);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: "DM Sans", sans-serif;
+        transition: background 0.15s;
+        margin-top: 6px;
+        display: block;
+      }
+      .cw-name-box button:hover {
+        background: var(--navy-mid);
+      }
+      @keyframes cwDot {
+        0%,
+        80%,
+        100% {
+          opacity: 0.2;
+          transform: scale(0.8);
+        }
+        40% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+
     <button id="chat-bubble" onclick="toggleChat()" aria-label="Open chat">
+      <svg id="chat-icon-open" viewBox="0 0 24 24">
+        <path
+          d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 10H6V10h12v2zm0-3H6V7h12v2z"
+        />
+      </svg>
+      <svg id="chat-icon-close" viewBox="0 0 24 24" style="display: none">
+        <path
+          d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+        />
+      </svg>
       <div id="chat-unread">1</div>
-      <svg id="chat-icon-open" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-      <svg id="chat-icon-close" viewBox="0 0 24 24" style="display:none;"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
     </button>
 
-    <!-- CHAT WINDOW -->
+    <div id="chat-backdrop" onclick="toggleFullscreen()"></div>
     <div id="chat-window">
+      <!-- Name + Email capture overlay -->
+      <div id="cw-name-overlay">
+        <div class="cw-name-box">
+          <p>
+            👋 Quick intro before we chat —<br /><strong
+              >what's your name and email?</strong
+            ><br /><span style="font-size: 11px; color: var(--muted)"
+              >So we can follow up with your estimate!</span
+            >
+          </p>
+          <input
+            type="text"
+            id="cw-name-input"
+            placeholder="Your first name"
+            maxlength="40"
+          />
+          <div class="cw-field-err" id="cw-err-name">
+            Please enter your name.
+          </div>
+          <input
+            type="email"
+            id="cw-email-input"
+            placeholder="Your email address"
+            maxlength="100"
+          />
+          <div class="cw-field-err" id="cw-err-email">
+            Please enter a valid email.
+          </div>
+          <button onclick="window.cwSubmitName()">Let's Chat →</button>
+        </div>
+      </div>
+
       <div class="cw-header">
-        <div class="cw-avatar">🎨</div>
+        <div class="cw-avatar">🖌️</div>
         <div class="cw-header-text">
           <div class="cw-name">Advance Pristine Painting</div>
-          <div class="cw-status">Typically replies in a few minutes</div>
+          <div class="cw-status">Get your free estimate!</div>
         </div>
         <div class="cw-header-actions">
-          <button class="cw-fullscreen" onclick="toggleFullscreen()" title="Expand">
-            <svg id="fs-expand-icon" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
-            <svg id="fs-shrink-icon" viewBox="0 0 24 24" style="display:none;"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>
+          <button
+            class="cw-fullscreen"
+            onclick="toggleFullscreen()"
+            id="cw-fullscreen-btn"
+            title="Fullscreen"
+          >
+            <svg id="fs-expand-icon" viewBox="0 0 24 24">
+              <path
+                d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"
+              />
+            </svg>
+            <svg id="fs-shrink-icon" viewBox="0 0 24 24" style="display: none">
+              <path
+                d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"
+              />
+            </svg>
           </button>
           <button class="cw-close" onclick="toggleChat()">×</button>
         </div>
@@ -522,36 +925,81 @@
       <div class="cw-messages" id="cw-messages"></div>
       <div class="cw-footer">
         <div class="cw-input-row">
-          <input class="cw-input" id="cw-input" placeholder="Type a message…" onkeydown="if(event.key==='Enter')cwSend()" disabled />
-          <button class="cw-send" onclick="cwSend()">
-            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          <input
+            class="cw-input"
+            id="cw-input"
+            placeholder="Type your message..."
+            onkeydown="if (event.key === 'Enter') sendMessage();"
+          />
+          <button class="cw-send" onclick="sendMessage()">
+            <svg viewBox="0 0 24 24">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+            </svg>
           </button>
         </div>
-        <div class="cw-powered">Powered by AI · Advance Pristine Painting</div>
-      </div>
-      <div id="cw-name-overlay">
-        <div class="cw-name-box">
-          <p>👋 Hi! Before we chat, what's your name and email?</p>
-          <input type="text" id="cw-name-input" placeholder="Your name" />
-          <span class="cw-name-err" id="cw-err-name">Please enter your name.</span>
-          <input type="email" id="cw-email-input" placeholder="Your email" />
-          <span class="cw-name-err" id="cw-err-email">Please enter a valid email.</span>
-          <button class="cw-name-btn" onclick="cwSubmitName()">Start Chatting →</button>
-        </div>
+        <div class="cw-powered">Advance Pristine Painting · 405-900-1000</div>
       </div>
     </div>
 
-    <script>
-      // CHAT WIDGET
-      let isOpen = false, visitorName = '', visitorEmail = '', chatHistory = [], leadDocId = null;
-      const messagesEl = document.getElementById('cw-messages');
-      const inputEl = document.getElementById('cw-input');
-      const nameOverlay = document.getElementById('cw-name-overlay');
-      const nameInput = document.getElementById('cw-name-input');
-      const emailInput = document.getElementById('cw-email-input');
-      const unreadEl = document.getElementById('chat-unread');
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        addDoc,
+        getDocs,
+        doc,
+        updateDoc,
+        serverTimestamp,
+      } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-   function buildSystemPrompt() {
+      const firebaseConfig = {
+        apiKey: "AIzaSyDV3aYpaLmphTYBnkL0YvxDccxaeEqg8vA",
+        authDomain: "advpristinepainting-e80b6.firebaseapp.com",
+        projectId: "advpristinepainting-e80b6",
+        storageBucket: "advpristinepainting-e80b6.firebasestorage.app",
+        messagingSenderId: "294701547068",
+        appId: "1:294701547068:web:41796ffc25c94bc97c8d39",
+        measurementId: "G-SDGJQD50C5",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      const CHAT_API = "https://painting-hf.vercel.app/api/chat";
+
+      // ── State ────────────────────────────────────────────────────────────────
+      let isOpen = false;
+      let visitorName = "";
+      let visitorEmail = "";
+      let chatHistory = []; // Sent to Claude each turn
+      let leadDocId = null; // Firestore doc ID for this conversation
+      let qaKnowledge = ""; // Loaded from Firestore qa collection
+
+      const messagesEl = document.getElementById("cw-messages");
+      const inputEl = document.getElementById("cw-input");
+      const unreadEl = document.getElementById("chat-unread");
+      const nameOverlay = document.getElementById("cw-name-overlay");
+      const nameInput = document.getElementById("cw-name-input");
+      const emailInput = document.getElementById("cw-email-input");
+
+      // ── Load Q&A knowledge from Firestore ───────────────────────────────────
+      async function loadQAKnowledge() {
+        try {
+          const snap = await getDocs(collection(db, "qa"));
+          const pairs = snap.docs.map(
+            (d) => `Q: ${d.data().question}\nA: ${d.data().answer}`,
+          );
+          if (pairs.length) {
+            qaKnowledge = `\n\n━━━━━━━━━━━━━━━━━━━━━━\nADDITIONAL Q&A (added by business owner — use these answers exactly when relevant):\n━━━━━━━━━━━━━━━━━━━━━━\n${pairs.join("\n\n")}`;
+          }
+        } catch (e) {
+          qaKnowledge = "";
+        }
+      }
+
+      // ── System prompt ─────────────────────────────────────────────────────────
+      function buildSystemPrompt() {
         return `You are a friendly, knowledgeable estimator assistant for Advance Pristine Painting LLC, based in Oklahoma City, OK. Your job is to chat with website visitors, ask smart questions about their painting project, and give them a ballpark price estimate.
 
 IMPORTANT RULES:
@@ -663,135 +1111,268 @@ BUSINESS INFO:
 - Uses premium Sherwin-Williams products (Emerald, Duration, SuperPaint lines)
 - 50% deposit required upfront, 50% on completion${qaKnowledge}`;
       }
+
+      // ── Create lead in Firestore ─────────────────────────────────────────────
+      async function createLead() {
+        try {
+          const ref = await addDoc(collection(db, "leads"), {
+            name: visitorName,
+            email: visitorEmail,
+            status: "new",
+            createdAt: new Date().toISOString(),
+            page: "chat widget",
+            conversation: [],
+          });
+          leadDocId = ref.id;
+        } catch (e) {
+          console.error("Lead create error:", e);
+        }
+      }
+
+      // ── Save message to Firestore conversation log ────────────────────────────
+      async function logMessage(role, text) {
+        if (!leadDocId) return;
+        try {
+          // We keep appending to the conversation array via a helper
+          // Firestore doesn't support arrayUnion with objects easily, so we fetch+update
+          const entry = { role, text, time: new Date().toISOString() };
+          // Use a subcollection for messages — cleaner
+          await addDoc(collection(db, "leads", leadDocId, "messages"), entry);
+        } catch (e) {
+          console.error("Log message error:", e);
+        }
+      }
+
+      // ── Typing indicator ─────────────────────────────────────────────────────
       function showTyping() {
-        const el = document.createElement('div');
-        el.className = 'cw-msg bot'; el.id = 'cw-typing';
-        el.innerHTML = `<div class="cw-bubble" style="padding:10px 14px;"><span style="display:inline-flex;gap:4px;align-items:center;"><span style="width:6px;height:6px;border-radius:50%;background:var(--muted);animation:cwDot 1.2s infinite 0s"></span><span style="width:6px;height:6px;border-radius:50%;background:var(--muted);animation:cwDot 1.2s infinite 0.2s"></span><span style="width:6px;height:6px;border-radius:50%;background:var(--muted);animation:cwDot 1.2s infinite 0.4s"></span></span></div>`;
+        const el = document.createElement("div");
+        el.className = "cw-msg bot";
+        el.id = "cw-typing";
+        el.innerHTML = `<div class="cw-bubble" style="padding:10px 14px;">
+      <span style="display:inline-flex;gap:4px;align-items:center;">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--muted);animation:cwDot 1.2s infinite 0s"></span>
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--muted);animation:cwDot 1.2s infinite 0.2s"></span>
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--muted);animation:cwDot 1.2s infinite 0.4s"></span>
+      </span>
+    </div>`;
         messagesEl.appendChild(el);
         messagesEl.scrollTop = messagesEl.scrollHeight;
       }
-      function hideTyping() { const el = document.getElementById('cw-typing'); if(el) el.remove(); }
+      function hideTyping() {
+        const el = document.getElementById("cw-typing");
+        if (el) el.remove();
+      }
 
+      // ── Add message to UI ─────────────────────────────────────────────────────
       function addMsg(text, role) {
-        const el = document.createElement('div');
+        const el = document.createElement("div");
         el.className = `cw-msg ${role}`;
-        const formatted = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+        const formatted = esc(text)
+          .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+          .replace(/\n/g, "<br>");
         el.innerHTML = `<div class="cw-bubble">${formatted}</div>`;
         messagesEl.appendChild(el);
         messagesEl.scrollTop = messagesEl.scrollHeight;
       }
 
+      // ── Call Claude via Vercel proxy ─────────────────────────────────────────
       async function askClaude(userMessage) {
-        chatHistory.push({ role: 'user', content: userMessage });
+        if (!Array.isArray(chatHistory)) {
+          chatHistory = [];
+        }
+
+        chatHistory.push({
+          role: "user",
+          content: userMessage,
+        });
+        await logMessage("user", userMessage);
+
         inputEl.disabled = true;
         showTyping();
+
         try {
           const response = await fetch(CHAT_API, {
-            method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ messages: chatHistory, systemPrompt: buildSystemPrompt() })
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              messages: chatHistory,
+              systemPrompt: buildSystemPrompt(),
+            }),
           });
+
           const data = await response.json();
           hideTyping();
-          const reply = data.content && data.content[0] && data.content[0].text
-            ? data.content[0].text
-            : "Sorry, I had a hiccup! Feel free to call us at 405-900-1000 😊";
-          chatHistory.push({ role: 'assistant', content: reply });
-          addMsg(reply, 'bot');
-        } catch(err) {
+
+          const reply =
+            data.content && data.content[0] && data.content[0].text
+              ? data.content[0].text
+              : "Sorry, I had a hiccup! Feel free to call us at 405-900-1000 and we'll sort you out right away. 😊";
+
+          chatHistory.push({
+            role: "assistant",
+            content: reply,
+          });
+          await logMessage("bot", reply);
+          addMsg(reply, "bot");
+        } catch (err) {
           hideTyping();
-          addMsg("Oops, something went wrong! Call us at 405-900-1000 and we'll be happy to help. 🎨", 'bot');
+          addMsg(
+            `Oops, something went wrong on my end! Give us a call at 405-900-1000 and we'll be happy to help. 🎨`,
+            "bot",
+          );
+          console.error("Chat error:", err);
         }
+
         inputEl.disabled = false;
         inputEl.focus();
       }
 
-      window.cwSubmitName = async function() {
+      // ── Name + Email submit ───────────────────────────────────────────────────
+      window.cwSubmitName = async function () {
         const name = nameInput.value.trim();
         const email = emailInput.value.trim();
         const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
         let hasError = false;
-        if (!name || name.length < 2) { nameInput.classList.add('shake'); document.getElementById('cw-err-name').classList.add('show'); hasError = true; }
-        else { document.getElementById('cw-err-name').classList.remove('show'); }
-        if (!emailValid) { emailInput.classList.add('shake'); document.getElementById('cw-err-email').classList.add('show'); hasError = true; }
-        else { document.getElementById('cw-err-email').classList.remove('show'); }
+
+        if (!name || name.length < 2) {
+          nameInput.classList.add("shake");
+          nameInput.addEventListener(
+            "animationend",
+            () => nameInput.classList.remove("shake"),
+            { once: true },
+          );
+          document.getElementById("cw-err-name").classList.add("show");
+          hasError = true;
+        } else {
+          document.getElementById("cw-err-name").classList.remove("show");
+        }
+
+        if (!emailValid) {
+          emailInput.classList.add("shake");
+          emailInput.addEventListener(
+            "animationend",
+            () => emailInput.classList.remove("shake"),
+            { once: true },
+          );
+          document.getElementById("cw-err-email").classList.add("show");
+          hasError = true;
+        } else {
+          document.getElementById("cw-err-email").classList.remove("show");
+        }
+
         if (hasError) return;
-        visitorName = name; visitorEmail = email;
-        nameOverlay.classList.remove('visible');
+
+        visitorName = name;
+        visitorEmail = email;
+        nameOverlay.classList.remove("visible");
         inputEl.disabled = false;
-        setTimeout(async () => { await askClaude(`Hi! My name is ${visitorName}.`); inputEl.focus(); }, 300);
+
+        // Save lead to Firestore immediately
+        await createLead();
+
+        // Kick off conversation
+        setTimeout(async () => {
+          await askClaude(`Hi! My name is ${visitorName}.`);
+          inputEl.focus();
+        }, 300);
       };
 
-      window.cwSend = function() {
-        const content = inputEl.value.trim();
+      nameInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") emailInput.focus();
+      });
+      emailInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") window.cwSubmitName();
+      });
+
+      // ── Send message ──────────────────────────────────────────────────────────
+      window.cwSend = function (text) {
+        const content = (text || inputEl.value).trim();
         if (!content || !visitorName || inputEl.disabled) return;
-        inputEl.value = '';
-        addMsg(content, 'user');
+        inputEl.value = "";
+        addMsg(content, "user");
         askClaude(content);
       };
 
-      window.toggleChat = function() {
+      window.sendMessage = function () {
+        window.cwSend();
+      };
+
+      // ── Toggle chat ───────────────────────────────────────────────────────────
+      window.toggleChat = function () {
         isOpen = !isOpen;
-        document.getElementById('chat-window').classList.toggle('open', isOpen);
-        document.getElementById('chat-icon-open').style.display = isOpen ? 'none' : 'block';
-        document.getElementById('chat-icon-close').style.display = isOpen ? 'block' : 'none';
-        unreadEl.style.display = 'none';
+        document.getElementById("chat-window").classList.toggle("open", isOpen);
+        document.getElementById("chat-icon-open").style.display = isOpen
+          ? "none"
+          : "block";
+        document.getElementById("chat-icon-close").style.display = isOpen
+          ? "block"
+          : "none";
+        unreadEl.style.display = "none";
         if (isOpen) {
-          if (!visitorName) nameOverlay.classList.add('visible');
-          setTimeout(() => { if (!visitorName) nameInput.focus(); else inputEl.focus(); }, 250);
+          if (!visitorName) nameOverlay.classList.add("visible");
+          setTimeout(() => {
+            if (!visitorName) nameInput.focus();
+            else inputEl.focus();
+          }, 250);
         } else {
-          nameOverlay.classList.remove('visible');
-          const win = document.getElementById('chat-window');
-          if (win.classList.contains('fullscreen')) {
-            win.classList.remove('fullscreen');
-            document.getElementById('chat-backdrop').classList.remove('visible');
-            document.getElementById('fs-expand-icon').style.display = 'block';
-            document.getElementById('fs-shrink-icon').style.display = 'none';
+          nameOverlay.classList.remove("visible");
+          // Exit fullscreen when closing
+          const win = document.getElementById("chat-window");
+          if (win.classList.contains("fullscreen")) {
+            win.classList.remove("fullscreen");
+            document
+              .getElementById("chat-backdrop")
+              .classList.remove("visible");
+            document.getElementById("fs-expand-icon").style.display = "block";
+            document.getElementById("fs-shrink-icon").style.display = "none";
           }
         }
       };
 
-      window.toggleFullscreen = function() {
-        const win = document.getElementById('chat-window');
-        const backdrop = document.getElementById('chat-backdrop');
-        const isFs = win.classList.toggle('fullscreen');
-        backdrop.classList.toggle('visible', isFs);
-        document.getElementById('fs-expand-icon').style.display = isFs ? 'none' : 'block';
-        document.getElementById('fs-shrink-icon').style.display = isFs ? 'block' : 'none';
-        setTimeout(() => { messagesEl.scrollTop = messagesEl.scrollHeight; }, 50);
+      window.toggleFullscreen = function () {
+        const win = document.getElementById("chat-window");
+        const backdrop = document.getElementById("chat-backdrop");
+        const isFs = win.classList.toggle("fullscreen");
+        backdrop.classList.toggle("visible", isFs);
+        document.getElementById("fs-expand-icon").style.display = isFs
+          ? "none"
+          : "block";
+        document.getElementById("fs-shrink-icon").style.display = isFs
+          ? "block"
+          : "none";
+        setTimeout(() => {
+          messagesEl.scrollTop = messagesEl.scrollHeight;
+        }, 50);
       };
 
-      nameInput.addEventListener('keydown', e => { if (e.key === 'Enter') emailInput.focus(); });
-      emailInput.addEventListener('keydown', e => { if (e.key === 'Enter') cwSubmitName(); });
-
-      // Auto-open after delay
-      setTimeout(() => {
-        const win = document.getElementById('chat-window');
-        win.style.display = 'flex';
-        requestAnimationFrame(() => requestAnimationFrame(() => toggleChat()));
-      }, 2000);
-    </script>
-  <script>
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      document.getElementById("page-loader").classList.add("hidden");
-      // Trigger hero animations after loader fades
-      setTimeout(() => {
-        document.querySelector(".hero").classList.add("animated");
-        document.querySelector(".hero-canvas").classList.add("animated");
-        // Fire hero counters now — they can't use IntersectionObserver
-        // because they start invisible and are already in the viewport
+      // ── Init ──────────────────────────────────────────────────────────────────
+      async function init() {
+        inputEl.disabled = true;
+        await loadQAKnowledge();
+        // Auto-open chat after a short delay — rAF ensures the open animation plays
         setTimeout(() => {
-          document.querySelectorAll('.hero [data-count]').forEach(el => {
-            if (!el.dataset.counted) {
-              el.dataset.counted = 'true';
-              animateCounter(el);
-            }
+          const win = document.getElementById("chat-window");
+          // Make sure it's rendered before toggling so the transition fires
+          win.style.display = "flex";
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              toggleChat();
+            });
           });
-  
- }); // wait for badge pop-in animation to start
-      }); // small extra delay so fade-out is visible first
-    });
-  });
-      </script>
-</body>
+        }, 1200);
+      }
+
+      function esc(s) {
+        return (s || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      init();
+    </script>
+
+  </body>
 </html>
