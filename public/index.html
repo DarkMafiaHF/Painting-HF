@@ -101,7 +101,6 @@
 
     <script>
       const FUNCTION_URL = "https://painting-hf.vercel.app/api/send-estimate";
-      const CHAT_API = "https://painting-hf.vercel.app/api/chat";
     </script>
 
     <style>
@@ -978,376 +977,6 @@
         font-style: italic;
       }
 
-      #chat-bubble {
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
-        z-index: 9999;
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        background: var(--orange);
-        color: #fff;
-        border: none;
-        cursor: pointer;
-        box-shadow: 0 4px 20px rgba(217, 79, 30, 0.45);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition:
-          transform 0.2s,
-          box-shadow 0.2s;
-      }
-      #chat-bubble:hover {
-        transform: scale(1.08);
-        box-shadow: 0 6px 24px rgba(217, 79, 30, 0.55);
-      }
-      #chat-bubble svg {
-        width: 24px;
-        height: 24px;
-        fill: #fff;
-      }
-      #chat-unread {
-        position: absolute;
-        top: -4px;
-        right: -4px;
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        background: var(--navy);
-        color: #fff;
-        font-size: 10px;
-        font-weight: 700;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        border: 2px solid #fff;
-      }
-      #chat-window {
-        position: fixed;
-        bottom: 92px;
-        right: 24px;
-        z-index: 9998;
-        width: 340px;
-        max-height: 620px;
-        height: 320px;
-        background: var(--white);
-        border-radius: 18px;
-        box-shadow: 0 16px 56px rgba(30, 45, 74, 0.18);
-        border: 1px solid var(--border);
-        display: flex;
-        flex-direction: column;
-        transform: scale(0.92) translateY(16px);
-        opacity: 0;
-        pointer-events: none;
-        transition:
-          transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
-          opacity 0.18s ease;
-        overflow: hidden;
-      }
-      #chat-window.open {
-        transform: scale(1) translateY(0);
-        opacity: 1;
-        pointer-events: all;
-      }
-      @media (max-width: 420px) {
-        #chat-window {
-          width: calc(100vw - 24px);
-          right: 12px;
-          bottom: 84px;
-        }
-      }
-      .cw-header {
-        background: var(--navy);
-        padding: 14px 16px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        flex-shrink: 0;
-      }
-      .cw-avatar {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: rgba(217, 79, 30, 0.25);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 17px;
-        flex-shrink: 0;
-      }
-      .cw-header-text .cw-name {
-        font-size: 13px;
-        font-weight: 600;
-        color: #fff;
-      }
-      .cw-header-text .cw-status {
-        font-size: 11px;
-        color: rgba(255, 255, 255, 0.55);
-      }
-      .cw-header-actions {
-        margin-left: auto;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-      }
-      .cw-close,
-      .cw-fullscreen {
-        background: none;
-        border: none;
-        color: rgba(255, 255, 255, 0.6);
-        cursor: pointer;
-        line-height: 1;
-        padding: 4px 5px;
-        border-radius: 6px;
-        transition:
-          color 0.15s,
-          background 0.15s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .cw-close {
-        font-size: 20px;
-      }
-      .cw-fullscreen svg {
-        width: 14px;
-        height: 14px;
-        fill: currentColor;
-      }
-      .cw-close:hover,
-      .cw-fullscreen:hover {
-        color: #fff;
-        background: rgba(255, 255, 255, 0.1);
-      }
-      #chat-backdrop {
-        display: none;
-        position: fixed;
-        inset: 0;
-        z-index: 99998;
-        background: rgba(14, 22, 40, 0.55);
-        backdrop-filter: blur(6px);
-        animation: backdropIn 0.25s ease;
-      }
-      #chat-backdrop.visible {
-        display: block;
-      }
-      @keyframes backdropIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-      #chat-window.fullscreen {
-        top: 40px !important;
-        bottom: 40px !important;
-        left: 50% !important;
-        right: auto !important;
-        transform: translateX(-50%) !important;
-        width: min(640px, calc(100vw - 48px)) !important;
-        height: auto !important;
-        max-height: none !important;
-        border-radius: 20px !important;
-        z-index: 99999;
-        box-shadow: 0 32px 80px rgba(14, 22, 40, 0.45) !important;
-      }
-      .cw-messages {
-        flex: 1;
-        overflow-y: auto;
-        padding: 14px 14px 6px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        scroll-behavior: smooth;
-      }
-      .cw-messages::-webkit-scrollbar {
-        width: 4px;
-      }
-      .cw-messages::-webkit-scrollbar-thumb {
-        background: var(--border);
-        border-radius: 2px;
-      }
-      .cw-msg {
-        display: flex;
-        flex-direction: column;
-        max-width: 85%;
-      }
-      .cw-msg.bot {
-        align-self: flex-start;
-      }
-      .cw-msg.user {
-        align-self: flex-end;
-      }
-      .cw-bubble {
-        padding: 9px 13px;
-        border-radius: 14px;
-        font-size: 13px;
-        line-height: 1.55;
-      }
-      .cw-msg.bot .cw-bubble {
-        background: #f0f2f5;
-        color: var(--text);
-        border-bottom-left-radius: 4px;
-      }
-      .cw-msg.user .cw-bubble {
-        background: var(--orange);
-        color: #fff;
-        border-bottom-right-radius: 4px;
-      }
-      .cw-footer {
-        padding: 10px 12px;
-        border-top: 1px solid var(--border);
-        flex-shrink: 0;
-      }
-      .cw-input-row {
-        display: flex;
-        gap: 8px;
-      }
-      .cw-input {
-        flex: 1;
-        padding: 9px 13px;
-        border-radius: 20px;
-        border: 1.5px solid var(--border);
-        font-size: 13px;
-        font-family: "DM Sans", sans-serif;
-        background: #faf9f7;
-        color: var(--text);
-        outline: none;
-        transition: border-color 0.15s;
-      }
-      .cw-input:focus {
-        border-color: var(--navy-mid);
-        background: #fff;
-      }
-      .cw-send {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: var(--orange);
-        border: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        transition: background 0.15s;
-      }
-      .cw-send:hover {
-        background: #bf4118;
-      }
-      .cw-send svg {
-        width: 16px;
-        height: 16px;
-        fill: #fff;
-      }
-      .cw-powered {
-        text-align: center;
-        font-size: 10px;
-        color: #ccc;
-        margin-top: 6px;
-      }
-      #cw-name-overlay {
-        position: absolute;
-        inset: 0;
-        z-index: 20;
-        background: rgba(20, 30, 51, 0.6);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s ease;
-      }
-      #cw-name-overlay.visible {
-        opacity: 1;
-        pointer-events: all;
-      }
-      .cw-name-box {
-        background: #fff;
-        border-radius: 14px;
-        padding: 18px 18px 16px;
-        width: 100%;
-        max-width: 290px;
-        box-shadow: 0 8px 32px rgba(30, 45, 74, 0.18);
-        text-align: center;
-      }
-      .cw-name-box p {
-        font-size: 13px;
-        color: var(--text);
-        margin-bottom: 12px;
-        line-height: 1.5;
-      }
-      .cw-name-box input {
-        width: 100%;
-        padding: 10px 12px;
-        font-size: 13px;
-        border: 1.5px solid var(--border);
-        border-radius: 8px;
-        margin-bottom: 10px;
-        font-family: "DM Sans", sans-serif;
-        color: var(--text);
-        outline: none;
-        transition: border-color 0.15s;
-        display: block;
-      }
-      .cw-name-box input:focus {
-        border-color: var(--navy-mid);
-      }
-      .cw-name-box input.shake {
-        animation: nameShake 0.35s ease;
-        border-color: var(--orange);
-      }
-      @keyframes nameShake {
-        0%,
-        100% {
-          transform: translateX(0);
-        }
-        25% {
-          transform: translateX(-5px);
-        }
-        75% {
-          transform: translateX(5px);
-        }
-      }
-      .cw-name-err {
-        font-size: 11px;
-        color: var(--orange);
-        display: none;
-        margin-top: -6px;
-        margin-bottom: 8px;
-      }
-      .cw-name-err.show {
-        display: block;
-      }
-      .cw-name-btn {
-        width: 100%;
-        padding: 11px;
-        background: var(--navy);
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        font-size: 13px;
-        font-weight: 600;
-        cursor: pointer;
-        font-family: "DM Sans", sans-serif;
-        transition: background 0.15s;
-      }
-      .cw-name-btn:hover {
-        background: var(--navy-mid);
-      }
-      @keyframes cwDot {
-        0%,
-        80%,
-        100% {
-          opacity: 0.25;
-          transform: scale(0.85);
-        }
-        40% {
-          opacity: 1;
-          transform: scale(1);
-        }
       }
 
       .reveal {
@@ -2355,157 +1984,93 @@
       </div>
     </footer>
 
-
     <script>
-      const rules = [
-        { id: "name", errId: "err-name", check: (v) => v.trim().length >= 2 },
-        {
-          id: "phone",
-          errId: "err-phone",
-          check: (v) => /[\d\s\-()+]{7,}/.test(v),
-        },
-        {
-          id: "address",
-          errId: "err-address",
-          check: (v) => v.trim().length >= 5,
-        },
-        { id: "service", errId: "err-service", check: (v) => v !== "" },
-        {
-          id: "message",
-          errId: "err-message",
-          check: (v) => v.trim().length >= 10,
-        },
-      ];
+      // NAV HAMBURGER
+      document.getElementById("hamburger").addEventListener("click", () => {
+        document.getElementById("navLinks").classList.toggle("open");
+        document.getElementById("hamburger").classList.toggle("open");
+      });
 
-      function validate() {
-        let ok = true;
-        rules.forEach(({ id, errId, check }) => {
-          const el = document.getElementById(id),
-            err = document.getElementById(errId);
-          if (!check(el.value)) {
-            el.classList.add("error");
-            err.classList.add("show");
-            ok = false;
-          } else {
-            el.classList.remove("error");
-            err.classList.remove("show");
-          }
-        });
-        const emailEl = document.getElementById("email"),
-          emailErr = document.getElementById("err-email");
-        const ev = emailEl.value.trim();
-        if (ev && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ev)) {
-          emailEl.classList.add("error");
-          emailErr.classList.add("show");
-          ok = false;
-        } else {
-          emailEl.classList.remove("error");
-          emailErr.classList.remove("show");
-        }
-        return ok;
-      }
-
-      document
-        .getElementById("estimateForm")
-        .addEventListener("submit", async function (e) {
-          e.preventDefault();
-          if (!validate()) return;
-
-          const btn = document.getElementById("submitBtn");
-          const banner = document.getElementById("errorBanner");
-          banner.classList.remove("show");
-          btn.classList.add("loading");
-          btn.disabled = true;
-
-          const now = new Date().toLocaleString("en-US", {
-            dateStyle: "full",
-            timeStyle: "short",
+      // SCROLL REVEAL
+      const revealEls = document.querySelectorAll(".reveal, .process-step");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("visible");
           });
-          const payload = {
-            name: document.getElementById("name").value.trim(),
-            phone: document.getElementById("phone").value.trim(),
-            email:
-              document.getElementById("email").value.trim() || "Not provided",
-            address: document.getElementById("address").value.trim(),
-            service:
-              document.getElementById("service").value || "Not specified",
-            message: document.getElementById("message").value.trim(),
-            contactTime:
-              document.getElementById("contactTime").value || "Not specified",
-            timeline:
-              document.getElementById("timeline").value || "Not specified",
-            sentAt: now,
-          };
+        },
+        { threshold: 0.12 },
+      );
+      revealEls.forEach((el) => observer.observe(el));
 
-          try {
-            const res = await fetch(FUNCTION_URL, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(payload),
-            });
-
-            if (res.ok) {
-              document.querySelector(".card-header").style.display = "none";
-              document.getElementById("estimateForm").style.display = "none";
-              document.getElementById("successPanel").style.display = "block";
-            } else {
-              throw new Error("Server error " + res.status);
-            }
-          } catch (err) {
-            console.error("Submission error:", err);
-            banner.classList.add("show");
-            btn.classList.remove("loading");
-            btn.disabled = false;
-          }
-        });
-
-      // Clear errors on input
-      [...rules.map((r) => r.id), "email"].forEach((id) => {
-        const el = document.getElementById(id);
-        if (el)
-          el.addEventListener("input", () => {
-            el.classList.remove("error");
-            const errEl = document.getElementById("err-" + id);
-            if (errEl) errEl.classList.remove("show");
-          });
+    </script>
+    <script>
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          document.getElementById("page-loader").classList.add("hidden");
+          setTimeout(() => {
+            document.querySelector(".hero").classList.add("animated");
+            document.querySelector(".hero-canvas").classList.add("animated");
+            setTimeout(() => {
+              document.querySelectorAll(".hero [data-count]").forEach((el) => {
+                if (!el.dataset.counted) {
+                  el.dataset.counted = "true";
+                  animateCounter(el);
+                }
+              });
+            }, 400);
+          }, 200);
+        }, 1400);
       });
     </script>
 
-    <!-- VISITOR PING -->
     <script>
-      (function () {
-        const VISIT_URL = "https://painting-hf.vercel.app/api/track-visit";
-        let fired = false;
+      // ── NUMBER COUNTER ANIMATION ──────────────────────────────────────────
+      function animateCounter(el) {
+        const target = parseFloat(el.dataset.count);
+        const suffix = el.dataset.suffix || "";
+        const prefix = el.dataset.prefix || "";
+        const decimals = target % 1 !== 0 ? 1 : 0;
+        const duration = 1800;
+        const start = performance.now();
 
-        function pingVisit() {
-          if (fired) return;
-          fired = true; // only ever fires once per page load
-
-          const now = new Date().toLocaleString("en-US", {
-            dateStyle: "full",
-            timeStyle: "short",
-          });
-          const ref = document.referrer || "Direct / No referrer";
-
-          fetch(VISIT_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              visitedAt: now,
-              referrer: ref,
-              userAgent: navigator.userAgent,
-            }),
-          }).catch(function () {
-            // silent fail — never breaks the page
-          });
+        function ease(t) {
+          return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
         }
 
-        // Fire after 5 seconds of being on the page
-        setTimeout(pingVisit, 5000);
-      })();
-    </script>
+        function step(now) {
+          const elapsed = Math.min(now - start, duration);
+          const progress = ease(elapsed / duration);
+          const current = target * progress;
+          el.textContent =
+            prefix +
+            (decimals ? current.toFixed(1) : Math.floor(current)) +
+            suffix;
+          if (elapsed < duration) requestAnimationFrame(step);
+          else
+            el.textContent =
+              prefix + (decimals ? target.toFixed(1) : target) + suffix;
+        }
+        requestAnimationFrame(step);
+      }
 
-    <!-- CHAT WIDGET -->
+      const counterObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting && !e.target.dataset.counted) {
+              e.target.dataset.counted = "true";
+              animateCounter(e.target);
+            }
+          });
+        },
+        { threshold: 0.5 },
+      );
+
+      document
+        .querySelectorAll("[data-count]")
+        .forEach((el) => counterObs.observe(el));
+    </script>
+      <!-- CHAT WIDGET -->
     <style>
       #chat-bubble {
         position: fixed;
@@ -3412,19 +2977,6 @@ BUSINESS INFO:
 
       init();
     </script>
-    <script>
-      document.getElementById("hamburger").addEventListener("click", () => {
-        document.getElementById("navLinks").classList.toggle("open");
-        document.getElementById("hamburger").classList.toggle("open");
-      });
-    </script>
-    <script>
-      window.addEventListener("load", () => {
-        setTimeout(
-          () => document.getElementById("page-loader").classList.add("hidden"),
-          1400,
-        );
-      });
-    </script>
+
   </body>
 </html>
